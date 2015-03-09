@@ -11,6 +11,7 @@ This is an refactoring of the PIKAIA unconstrained optimization code from the [H
  * The random number generator was replaced with calls to the intrinsic Fortran ```random_number``` function.
  * There are various new options (e.g., a convergence window with a tolerance can be specified as a stopping condition, and the user can specify a subroutine for reporting iterations).
  * Mapping the variables to be between 0 and 1 now occurs internally, rather than requiring the user to do it.
+ * Can now include an initial guess in the initial population.
 
 Compiling
 ------
