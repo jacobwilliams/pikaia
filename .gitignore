@@ -1,3 +1,9 @@
+#directories
+bin/
+build/
+lib/
+documentation/
+
 # Compiled Object files
 *.slo
 *.lo
