@@ -4,7 +4,7 @@ Modern Fortran Edition of the Pikaia Genetic Algorithm
 Overview
 ------
 
-This is an refactoring of the PIKAIA unconstrained optimization code from the [High Altitude Observatory](http://www.hao.ucar.edu/modeling/pikaia/pikaia.php).  The original code is public domain and was written by Paul Charbonneau & Barry Knapp.  The new code differs from the old code in the following respects:
+This is a refactoring of the PIKAIA unconstrained optimization code from the [High Altitude Observatory](http://www.hao.ucar.edu/modeling/pikaia/pikaia.php).  The original code is public domain and was written by Paul Charbonneau & Barry Knapp.  The new code differs from the old code in the following respects:
  * The original fixed-form source (FORTRAN 77) was converted to free-form source.
  * The code is now object-oriented Fortran 2003/2008.  All user interaction is now through the ```pikaia_class```.
  * All real variables are now double precision.
