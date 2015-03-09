@@ -484,6 +484,7 @@
     i_window    = 0
     last_best_f = -big
     convergence = .false.
+    status = 0
 
     !allocate the arrays:
     allocate(ph    (me%n,2))
@@ -1082,7 +1083,7 @@
     class(pikaia_class),intent(inout)           :: me
     integer,dimension(me%n*me%nd),intent(inout) :: gn
 
-    integer :: i,j,k,l,ist,inc,loc,kk
+    integer :: i,j,k,l,ist,inc,loc
     logical :: fix
 
     !Decide which type of mutation is to occur
@@ -1445,6 +1446,9 @@
 !  DESCRIPTION
 !    Replaces old population by new; recomputes fitnesses & ranks
 !
+!  HISTORY
+!    Jacob Williams : 3/9/2015 : avoid unnecessary function evaluation if ielite/=1.
+!
 !  SOURCE
 
     subroutine newpop(me,oldph,newph,ifit,jfit,fitns,nnew)
@@ -1459,31 +1463,29 @@
     real(wp),dimension(me%np),intent(out)        :: fitns
     integer,intent(out)                          :: nnew
 
-    integer  :: i,k
+    integer  :: i
     real(wp) :: f
 
     nnew = me%np
 
-    !if using elitism, introduce in new population fittest of old
-    !population (if greater than fitness of the individual it is
-    !to replace)
-    call me%ff(newph(:,1),f)
+    if (me%ielite==1) then
 
-    if (me%ielite==1 .and. f<fitns(ifit(me%np))) then
+        !if using elitism, introduce in new population fittest of old
+        !population (if greater than fitness of the individual it is
+        !to replace)
+        call me%ff(newph(:,1),f)
 
-        do k=1,me%n
-            newph(k,1)=oldph(k,ifit(me%np))
-        end do
-        nnew = nnew-1
+        if (f<fitns(ifit(me%np))) then
+            newph(:,1)=oldph(:,ifit(me%np))
+            nnew = nnew-1
+        end if
 
     end if
 
     !replace population
     do i=1,me%np
 
-        do k=1,me%n
-            oldph(k,i)=newph(k,i)
-        end do
+        oldph(:,i)=newph(:,i)
 
         !get fitness using caller's fitness function
         call me%ff(oldph(:,i),fitns(i))
