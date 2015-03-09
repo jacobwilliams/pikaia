@@ -19,15 +19,21 @@
     
     integer,parameter :: n = 2  !dimension of problem (number of optimization variables)
     
-    integer                 :: seed, i, status
+    integer                 :: seed,status
     real(wp),dimension(n)   :: x
     real(wp)                :: f
     integer                 :: ierr,iunit,istat
     real(wp),dimension(n)   :: xl,xu
     type(pikaia_class)      :: p
     logical                 :: header_written
+    real                    :: tstart,tend
 
     character(len=*),parameter :: filename = 'pikaia_test.txt'
+
+    !the user enters a new seed value to use:
+    write(output_unit,fmt='(A)') 'Enter random number seed: '
+    read(input_unit,fmt='(I10)',iostat=ierr) seed
+    if (ierr/=0) stop 'Invalid input.'
 
     !output file:
     open(newunit=iunit,file=filename,iostat=istat)
@@ -35,40 +41,67 @@
     header_written = .false.
 
     !initial guess:
+    write(output_unit,'(A)') ''
+    write(output_unit,'(A)') ' TWOD Example'
+    write(output_unit,'(A)') ''
 
-    !twod:
     x = 0.0_wp
     xl = 0.0_wp
     xu = 1.0_wp
-
-    !rosenbrock
-    !x = 0.5_wp
-    !xl = -2.0_wp
-    !xu = 2.0_wp
-
-    !the user enters a new seed value to use:
-    write(output_unit,fmt='(A)') 'Enter random number seed: '
-    read(input_unit,fmt='(I10)',iostat=ierr) seed
-    if (ierr/=0) stop 'Invalid input.'
     
     !initialize the class:
     call p%init(n,xl,xu,twod,status,&
                 iter_f              = report_iteration,&
                 ngen                = 1000,&
                 nd                  = 9,&
-                ivrb                = 2,&
+                ivrb                = 0,&    !0,1,2
                 convergence_tol     = 1.0e-6_wp,&
                 convergence_window  = 200,&
                 iseed               = seed)
 
     !Now call pikaia:
+    call cpu_time(tstart)
     call p%solve(x,f,status)
+    call cpu_time(tend)
 
     !Print the results:
     write(output_unit,'(A)') ''
-    write(output_unit,'(A,1X,*(I4))')    ' status: ',status
-    write(output_unit,'(A,1X,*(F12.6))') '      x: ',x
-    write(output_unit,'(A,1X,*(F12.6))') '      f: ',f
+    write(output_unit,'(A,1X,*(I4))')    '  status: ',status
+    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
+    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A)') ''
+    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
+    write(output_unit,'(A)') ''
+
+    !****************************
+
+    !initial guess:
+    write(output_unit,'(A)') ''
+    write(output_unit,'(A)') ' ROSENBROCK Example'
+    write(output_unit,'(A)') ''
+
+    x  = 0.5_wp
+    xl = 0.0_wp
+    xu = 2.0_wp
+    
+    !initialize the class:
+    call p%init(n,xl,xu,rosenbrock,status,&
+                np              = 500,&        !try a larger population for this one
+                convergence_tol = 1.0e-10_wp,& !tighter tolerance also
+                iseed           = seed)        !same initial seed as before
+
+    !Now call pikaia:
+    call cpu_time(tstart)
+    call p%solve(x,f,status)
+    call cpu_time(tend)
+
+    !Print the results:
+    write(output_unit,'(A)') ''
+    write(output_unit,'(A,1X,*(I4))')    '  status: ',status
+    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
+    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A)') ''
+    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
     write(output_unit,'(A)') ''
 
     close(iunit,iostat=istat)

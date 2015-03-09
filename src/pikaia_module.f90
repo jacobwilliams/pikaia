@@ -210,7 +210,8 @@
 !
 !    For the following parameters, if they are not present, then
 !    the default values in the class are used:
-!    * iter_f - user-supplied subroutine that will report each iteration.
+!    * iter_f - user-supplied subroutine that will report the
+!      best solution for each generation.
 !      It must have the iter_func procedure interface.  If not present,
 !      then it is not used.  (note: this is independent of ivrb).
 !    * np - number of individuals in a population (default
@@ -746,97 +747,99 @@
     integer,parameter :: Q   = 11      ! smallest subfile to use quicksort on
 
     !Local:
+    integer,dimension(LGN) :: stackl,stackr
     real(wp) :: x
-    integer,dimension(LGN)    :: stackl,stackr
     integer :: s,t,l,m,r,i,j
 
     !Initialize the stack
-      stackl(1)=1
-      stackr(1)=n
-      s=1
+    stackl(1)=1
+    stackr(1)=n
+    s=1
 
     !Initialize the pointer array
-      do i=1,n
-         p(i)=i
-      end do
+    p = [(i, i=1,n)]
 
-    2 if (s>0) then
-         l=stackl(s)
-         r=stackr(s)
-         s=s-1
+    do while (s>0)
 
-    3    if ((r-l)<Q) then
+        l=stackl(s)
+        r=stackr(s)
+        s=s-1
 
-        !Use straight insertion
+3       if ((r-l)<Q) then
+
+            !Use straight insertion
             do i=l+1,r
-               t = p(i)
-               x = a(t)
-               do j=i-1,l,-1
-                  if (a(p(j))<=x) goto 5
-                  p(j+1) = p(j)
-               end do
-               j=l-1
-    5          p(j+1) = t
+                t = p(i)
+                x = a(t)
+                do j=i-1,l,-1
+                    if (a(p(j))<=x) goto 5
+                    p(j+1) = p(j)
+                end do
+                j=l-1
+5               p(j+1) = t
             end do
-         else
 
-        !Use quicksort, with pivot as median of a(l), a(m), a(r)
+        else
+
+            !Use quicksort, with pivot as median of a(l), a(m), a(r)
             m=(l+r)/2
             t=p(m)
             if (a(t)<a(p(l))) then
-               p(m)=p(l)
-               p(l)=t
-               t=p(m)
+                p(m)=p(l)
+                p(l)=t
+                t=p(m)
             end if
             if (a(t)>a(p(r))) then
-               p(m)=p(r)
-               p(r)=t
-               t=p(m)
-               if (a(t)<a(p(l))) then
-                  p(m)=p(l)
-                  p(l)=t
-                  t=p(m)
-               end if
+                p(m)=p(r)
+                p(r)=t
+                t=p(m)
+                if (a(t)<a(p(l))) then
+                    p(m)=p(l)
+                    p(l)=t
+                    t=p(m)
+                end if
             end if
 
-        !Partition
+            !Partition
             x=a(t)
             i=l+1
             j=r-1
-    7       if (i<=j) then
-    8          if (a(p(i))<x) then
-                  i=i+1
-                  goto 8
-               end if
-    9          if (x<a(p(j))) then
-                  j=j-1
-                  goto 9
-               end if
-               if (i<=j) then
-                  t=p(i)
-                  p(i)=p(j)
-                  p(j)=t
-                  i=i+1
-                  j=j-1
-               end if
-               goto 7
-            end if
+            do while (i<=j)
 
-        !Stack the larger subfile
+                do while (a(p(i))<x)
+                    i=i+1
+                end do 
+
+                do while (x<a(p(j)))
+                    j=j-1
+                end do
+
+                if (i<=j) then
+                    t=p(i)
+                    p(i)=p(j)
+                    p(j)=t
+                    i=i+1
+                    j=j-1
+                end if
+
+            end do
+
+            !Stack the larger subfile
             s=s+1
             if ((j-l)>(r-i)) then
-               stackl(s)=l
-               stackr(s)=j
-               l=i
+                stackl(s)=l
+                stackr(s)=j
+                l=i
             else
-               stackl(s)=i
-               stackr(s)=r
-               r=j
+                stackl(s)=i
+                stackr(s)=r
+                r=j
             end if
+
             goto 3
-         end if
-         goto 2
-      end if
+        end if
+
+    end do
 
     end subroutine rqsort
 !*****************************************************************************************
@@ -851,7 +854,8 @@
 !    Return the next pseudo-random deviate from a sequence which is
 !    uniformly distributed in the interval [0,1]
 !
-!   This is now just a wrapper for the intrinsic random_number function.
+!  NOTES
+!    This is now just a wrapper for the intrinsic random_number function.
 !
 !  AUTHOR
 !    Jacob Williams, 3/8/2015
@@ -877,6 +881,9 @@
 !
 !  DESCRIPTION
 !    Initialize the random number generator with the input seed value.
+!
+!  NOTES
+!    This is now just a wrapper for the intrinsic random_seed function.
 !
 !  AUTHOR
 !    Jacob Williams, 3/8/2015
