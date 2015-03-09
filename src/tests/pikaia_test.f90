@@ -8,11 +8,14 @@
 !    Sample driver program for pikaia.  
 !    Based on the xpikaia routine.
 !
+!  AUTHOR
+!    Jacob Williams : 3/9/2015
+!
 !  SOURCE
 
     program pikaia_test
 
-    use pikaia_module
+    use pikaia_module, only: pikaia_class
     use,intrinsic :: iso_fortran_env, wp => real64
 
     implicit none
@@ -73,7 +76,7 @@
     write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
     write(output_unit,'(A)') ''
 
-    !****************************
+    !-------------------------
 
     !initial guess:
     write(output_unit,'(A)') ''
