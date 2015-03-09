@@ -15,6 +15,43 @@
 !    * http://www.hao.ucar.edu/modeling/pikaia/pikaia.php [description page]
 !    * http://download.hao.ucar.edu/archive/pikaia/ [original sourcecode]
 !
+!  LICENSE
+!
+!   Copyright (c) 2015, Jacob Williams
+!
+!   http://github.com/jacobwilliams/pikaia
+!   
+!   All rights reserved.
+!   
+!   Redistribution and use in source and binary forms, with or without
+!   modification, are permitted provided that the following conditions are met:
+!   * Redistributions of source code must retain the above copyright notice, this
+!     list of conditions and the following disclaimer.
+!   * Redistributions in binary form must reproduce the above copyright notice,
+!     this list of conditions and the following disclaimer in the documentation
+!     and/or other materials provided with the distribution. 
+!   * Neither the name of pikaia nor the names of its
+!     contributors may be used to endorse or promote products derived from
+!     this software without specific prior written permission.
+!   
+!   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+!   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+!   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+!   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+!   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+!   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+!   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+!   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+!   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+!   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+!   
+!   ------------------------------------------------------------------------------
+!   
+!   The original version of the PIKAIA software is public domain software 
+!   and is available electronically from the High Altitude Observatory.
+!   http://www.hao.ucar.edu/modeling/pikaia/pikaia.php
+!
+!
 !  HISTORY
 !    * Jacob Williams : 3/8/2015 : Significant refactoring of original PIKAIA code.
 !      Converted to free-form source, double precision real variables, added various
@@ -238,23 +275,23 @@
     real(wp),dimension(n),intent(in)   :: xl        !lower bound
     real(wp),dimension(n),intent(in)   :: xu        !upper bound
     procedure(pikaia_func)             :: f         !user fitness function
-    procedure(iter_func),optional      :: iter_f    !iteration report function
     integer,intent(out)                :: status    !status flag (0 if OK)
+    procedure(iter_func),optional      :: iter_f    !iteration report function
     integer,intent(in),optional        :: np
     integer,intent(in),optional        :: ngen
     integer,intent(in),optional        :: nd
-    integer,intent(in),optional        :: imut
-    integer,intent(in),optional        :: irep
-    integer,intent(in),optional        :: ielite
-    integer,intent(in),optional        :: ivrb
-    integer,intent(in),optional        :: convergence_window
-    integer,intent(in),optional        :: iseed
     real(wp),intent(in),optional       :: pcross
     real(wp),intent(in),optional       :: pmutmn
     real(wp),intent(in),optional       :: pmutmx
     real(wp),intent(in),optional       :: pmut
-    real(wp),intent(in),optional       :: fdif
+    integer,intent(in),optional        :: imut 
+    real(wp),intent(in),optional       :: fdif 
+    integer,intent(in),optional        :: irep 
+    integer,intent(in),optional        :: ielite
+    integer,intent(in),optional        :: ivrb
+    integer,intent(in),optional        :: convergence_window
     real(wp),intent(in),optional       :: convergence_tol
+    integer,intent(in),optional        :: iseed
 
     me%n = n
 
@@ -478,13 +515,13 @@
     real(wp),parameter :: big = huge(1.0_wp)    !a large number
 
     !initialize:
-    call random_init(me%iseed)
+    call rninit(me%iseed)
     me%bestft   = -big
     me%pmutpv   = -big
     i_window    = 0
     last_best_f = -big
     convergence = .false.
-    status = 0
+    status      = 0
 
     !allocate the arrays:
     allocate(ph    (me%n,2))
@@ -679,34 +716,6 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/urand
-!
-!  NAME
-!    urand
-!
-!  DESCRIPTION
-!    Return the next pseudo-random deviate from a sequence which is
-!    uniformly distributed in the interval [0,1]
-!
-!   This is now just a wrapper for the intrinsic random_number function.
-!
-!  AUTHOR
-!    Jacob Williams, 3/8/2015
-!
-!  SOURCE
-
-    function urand() result(r)
-
-    implicit none
-
-    real(wp) :: r
-
-    call random_number(r)
-
-    end function urand
-!*****************************************************************************************
-
-!*****************************************************************************************
 !****f* pikaia_module/rqsort
 !
 !  NAME
@@ -833,10 +842,38 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/random_init
+!****f* pikaia_module/urand
 !
 !  NAME
-!    random_init
+!    urand
+!
+!  DESCRIPTION
+!    Return the next pseudo-random deviate from a sequence which is
+!    uniformly distributed in the interval [0,1]
+!
+!   This is now just a wrapper for the intrinsic random_number function.
+!
+!  AUTHOR
+!    Jacob Williams, 3/8/2015
+!
+!  SOURCE
+
+    function urand() result(r)
+
+    implicit none
+
+    real(wp) :: r
+
+    call random_number(r)
+
+    end function urand
+!*****************************************************************************************
+
+!*****************************************************************************************
+!****f* pikaia_module/rninit
+!
+!  NAME
+!    rninit
 !
 !  DESCRIPTION
 !    Initialize the random number generator with the input seed value.
@@ -846,7 +883,7 @@
 !
 !  SOURCE
 
-    subroutine random_init(iseed)
+    subroutine rninit(iseed)
 
     implicit none
 
@@ -861,7 +898,7 @@
     call random_seed(put=seed)
     deallocate(seed)
 
-    end subroutine random_init
+    end subroutine rninit
 !*****************************************************************************************
 
 !*****************************************************************************************
