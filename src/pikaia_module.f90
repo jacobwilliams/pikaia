@@ -133,7 +133,7 @@
         procedure,non_overridable :: newpop,stdrep,genrep,&
                                      adjmut,cross,encode,&
                                      mutate,decode,select_parent,&
-                                     report,rnkpop
+                                     report,rnkpop,pikaia
 
     end type pikaia_class
     !*********************************************************
@@ -474,7 +474,7 @@
 !      (High Altitude Observatory, National Center for Atmospheric Research)
 !
 !  SEE ALSO
-!    * Charbonneau, Paul. "An introduction to gemetic algorithms for
+!    * Charbonneau, Paul. "An introduction to genetic algorithms for
 !        numerical optimization", NCAR Technical Note TN-450+IA
 !        (April 2002)
 !    * Charbonneau, Paul. "Release Notes for PIKAIA 1.2",
@@ -670,14 +670,23 @@
     real(wp),intent(out)                :: f
     integer,intent(out)                 :: status
 
-    !scale input initial guess to be [0,1]:
-    x = (x-me%xl)/me%del
+    if (associated(me%user_f)) then
 
-    !call the main routine, using the wrapper function:
-    call pikaia(me,x,f,status)
+        !scale input initial guess to be [0,1]:
+        x = (x-me%xl)/me%del
 
-    !unscale output to be [xl,xu]:
-    x = me%xl + me%del*x
+        !call the main routine, using the wrapper function:
+        call me%pikaia(x,f,status)
+
+        !unscale output to be [xl,xu]:
+        x = me%xl + me%del*x
+
+    else
+
+        write(output_unit,'(A)') 'Error: pikaia class not initialized.'
+        status = -1
+
+    end if
 
     end subroutine solve_with_pikaia
 !*****************************************************************************************
