@@ -543,7 +543,7 @@
     convergence = .false.
     status      = 0
 
-    !JW: the first element of the population is the initial guess:
+    !Handle the initial guess:
     if (me%initial_guess_frac==0.0_wp) then
 
         !initial guess not used (totally random population)
@@ -553,8 +553,9 @@
     else
 
         !use the initial guess:
+
         xguess = x
-        do k=1,me%n    !make sure they are all within the bounds
+        do k=1,me%n    !make sure they are all within the [0,1] bounds
             xguess(k) = max( 0.0_wp, min(1.0_wp,xguess(k)) )
         end do
         call me%ff(xguess,fguess)
@@ -624,8 +625,7 @@
         if (me%irep==1) call me%newpop(oldph,newph,ifit,jfit,fitns,newtot)
 
         !adjust mutation rate?
-        if (me%imut==2 .or. me%imut==3 .or. me%imut==5 .or. me%imut==6) &
-            call adjmut(me,oldph,fitns,ifit)
+        if (any(me%imut==[2,3,5,6])) call adjmut(me,oldph,fitns,ifit)
 
         !report this iteration:
         if (me%ivrb>0) call me%report(oldph,fitns,ifit,ig,newtot)
