@@ -1168,7 +1168,7 @@
 
                     !Construct integer
                     loc=(i-1)*me%nd+j
-                    inc=nint ( urand() )*2-1
+                    inc=nint( urand() )*2-1
                     ist=(i-1)*me%nd+1
                     gn(loc)=gn(loc)+inc
 
@@ -1453,7 +1453,7 @@
 
                 !make sure the phenotype is not already in the population
                 if (i<me%np) then
-                    if (all(oldph(1:me%n,ifit(i+1))==ph(1:me%n,j))) exit main_loop
+                    if (all(oldph(1:me%n,ifit(i+1))==ph(1:me%n,j))) cycle main_loop
                 end if
 
                 !offspring is fit enough for insertion, and is unique
@@ -1496,7 +1496,7 @@
                 end if
 
                 nnew = nnew+1
-                exit main_loop
+                cycle main_loop
 
             end if
 
