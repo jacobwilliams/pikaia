@@ -116,7 +116,7 @@
         real(wp) :: initial_guess_frac = 0.1_wp
 
         !used internally:
-        real(wp) :: pmut   = huge(1.0_wp)
+        real(wp) :: pmut   = -huge(1.0_wp)
         real(wp) :: bestft = huge(1.0_wp)
         real(wp) :: pmutpv = huge(1.0_wp)
 
@@ -1073,7 +1073,7 @@
 !    cross
 !
 !  DESCRIPTION
-!    breeds two parent chromosomes into two offspring chromosomes
+!    breeds two parent chromosomes into two offspring chromosomes.
 !    breeding occurs through crossover. If the crossover probability
 !    test yields true (crossover taking place), either one-point or
 !    two-point crossover is used, with equal probabilities.
