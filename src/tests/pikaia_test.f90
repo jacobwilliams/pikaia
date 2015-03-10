@@ -57,7 +57,7 @@
                 iter_f              = report_iteration,&
                 ngen                = 1000,&
                 nd                  = 9,&
-                ivrb                = 0,&    !0,1,2
+                ivrb                = 1,&    !0,1,2
                 convergence_tol     = 1.0e-6_wp,&
                 convergence_window  = 200,&
                 iseed               = seed)
@@ -89,9 +89,12 @@
     
     !initialize the class:
     call p%init(n,xl,xu,rosenbrock,status,&
-                np              = 500,&        !try a larger population for this one
-                convergence_tol = 1.0e-10_wp,& !tighter tolerance also
-                iseed           = seed)        !same initial seed as before
+                np                  = 500,&        !try a larger population for this one
+                ngen                = 1000,&
+                nd                  = 9,&
+                convergence_tol     = 1.0e-10_wp,& !tighter tolerance also
+                convergence_window  = 200,&
+                iseed               = seed)
 
     !Now call pikaia:
     call cpu_time(tstart)

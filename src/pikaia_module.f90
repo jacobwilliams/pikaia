@@ -103,7 +103,7 @@
         integer  :: nd                 = 5
         real(wp) :: pcross             = 0.85_wp
         integer  :: imut               = 2
-        real(wp) :: pmut               = 0.005_wp
+        real(wp) :: pmuti              = 0.005_wp  !initial value of pmut
         real(wp) :: pmutmn             = 0.0005_wp
         real(wp) :: pmutmx             = 0.25_wp
         real(wp) :: fdif               = 1.0_wp
@@ -113,8 +113,10 @@
         real(wp) :: convergence_tol    = 0.0001_wp
         integer  :: convergence_window = 20
         integer  :: iseed              = 999
+        real(wp) :: initial_guess_frac = 0.1_wp
 
         !used internally:
+        real(wp) :: pmut   = huge(1.0_wp)
         real(wp) :: bestft = huge(1.0_wp)
         real(wp) :: pmutpv = huge(1.0_wp)
 
@@ -192,7 +194,7 @@
 !    set_inputs
 !
 !  DESCRIPTION
-!    Set the inputs to the pikaia class.
+!    Constructor for the pikaia class.
 !    The routine must be called before the solve routine can be used.
 !
 !  INPUTS
@@ -209,7 +211,7 @@
 !    * xu - vector of upper bounds for x
 !
 !    For the following parameters, if they are not present, then
-!    the default values in the class are used:
+!    the default values are used:
 !    * iter_f - user-supplied subroutine that will report the
 !      best solution for each generation.
 !      It must have the iter_func procedure interface.  If not present,
@@ -252,6 +254,9 @@
 !                 This is the number of consecutive solutions
 !                 within the tolerance for convergence to
 !                 be declared (default is 20)
+!    * initial_guess_frac - fraction of the initial population
+!                 to set equal to the initial guess.  Range from 0
+!                 (none) to 1.0 (all). (default is 0.1 or 10%).
 !    * iseed - random seed value; must be > 0 (default is 999)
 !
 !  OUTPUT
@@ -267,11 +272,12 @@
                             iter_f,&
                             np,ngen,nd,pcross,pmutmn,pmutmx,pmut,imut,&
                             fdif,irep,ielite,ivrb,&
-                            convergence_tol,convergence_window,iseed)
+                            convergence_tol,convergence_window,initial_guess_frac,&
+                            iseed)
 
     implicit none
 
-    class(pikaia_class),intent(inout)  :: me        !pikaia class
+    class(pikaia_class),intent(out)    :: me        !pikaia class
     integer,intent(in)                 :: n         !number of variables (size of x)
     real(wp),dimension(n),intent(in)   :: xl        !lower bound
     real(wp),dimension(n),intent(in)   :: xu        !upper bound
@@ -290,8 +296,9 @@
     integer,intent(in),optional        :: irep 
     integer,intent(in),optional        :: ielite
     integer,intent(in),optional        :: ivrb
-    integer,intent(in),optional        :: convergence_window
     real(wp),intent(in),optional       :: convergence_tol
+    integer,intent(in),optional        :: convergence_window
+    real(wp),intent(in),optional       :: initial_guess_frac
     integer,intent(in),optional        :: iseed
 
     me%n = n
@@ -317,7 +324,7 @@
     if (present(nd                 )) me%nd                 = nd
     if (present(pcross             )) me%pcross             = pcross
     if (present(imut               )) me%imut               = imut
-    if (present(pmut               )) me%pmut               = pmut
+    if (present(pmut               )) me%pmuti              = pmut  !initial value
     if (present(pmutmn             )) me%pmutmn             = pmutmn
     if (present(pmutmx             )) me%pmutmx             = pmutmx
     if (present(fdif               )) me%fdif               = fdif
@@ -326,6 +333,7 @@
     if (present(ivrb               )) me%ivrb               = ivrb
     if (present(convergence_tol    )) me%convergence_tol    = convergence_tol
     if (present(convergence_window )) me%convergence_window = convergence_window
+    if (present(initial_guess_frac )) me%initial_guess_frac = initial_guess_frac
     if (present(iseed              )) me%iseed              = iseed
 
     !check for errors:
@@ -343,10 +351,11 @@
         write(output_unit,'(A,I4)')    '  Number of Chromosome segments: ',me%n
         write(output_unit,'(A,I4)')    '  Length of Chromosome segments: ',me%nd
         write(output_unit,'(A,E10.4)') '          Crossover probability: ',me%pcross
-        write(output_unit,'(A,E10.4)') '          Initial mutation rate: ',me%pmut
+        write(output_unit,'(A,E10.4)') '          Initial mutation rate: ',me%pmuti
         write(output_unit,'(A,E10.4)') '          Minimum mutation rate: ',me%pmutmn
         write(output_unit,'(A,E10.4)') '          Maximum mutation rate: ',me%pmutmx
         write(output_unit,'(A,E10.4)') '  Relative fitness differential: ',me%fdif
+        write(output_unit,'(A,E10.4)') '         Initial guess fraction: ',me%initial_guess_frac
         write(output_unit,'(A,E10.4)') '          Convergence tolerance: ',me%convergence_tol
         write(output_unit,'(A,I4)')    '             Convergence window: ',me%convergence_window
         select case (me%imut)
@@ -417,7 +426,12 @@
       status = 105
    end if
 
-   if (me%irep==1 .and. me%imut==1 .and. me%pmut>0.5_wp .and. me%ielite==0) then
+   if (me%initial_guess_frac<0.0_wp .or. me%initial_guess_frac>1.0_wp) then
+      write(output_unit,'(A)') ' ERROR: illegal value for Initial guess fraction.'
+      status = 106
+   end if
+
+   if (me%irep==1 .and. me%imut==1 .and. me%pmuti>0.5_wp .and. me%ielite==0) then
       write(output_unit,'(A)') &
        ' WARNING: dangerously high value for Initial mutation rate; '//&
        '(Should enforce elitism with ielite=1.)'
@@ -504,14 +518,18 @@
     integer,intent(out)                    :: status
 
     !Local variables
-    integer  :: k,ip,ig,ip1,ip2,new,newtot
-    integer  :: i_window
-    real(wp) :: current_best_f, last_best_f
+    integer  :: k,ip,ig,ip1,ip2,new,newtot,istart,i_window
+    real(wp) :: current_best_f, last_best_f, fguess
     logical  :: convergence
-    real(wp),dimension(:,:),allocatable :: ph, oldph, newph
-    integer,dimension(:),allocatable    :: gn1, gn2
-    integer,dimension(:),allocatable    :: ifit, jfit
-    real(wp),dimension(:),allocatable   :: fitns
+    real(wp),dimension(me%n,2)     :: ph
+    real(wp),dimension(me%n,me%np) :: oldph
+    real(wp),dimension(me%n,me%np) :: newph
+    integer,dimension(me%n*me%nd)  :: gn1
+    integer,dimension(me%n*me%nd)  :: gn2
+    integer,dimension(me%np)       :: ifit
+    integer,dimension(me%np)       :: jfit
+    real(wp),dimension(me%np)      :: fitns
+    real(wp),dimension(me%n)       :: xguess
 
     real(wp),parameter :: big = huge(1.0_wp)    !a large number
 
@@ -519,36 +537,45 @@
     call rninit(me%iseed)
     me%bestft   = -big
     me%pmutpv   = -big
+    me%pmut     = me%pmuti  !set initial mutation rate (it can change)
     i_window    = 0
     last_best_f = -big
     convergence = .false.
     status      = 0
 
-    !allocate the arrays:
-    allocate(ph    (me%n,2))
-    allocate(oldph (me%n,me%np))
-    allocate(newph (me%n,me%np))
-    allocate(gn1   (me%n*me%nd))
-    allocate(gn2   (me%n*me%nd))
-    allocate(ifit  (me%np))
-    allocate(jfit  (me%np))
-    allocate(fitns (me%np))
-
     !JW: the first element of the population is the initial guess:
-    oldph(:,1) = x
-    do k=1,me%n    !make sure they are all within the bounds !
-        if (oldph(k,1)<0.0_wp) then
-            oldph(k,1)=0.0_wp
-        elseif (oldph(k,1)>1.0_wp) then
-            oldph(k,1)=1.0_wp
-        end if
-    end do
-    call me%ff(oldph(:,1),fitns(1))
+    if (me%initial_guess_frac==0.0_wp) then
+
+        !initial guess not used (totally random population)
+
+        istart = 1  !index to start random population members
+
+    else
+
+        !use the initial guess:
+        xguess = x
+        do k=1,me%n    !make sure they are all within the bounds
+            xguess(k) = max( 0.0_wp, min(1.0_wp,xguess(k)) )
+        end do
+        call me%ff(xguess,fguess)
+
+        !how many elements in the population to set to xguess?:
+        ! [at least 1, at most n]
+        istart = max(1, min(me%np, int(me%np * me%initial_guess_frac)))
+
+        do k=1,istart
+            oldph(:,k) = xguess
+            fitns(k)   = fguess
+        end do
+
+        istart = istart + 1  !index to start random population members
+
+    end if
 
     !Compute initial (random but bounded) phenotypes
-    do ip=2,me%np
+    do ip=istart,me%np
         do k=1,me%n
-            oldph(k,ip)=urand()
+            oldph(k,ip)=urand()  !from [0,1]
         end do
         call me%ff(oldph(:,ip),fitns(ip))
     end do
@@ -633,16 +660,6 @@
     !Return best phenotype and its fitness
     x = oldph(1:me%n,ifit(me%np))
     f = fitns(ifit(me%np))
-
-    !clean up:
-    deallocate(ph)
-    deallocate(oldph)
-    deallocate(newph)
-    deallocate(gn1)
-    deallocate(gn2)
-    deallocate(ifit)
-    deallocate(jfit)
-    deallocate(fitns)
 
     end subroutine pikaia
 !*****************************************************************************************
