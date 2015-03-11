@@ -135,7 +135,7 @@
         procedure,non_overridable :: ff  => func_wrapper  !internal pikaia function (x:[0,1])
         procedure,non_overridable :: newpop,stdrep,genrep,&
                                      adjmut,cross,encode,&
-                                     mutate,decode,select_parent,&
+                                     mutate,decode,select_parents,&
                                      report,rnkpop,pikaia
 
     end type pikaia_class
@@ -595,11 +595,7 @@
         do ip=1,me%np/2
 
             !1. pick two parents
-            call me%select_parent(jfit,ip1)
-            do
-                call me%select_parent(jfit,ip2)
-                if (ip1/=ip2) exit
-            end do
+            call me%select_parents(jfit,ip1,ip2)
 
             !2. encode parent phenotypes
             call me%encode(oldph(:,ip1),gn1)
@@ -1304,45 +1300,61 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/select_parent
+!****f* pikaia_module/select_parents
 !
 !  NAME
-!    select_parent
+!    select_parents
 !
 !  DESCRIPTION
-!    Selects a parent from the population, using roulette wheel
+!    Selects two parents from the population, using roulette wheel
 !    algorithm with the relative fitnesses of the phenotypes as
 !    the "hit" probabilities.
 !
 !  SEE ALSO
 !    * Davis 1991, chap. 1.
 !
+!  HISTORY
+!    Jacob Williams : 3/10/2015 : rewrote this routine to return both parents,
+!    and also protect against the loop exiting without selecting a parent.
+!
 !  SOURCE
 
-    subroutine select_parent(me,jfit,idad)
+    subroutine select_parents(me,jfit,imom,idad)
 
     implicit none
 
     class(pikaia_class),intent(inout)   :: me
     integer,dimension(me%np),intent(in) :: jfit
+    integer,intent(out)                 :: imom
     integer,intent(out)                 :: idad
 
-    integer  :: np1,i
+    integer  :: np1,i,j
     real(wp) :: dice,rtfit
+    integer,dimension(2) :: parents
 
+    !initialize:
     np1 = me%np+1
-    dice = urand()*me%np*np1
-    rtfit = 0.0_wp
-    do i=1,me%np
-        rtfit = rtfit+np1+me%fdif*(np1-2*jfit(i))
-        if (rtfit>=dice) then
-            idad=i
-            exit
-        end if
-    end do
-    !Assert: loop will never exit by falling through
+    parents = -99
 
-    end subroutine select_parent
+    !get two (unequal) parents:
+    do j=1,2
+        main: do
+            dice = urand()*me%np*np1
+            rtfit = 0.0_wp
+            do i=1,me%np
+                rtfit = rtfit+np1+me%fdif*(np1-2*jfit(i))
+                if (rtfit>=dice) then
+                    parents(j) = i
+                    if (parents(1)/=parents(2)) exit main
+                end if
+            end do
+        end do main
+    end do
+
+    imom = parents(1)
+    idad = parents(2)
+
+    end subroutine select_parents
 !*****************************************************************************************
 
 !*****************************************************************************************
