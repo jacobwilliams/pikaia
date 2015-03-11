@@ -94,8 +94,9 @@
         private
 
         integer :: n = 0  !number of solution variables
-        real(wp),dimension(:),allocatable :: xu, xl    !lower,upper bounds on x
-        real(wp),dimension(:),allocatable :: del       !internal variables
+        real(wp),dimension(:),allocatable :: xl    !lower bounds of x
+        real(wp),dimension(:),allocatable :: xu    !upper bound of x
+        real(wp),dimension(:),allocatable :: del
 
         !other solution inputs (with default values):
         integer  :: np                 = 100
@@ -122,7 +123,7 @@
 
         !user-supplied procedures:
         procedure(pikaia_func),pointer :: user_f => null()    !fitness function
-        procedure(iter_func),pointer   :: iter_f => null()    !reporting function
+        procedure(iter_func),pointer   :: iter_f => null()    !reporting function (best member of population)
 
     contains
 
@@ -147,7 +148,7 @@
     !    pikaia_func
     !
     !  DESCRIPTION
-    !    The interface for the function that pikaia will be maximizing:
+    !    The interface for the function that pikaia will be maximizing.
     !
     !  SOURCE
     abstract interface
@@ -170,6 +171,8 @@
     !  DESCRIPTION
     !    The interface for the function that user can specify
     !    to report each iteration when pikaia is running.
+    !    The best (fittest) population member is passed to
+    !    this routine in each generation.
     !
     !  SOURCE
     abstract interface
@@ -401,52 +404,52 @@
        status = 11
     end if
 
-   if (me%convergence_tol<=0.0_wp) then
-       write(output_unit,'(A)') ' ERROR: illegal value for Convergence tolerance.'
-       status = 101
-   end if
-
-   if (me%convergence_window<=0) then
-       write(output_unit,'(A)') ' ERROR: illegal value for Convergence window.'
-       status = 102
-   end if
-
-   if (me%iseed<=0) then
-       write(output_unit,'(A)') ' ERROR: illegal value for iseed.'
-       status = 103
-   end if
-
-   if (me%nd>9 .or. me%nd<1) then
-       write(output_unit,'(A)') ' ERROR: illegal value for Chromosome length.'
-       status = 104
-   end if
-
-   if (mod(me%np,2)>0) then
-      write(output_unit,'(A)') ' ERROR: population size must be an even number.'
-      status = 105
-   end if
-
-   if (me%initial_guess_frac<0.0_wp .or. me%initial_guess_frac>1.0_wp) then
-      write(output_unit,'(A)') ' ERROR: illegal value for Initial guess fraction.'
-      status = 106
-   end if
-
-   if (me%irep==1 .and. me%imut==1 .and. me%pmuti>0.5_wp .and. me%ielite==0) then
-      write(output_unit,'(A)') &
-       ' WARNING: dangerously high value for Initial mutation rate; '//&
+    if (me%convergence_tol<=0.0_wp) then
+        write(output_unit,'(A)') ' ERROR: illegal value for Convergence tolerance.'
+        status = 101
+    end if
+ 
+    if (me%convergence_window<=0) then
+        write(output_unit,'(A)') ' ERROR: illegal value for Convergence window.'
+        status = 102
+    end if
+ 
+    if (me%iseed<=0) then
+        write(output_unit,'(A)') ' ERROR: illegal value for iseed.'
+        status = 103
+    end if
+ 
+    if (me%nd>9 .or. me%nd<1) then
+        write(output_unit,'(A)') ' ERROR: illegal value for Chromosome length.'
+        status = 104
+    end if
+ 
+    if (mod(me%np,2)>0) then
+       write(output_unit,'(A)') ' ERROR: population size must be an even number.'
+       status = 105
+    end if
+ 
+    if (me%initial_guess_frac<0.0_wp .or. me%initial_guess_frac>1.0_wp) then
+       write(output_unit,'(A)') ' ERROR: illegal value for Initial guess fraction.'
+       status = 106
+    end if
+ 
+    if (me%irep==1 .and. me%imut==1 .and. me%pmuti>0.5_wp .and. me%ielite==0) then
+       write(output_unit,'(A)') &
+        ' WARNING: dangerously high value for Initial mutation rate; '//&
+        '(Should enforce elitism with ielite=1.)'
+    end if
+ 
+    if (me%irep==1 .and. me%imut==2 .and. me%pmutmx>0.5_wp .and. me%ielite==0) then
+       write(output_unit,'(A)') &
+       ' WARNING: dangerously high value for Maximum mutation rate; '//&
        '(Should enforce elitism with ielite=1.)'
-   end if
-
-   if (me%irep==1 .and. me%imut==2 .and. me%pmutmx>0.5_wp .and. me%ielite==0) then
-      write(output_unit,'(A)') &
-      ' WARNING: dangerously high value for Maximum mutation rate; '//&
-      '(Should enforce elitism with ielite=1.)'
-   end if
-
-   if (me%fdif<0.33_wp .and. me%irep/=3) then
-      write(output_unit,'(A)') &
-      ' WARNING: dangerously low value of Relative fitness differential.'
-   end if
+    end if
+ 
+    if (me%fdif<0.33_wp .and. me%irep/=3) then
+       write(output_unit,'(A)') &
+       ' WARNING: dangerously low value of Relative fitness differential.'
+    end if
 
     end subroutine set_inputs
 !*****************************************************************************************
@@ -974,7 +977,7 @@
     if (rpt .or. me%ivrb>=2) then
 
         !Power of 10 to make integer genotypes for display
-        ndpwr = nint(10.0_wp**me%nd)
+        ndpwr = 10**me%nd
 
         write(output_unit,'(/I6,I6,F10.6,4F10.6)') &
             ig,nnew,me%pmut,fitns(ifit(me%np)),&
@@ -1189,7 +1192,7 @@
                             end do
                             if (fix) then
                                 !we popped under 0.00000 lower bound; fix it up
-                                if ( gn(ist)<0.0_wp) then
+                                if ( gn(ist)<0) then
                                     do l=ist,loc
                                         gn(l)=0
                                     end do
