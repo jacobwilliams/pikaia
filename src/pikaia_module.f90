@@ -628,7 +628,10 @@
 
         !report this iteration:
         if (me%ivrb>0) call me%report(oldph,fitns,ifit,ig,newtot)
-        if (associated(me%iter_f)) call me%iter_f(ig,oldph(1:me%n,ifit(me%np)),fitns(ifit(me%np)))
+
+        !report (unscaled) x:
+        if (associated(me%iter_f)) &
+            call me%iter_f(ig,me%xl+me%del*oldph(1:me%n,ifit(me%np)),fitns(ifit(me%np)))
 
         !JW additions: add a convergence criteria
         ! [stop if the last convergence_window iterations are all within the convergence_tol]
