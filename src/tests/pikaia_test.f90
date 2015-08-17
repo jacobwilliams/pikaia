@@ -26,9 +26,11 @@
     character(len=*),parameter :: filename = 'pikaia_test.txt'
 
     !the user enters a new seed value to use:
-    write(output_unit,fmt='(A)') 'Enter random number seed: '
-    read(input_unit,fmt='(I10)',iostat=ierr) seed
-    if (ierr/=0) stop 'Invalid input.'
+    !write(output_unit,fmt='(A)') 'Enter random number seed: '
+    !read(input_unit,fmt='(I10)',iostat=ierr) seed
+    !if (ierr/=0) stop 'Invalid input.'
+    
+    seed = 999  ! specify the random seed
 
     !output file:
     open(newunit=iunit,file=filename,iostat=istat)
