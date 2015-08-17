@@ -1,63 +1,58 @@
 !*****************************************************************************************
+!>
+!  PIKAIA is a general purpose unconstrained optimization
+!  method based on a genetic algorithm.
+!  This is an object-oriented version of the algorithm for Fortran 2003/2008.
+!
+!# See also
+!  * [Original description page](http://www.hao.ucar.edu/modeling/pikaia/pikaia.php)
+!  * [Original sourcecode](http://download.hao.ucar.edu/archive/pikaia/)
+!
+!# License
+!
+!    Copyright (c) 2015, Jacob Williams
+! 
+!    http://github.com/jacobwilliams/pikaia
+!    
+!    All rights reserved.
+!    
+!    Redistribution and use in source and binary forms, with or without
+!    modification, are permitted provided that the following conditions are met:
+!    * Redistributions of source code must retain the above copyright notice, this
+!      list of conditions and the following disclaimer.
+!    * Redistributions in binary form must reproduce the above copyright notice,
+!      this list of conditions and the following disclaimer in the documentation
+!      and/or other materials provided with the distribution. 
+!    * Neither the name of pikaia nor the names of its
+!      contributors may be used to endorse or promote products derived from
+!      this software without specific prior written permission.
+!    
+!    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+!    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+!    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+!    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+!    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+!    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+!    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+!    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+!    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+!    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+!    
+!    ------------------------------------------------------------------------------
+!    
+!    The original version of the PIKAIA software is public domain software 
+!    and is available electronically from the High Altitude Observatory.
+!    http://www.hao.ucar.edu/modeling/pikaia/pikaia.php
+!
+!
+!# History
+!  * Jacob Williams : 3/8/2015 : Significant refactoring of original PIKAIA code.
+!    Converted to free-form source, double precision real variables, added various
+!    new features, and an object-oriented interface.
+!
+!*****************************************************************************************
+
     module pikaia_module
-!*****************************************************************************************
-!****h* PIKAIA/pikaia_module
-!
-!  NAME
-!    pikaia_module
-!
-!  DESCRIPTION
-!    PIKAIA is a general purpose unconstrained optimization
-!    method based on a genetic algorithm.
-!    This is an object-oriented version of the algorithm for Fortran 2003/2008.
-!
-!  SEE ALSO
-!    * http://www.hao.ucar.edu/modeling/pikaia/pikaia.php [description page]
-!    * http://download.hao.ucar.edu/archive/pikaia/ [original sourcecode]
-!
-!  LICENSE
-!
-!   Copyright (c) 2015, Jacob Williams
-!
-!   http://github.com/jacobwilliams/pikaia
-!   
-!   All rights reserved.
-!   
-!   Redistribution and use in source and binary forms, with or without
-!   modification, are permitted provided that the following conditions are met:
-!   * Redistributions of source code must retain the above copyright notice, this
-!     list of conditions and the following disclaimer.
-!   * Redistributions in binary form must reproduce the above copyright notice,
-!     this list of conditions and the following disclaimer in the documentation
-!     and/or other materials provided with the distribution. 
-!   * Neither the name of pikaia nor the names of its
-!     contributors may be used to endorse or promote products derived from
-!     this software without specific prior written permission.
-!   
-!   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-!   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-!   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-!   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-!   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-!   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-!   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-!   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-!   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-!   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-!   
-!   ------------------------------------------------------------------------------
-!   
-!   The original version of the PIKAIA software is public domain software 
-!   and is available electronically from the High Altitude Observatory.
-!   http://www.hao.ucar.edu/modeling/pikaia/pikaia.php
-!
-!
-!  HISTORY
-!    * Jacob Williams : 3/8/2015 : Significant refactoring of original PIKAIA code.
-!      Converted to free-form source, double precision real variables, added various
-!      new features, and an object-oriented interface.
-!
-!*****************************************************************************************
 
     use,intrinsic :: iso_fortran_env
 
@@ -65,37 +60,19 @@
 
     private
 
-    !*********************************************************
-    !****d* pikaia_module/wp
-    !
-    !  NAME
-    !    wp
-    !
-    !  DESCRIPTION
-    !    Default real kind [8 bytes].
-    !
-    !  SOURCE
-    integer,parameter :: wp = real64
-    !*********************************************************
+    integer,parameter :: wp = real64  !! Default real kind [8 bytes].
 
     !*********************************************************
-    !****c* pikaia_module/pikaia_class
-    !
-    !  NAME
-    !    pikaia_class
-    !
-    !  DESCRIPTION
-    !    Main class for using the Pikaia algorithm.
-    !    INIT and SOLVE are the only public methods.
-    !
-    !  SOURCE
     type,public :: pikaia_class
+    
+        !! Main class for using the Pikaia algorithm.
+        !! INIT and SOLVE are the only public methods.
 
         private
 
         integer :: n = 0  !number of solution variables
-        real(wp),dimension(:),allocatable :: xl    !lower bounds of x
-        real(wp),dimension(:),allocatable :: xu    !upper bound of x
+        real(wp),dimension(:),allocatable :: xl    !! lower bounds of x
+        real(wp),dimension(:),allocatable :: xu    !! upper bound of x
         real(wp),dimension(:),allocatable :: del
 
         !other solution inputs (with default values):
@@ -104,7 +81,7 @@
         integer  :: nd                 = 5
         real(wp) :: pcross             = 0.85_wp
         integer  :: imut               = 2
-        real(wp) :: pmuti              = 0.005_wp  !initial value of pmut
+        real(wp) :: pmuti              = 0.005_wp  !! initial value of pmut
         real(wp) :: pmutmn             = 0.0005_wp
         real(wp) :: pmutmx             = 0.25_wp
         real(wp) :: fdif               = 1.0_wp
@@ -122,8 +99,8 @@
         real(wp) :: pmutpv = huge(1.0_wp)
 
         !user-supplied procedures:
-        procedure(pikaia_func),pointer :: user_f => null()    !fitness function
-        procedure(iter_func),pointer   :: iter_f => null()    !reporting function (best member of population)
+        procedure(pikaia_func),pointer :: user_f => null()  !! fitness function
+        procedure(iter_func),pointer   :: iter_f => null()  !! reporting function (best member of population)
 
     contains
 
@@ -132,7 +109,7 @@
         procedure,non_overridable,public :: solve  => solve_with_pikaia
 
         !private routines:
-        procedure,non_overridable :: ff  => func_wrapper  !internal pikaia function (x:[0,1])
+        procedure,non_overridable :: ff  => func_wrapper  !! internal pikaia function (x:[0,1])
         procedure,non_overridable :: newpop,stdrep,genrep,&
                                      adjmut,cross,encode,&
                                      mutate,decode,select_parents,&
@@ -141,134 +118,46 @@
     end type pikaia_class
     !*********************************************************
 
-    !*********************************************************
-    !****I* pikaia_module/pikaia_func
-    !
-    !  NAME
-    !    pikaia_func
-    !
-    !  DESCRIPTION
-    !    The interface for the function that pikaia will be maximizing.
-    !
-    !  SOURCE
     abstract interface
-        subroutine pikaia_func(me,x,f)
+    
+        subroutine pikaia_func(me,x,f)  
+            !! The interface for the function that pikaia will be maximizing.
         import :: wp,pikaia_class
         implicit none
-        class(pikaia_class),intent(inout)  :: me    !pikaia class
-        real(wp),dimension(:),intent(in)   :: x     !optimization variable vector
-        real(wp),intent(out)               :: f     !fitness value
+        class(pikaia_class),intent(inout)  :: me    !! pikaia class
+        real(wp),dimension(:),intent(in)   :: x     !! optimization variable vector
+        real(wp),intent(out)               :: f     !! fitness value
         end subroutine pikaia_func
-    end interface
-    !*********************************************************
 
-    !*********************************************************
-    !****I* pikaia_module/iter_func
-    !
-    !  NAME
-    !    iter_func
-    !
-    !  DESCRIPTION
-    !    The interface for the function that user can specify
-    !    to report each iteration when pikaia is running.
-    !    The best (fittest) population member is passed to
-    !    this routine in each generation.
-    !
-    !  SOURCE
-    abstract interface
         subroutine iter_func(me,iter,x,f)
+            !! The interface for the function that user can specify
+            !! to report each iteration when pikaia is running.
+            !! The best (fittest) population member is passed to
+            !! this routine in each generation.
         import :: wp,pikaia_class
         implicit none
-        class(pikaia_class),intent(inout)  :: me    !pikaia class
-        integer,intent(in)                 :: iter  !iteration number
-        real(wp),dimension(:),intent(in)   :: x     !optimization variable vector
-        real(wp),intent(in)                :: f     !fitness value
+        class(pikaia_class),intent(inout)  :: me    !! pikaia class
+        integer,intent(in)                 :: iter  !! iteration number
+        real(wp),dimension(:),intent(in)   :: x     !! optimization variable vector
+        real(wp),intent(in)                :: f     !! fitness value
         end subroutine iter_func
+        
     end interface
-    !*********************************************************
 
     contains
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/set_inputs
+!> author: Jacob Williams
 !
-!  NAME
-!    set_inputs
+!  Constructor for the [[pikaia_class]].
+!  The routine must be called before the solve routine can be used.
 !
-!  DESCRIPTION
-!    Constructor for the pikaia class.
-!    The routine must be called before the solve routine can be used.
+!  The following inputs are required: n, f, xl, xu.
+!  For the others, if they are not present, then
+!  the default values are used
 !
-!  INPUTS
-!    The following inputs are required:
-!    * n - is the parameter space dimension, i.e., the number
-!      of adjustable parameters (size of the x vector).
-!    * f - is a user-supplied scalar function of n variables,
-!      which must have the pikaia_func procedure interface.
-!      By convention, f should return higher values for more optimal
-!      parameter values (i.e., individuals which are more "fit").
-!      For example, in fitting a function through data points, f
-!      could return the inverse of chi**2.
-!    * xl - vector of lower bounds for x
-!    * xu - vector of upper bounds for x
-!
-!    For the following parameters, if they are not present, then
-!    the default values are used:
-!    * iter_f - user-supplied subroutine that will report the
-!      best solution for each generation.
-!      It must have the iter_func procedure interface.  If not present,
-!      then it is not used.  (note: this is independent of ivrb).
-!    * np - number of individuals in a population (default
-!      is 100)
-!    * ngen - maximum number of iterations
-!    * nd - number of significant digits (i.e., number of
-!               genes) retained in chromosomal encoding (default
-!               is 6).
-!    * pcross - crossover probability; must be  <= 1.0 (default
-!               is 0.85). If crossover takes place, either one
-!               or two splicing points are used, with equal
-!               probabilities
-!    * imut - mutation mode; 1/2/3/4/5 (default is 2).
-!               1=one-point mutation, fixed rate.
-!               2=one-point, adjustable rate based on fitness.
-!               3=one-point, adjustable rate based on distance.
-!               4=one-point+creep, fixed rate.
-!               5=one-point+creep, adjustable rate based on fitness.
-!               6=one-point+creep, adjustable rate based on distance.
-!    * pmut - initial mutation rate; should be small (default
-!               is 0.005) (Note: the mutation rate is the probability
-!               that any one gene locus will mutate in
-!               any one generation.)
-!    * pmutmn - minimum mutation rate; must be >= 0.0 (default is 0.0005)
-!    * pmutmx - maximum mutation rate; must be <= 1.0 (default is 0.25)
-!    * fdif - relative fitness differential; range from 0
-!               (none) to 1 (maximum).  (default is 1.0)
-!    * irep - reproduction plan; 1/2/3=Full generational
-!               replacement/Steady-state-replace-random/Steady-
-!               state-replace-worst (default is 3)
-!    * ielite - elitism flag; 0/1=off/on (default is 0)
-!               (Applies only to reproduction plans 1 and 2)
-!    * ivrb - printed output 0/1/2=None/Minimal/Verbose
-!               (default is 0)
-!    * convergence_tol - convergence tolerance; must be > 0.0
-!               (default is 0.0001)
-!    * convergence_window - convergence window; must be >= 0
-!                 This is the number of consecutive solutions
-!                 within the tolerance for convergence to
-!                 be declared (default is 20)
-!    * initial_guess_frac - fraction of the initial population
-!                 to set equal to the initial guess.  Range from 0
-!                 (none) to 1.0 (all). (default is 0.1 or 10%).
-!    * iseed - random seed value; must be > 0 (default is 999)
-!
-!  OUTPUT
-!    * status - Will be 0 if there were no errors.
-!
-!  AUTHOR
-!    Jacob Williams (based on setctl in original code).
-!
-!  SOURCE
+!@note Based on setctl in the original code.
 
     subroutine set_inputs(me,&
                             n,xl,xu,f,status,&
@@ -280,29 +169,61 @@
 
     implicit none
 
-    class(pikaia_class),intent(out)    :: me        !pikaia class
-    integer,intent(in)                 :: n         !number of variables (size of x)
-    real(wp),dimension(n),intent(in)   :: xl        !lower bound
-    real(wp),dimension(n),intent(in)   :: xu        !upper bound
-    procedure(pikaia_func)             :: f         !user fitness function
-    integer,intent(out)                :: status    !status flag (0 if OK)
-    procedure(iter_func),optional      :: iter_f    !iteration report function
-    integer,intent(in),optional        :: np
-    integer,intent(in),optional        :: ngen
-    integer,intent(in),optional        :: nd
-    real(wp),intent(in),optional       :: pcross
-    real(wp),intent(in),optional       :: pmutmn
-    real(wp),intent(in),optional       :: pmutmx
-    real(wp),intent(in),optional       :: pmut
-    integer,intent(in),optional        :: imut 
-    real(wp),intent(in),optional       :: fdif 
-    integer,intent(in),optional        :: irep 
-    integer,intent(in),optional        :: ielite
-    integer,intent(in),optional        :: ivrb
-    real(wp),intent(in),optional       :: convergence_tol
-    integer,intent(in),optional        :: convergence_window
-    real(wp),intent(in),optional       :: initial_guess_frac
-    integer,intent(in),optional        :: iseed
+    class(pikaia_class),intent(out)    :: me        !! pikaia class
+    integer,intent(in)                 :: n         !! the parameter space dimension, i.e., the number
+                                                    !! of adjustable parameters (size of the x vector).
+    real(wp),dimension(n),intent(in)   :: xl        !! vector of lower bounds for x
+    real(wp),dimension(n),intent(in)   :: xu        !! vector of upper bounds for x
+    procedure(pikaia_func)             :: f         !! user-supplied scalar function of n variables,
+                                                    !! which must have the [[pikaia_func]] procedure interface.
+                                                    !! By convention, f should return higher values for more optimal
+                                                    !! parameter values (i.e., individuals which are more "fit").
+                                                    !! For example, in fitting a function through data points, f
+                                                    !! could return the inverse of chi**2.
+    integer,intent(out)                :: status    !! status output flag (0 if there were no errors)
+    procedure(iter_func),optional      :: iter_f    !! user-supplied subroutine that will report the
+                                                    !! best solution for each generation.
+                                                    !! It must have the [[iter_func]] procedure interface.  If not present,
+                                                    !! then it is not used.  (note: this is independent of ivrb).
+    integer,intent(in),optional        :: np        !! number of individuals in a population (default is 100)
+    integer,intent(in),optional        :: ngen      !! maximum number of iterations
+    integer,intent(in),optional        :: nd        !! number of significant digits (i.e., number of
+                                                    !! genes) retained in chromosomal encoding (default is 6).
+    real(wp),intent(in),optional       :: pcross    !! crossover probability; must be  <= 1.0 (default
+                                                    !! is 0.85). If crossover takes place, either one
+                                                    !! or two splicing points are used, with equal
+                                                    !! probabilities
+    real(wp),intent(in),optional       :: pmutmn    !! minimum mutation rate; must be >= 0.0 (default is 0.0005)
+    real(wp),intent(in),optional       :: pmutmx    !! maximum mutation rate; must be <= 1.0 (default is 0.25)
+    real(wp),intent(in),optional       :: pmut      !! initial mutation rate; should be small (default
+                                                    !! is 0.005) (Note: the mutation rate is the probability
+                                                    !! that any one gene locus will mutate in
+                                                    !! any one generation.)
+    integer,intent(in),optional        :: imut      !! mutation mode; 1/2/3/4/5 (default is 2).
+                                                    !!  1=one-point mutation, fixed rate.
+                                                    !!  2=one-point, adjustable rate based on fitness.
+                                                    !!  3=one-point, adjustable rate based on distance.
+                                                    !!  4=one-point+creep, fixed rate.
+                                                    !!  5=one-point+creep, adjustable rate based on fitness.
+                                                    !!  6=one-point+creep, adjustable rate based on distance.
+    real(wp),intent(in),optional       :: fdif      !! relative fitness differential; range from 0
+                                                    !! (none) to 1 (maximum).  (default is 1.0)
+    integer,intent(in),optional        :: irep      !! reproduction plan; 1/2/3=Full generational
+                                                    !! replacement/Steady-state-replace-random/Steady-
+                                                    !! state-replace-worst (default is 3)
+    integer,intent(in),optional        :: ielite    !! elitism flag; 0/1=off/on (default is 0)
+                                                    !! (Applies only to reproduction plans 1 and 2)
+    integer,intent(in),optional        :: ivrb      !! printed output 0/1/2=None/Minimal/Verbose
+                                                    !! (default is 0)
+    real(wp),intent(in),optional       :: convergence_tol    !! convergence tolerance; must be > 0.0 (default is 0.0001)
+    integer,intent(in),optional        :: convergence_window !! convergence window; must be >= 0
+                                                             !! This is the number of consecutive solutions
+                                                             !! within the tolerance for convergence to
+                                                             !! be declared (default is 20)
+    real(wp),intent(in),optional       :: initial_guess_frac !! fraction of the initial population
+                                                             !! to set equal to the initial guess.  Range from 0
+                                                             !! (none) to 1.0 (all). (default is 0.1 or 10%).
+    integer,intent(in),optional        :: iseed              !! random seed value; must be > 0 (default is 999)
 
     me%n = n
 
@@ -455,60 +376,41 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/pikaia
+!>
+!  Optimization (maximization) of user-supplied "fitness" function
+!  over n-dimensional parameter space x using a basic genetic
+!  algorithm method.
 !
-!  NAME
-!    pikaia
+!  Genetic algorithms are heuristic search techniques that
+!  incorporate in a computational setting, the biological notion
+!  of evolution by means of natural selection.  This subroutine
+!  implements the three basic operations of selection, crossover,
+!  and mutation, operating on "genotypes" encoded as strings.
 !
-!  DESCRIPTION
-!    Optimization (maximization) of user-supplied "fitness" function
-!    over n-dimensional parameter space x using a basic genetic
-!    algorithm method.
+!  Version 1.2 differs from version 1.0 (December 1995) in that
+!  it includes (1) two-point crossover, (2) creep mutation, and
+!  (3) dynamical adjustment of the mutation rate based on metric
+!  distance in parameter space.
 !
-!    Genetic algorithms are heuristic search techniques that
-!    incorporate in a computational setting, the biological notion
-!    of evolution by means of natural selection.  This subroutine
-!    implements the three basic operations of selection, crossover,
-!    and mutation, operating on "genotypes" encoded as strings.
+!# Authors
+!   * Paul Charbonneau & Barry Knapp
+!     (High Altitude Observatory, National Center for Atmospheric Research)
+!     Version 1.2 [ 2002 April 3 ]
+!   * Jacob Williams : 3/8/3015 : Refactoring and some new features.
 !
-!    Version 1.2 differs from version 1.0 (December 1995) in that
-!    it includes (1) two-point crossover, (2) creep mutation, and
-!    (3) dynamical adjustment of the mutation rate based on metric
-!    distance in parameter space.
-!
-!  INPUT
-!    * x - initial guess for solution vector
-!
-!  OUTPUTS
-!    * x - the "fittest" (optimal) solution found,
-!      i.e., the solution which maximizes the fitness function
-!    * f - is the (scalar) value of the fitness function at x
-!    * status - an indicator of the success or failure
-!      of the call to pikaia (0=success; non-zero=failure)
-!
-!  AUTHOR
-!    * Paul Charbonneau & Barry Knapp
-!      (High Altitude Observatory, National Center for Atmospheric Research)
-!
-!  SEE ALSO
-!    * Charbonneau, Paul. "An introduction to genetic algorithms for
-!        numerical optimization", NCAR Technical Note TN-450+IA
-!        (April 2002)
-!    * Charbonneau, Paul. "Release Notes for PIKAIA 1.2",
-!        NCAR Technical Note TN-451+STR (April 2002)
-!    * Charbonneau, Paul, and Knapp, Barry. "A User's Guide
-!        to PIKAIA 1.0" NCAR Technical Note TN-418+IA
-!        (December 1995)
-!    * Goldberg, David E.  Genetic Algorithms in Search, Optimization,
-!        & Machine Learning.  Addison-Wesley, 1989.
-!    * Davis, Lawrence, ed.  Handbook of Genetic Algorithms.
-!        Van Nostrand Reinhold, 1991.
-!
-!  HISTORY
-!    * Version 1.2 [ 2002 April 3 ]
-!    * Jacob Williams : 3/8/3015 : Refactoring and some new features.
-!
-!  SOURCE
+!# References
+!   * Charbonneau, Paul. "An introduction to genetic algorithms for
+!     numerical optimization", NCAR Technical Note TN-450+IA
+!     (April 2002)
+!   * Charbonneau, Paul. "Release Notes for PIKAIA 1.2",
+!     NCAR Technical Note TN-451+STR (April 2002)
+!   * Charbonneau, Paul, and Knapp, Barry. "A User's Guide
+!     to PIKAIA 1.0" NCAR Technical Note TN-418+IA
+!     (December 1995)
+!   * Goldberg, David E.  Genetic Algorithms in Search, Optimization,
+!     & Machine Learning.  Addison-Wesley, 1989.
+!   * Davis, Lawrence, ed.  Handbook of Genetic Algorithms.
+!     Van Nostrand Reinhold, 1991.
 
     subroutine pikaia(me,x,f,status)
 
@@ -516,9 +418,12 @@
 
     !subroutine arguments:
     class(pikaia_class),intent(inout)      :: me
-    real(wp),dimension(:),intent(inout)    :: x
-    real(wp),intent(out)                   :: f
-    integer,intent(out)                    :: status
+    real(wp),dimension(:),intent(inout)    :: x      !! Input - initial guess for solution vector. 
+                                                     !! Output - the "fittest" (optimal) solution found, 
+                                                     !! i.e., the solution which maximizes the fitness function.
+    real(wp),intent(out)                   :: f      !! the (scalar) value of the fitness function at x
+    integer,intent(out)                    :: status !! an indicator of the success or failure
+                                                     !! of the call to pikaia (0=success; non-zero=failure)
 
     !Local variables
     integer  :: k,ip,ig,ip1,ip2,new,newtot,istart,i_window
@@ -534,7 +439,7 @@
     real(wp),dimension(me%np)      :: fitns
     real(wp),dimension(me%n)       :: xguess
 
-    real(wp),parameter :: big = huge(1.0_wp)    !a large number
+    real(wp),parameter :: big = huge(1.0_wp)    !! a large number
 
     !initialize:
     call rninit(me%iseed)
@@ -667,18 +572,9 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/solve_with_pikaia
+!> author: Jacob Williams
 !
-!  NAME
-!    solve_with_pikaia
-!
-!  DESCRIPTION
-!    Main pikaia wrapper used by the class.
-!
-!  AUTHOR
-!    Jacob Williams
-!
-!  SOURCE
+!  Main pikaia wrapper used by the class.
 
     subroutine solve_with_pikaia(me,x,f,status)
 
@@ -711,19 +607,10 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/func_wrapper
+!> author: Jacob Williams
 !
-!  NAME
-!    solve_with_pikaia
-!
-!  DESCRIPTION
-!    Wrapper for the user's function that is used by the main pikaia routine
-!    The x input to this function comes from pikaia, and will be between [0,1].
-!
-!  AUTHOR
-!    Jacob Williams
-!
-!  SOURCE
+!  Wrapper for the user's function that is used by the main pikaia routine
+!  The x input to this function comes from pikaia, and will be between [0,1].
 
     subroutine func_wrapper(me,x,f)
 
@@ -745,22 +632,14 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/rqsort
+!> author: B. G. Knapp
+!  date: 86/12/23
 !
-!  NAME
-!    rqsort
+!  Return integer array p which indexes array a in increasing order.
+!  Array a is not disturbed.  The Quicksort algorithm is used.
 !
-!  DESCRIPTION
-!    Return integer array p which indexes array a in increasing order.
-!    Array a is not disturbed.  The Quicksort algorithm is used.
-!
-!  SEE ALSO
-!    * N. Wirth, "Algorithms and Data Structures", Prentice-Hall, 1986
-!
-!  AUTHOR
-!    B. G. Knapp, 86/12/23
-!
-!  SOURCE
+!# Reference
+!   * N. Wirth, "Algorithms and Data Structures", Prentice-Hall, 1986
 
     subroutine rqsort(n,a,p)
 
@@ -771,8 +650,8 @@
     integer,dimension(n),intent(out) :: p
 
     !Constants
-    integer,parameter :: LGN = 32      ! log base 2 of maximum n
-    integer,parameter :: Q   = 11      ! smallest subfile to use quicksort on
+    integer,parameter :: LGN = 32      !! log base 2 of maximum n
+    integer,parameter :: Q   = 11      !! smallest subfile to use quicksort on
 
     !Local:
     integer,dimension(LGN) :: stackl,stackr
@@ -873,22 +752,13 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/urand
+!> author: Jacob Williams
+!  date: 3/8/2015
 !
-!  NAME
-!    urand
+!  Return the next pseudo-random deviate from a sequence which is
+!  uniformly distributed in the interval [0,1]
 !
-!  DESCRIPTION
-!    Return the next pseudo-random deviate from a sequence which is
-!    uniformly distributed in the interval [0,1]
-!
-!  NOTES
-!    This is now just a wrapper for the intrinsic random_number function.
-!
-!  AUTHOR
-!    Jacob Williams, 3/8/2015
-!
-!  SOURCE
+!@note This is now just a wrapper for the intrinsic random_number function.
 
     function urand() result(r)
 
@@ -902,21 +772,12 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/rninit
+!> author: Jacob Williams
+!  date: 3/8/2015
 !
-!  NAME
-!    rninit
+!  Initialize the random number generator with the input seed value.
 !
-!  DESCRIPTION
-!    Initialize the random number generator with the input seed value.
-!
-!  NOTES
-!    This is now just a wrapper for the intrinsic random_seed function.
-!
-!  AUTHOR
-!    Jacob Williams, 3/8/2015
-!
-!  SOURCE
+!@note This is now just a wrapper for the intrinsic random_seed function.
 
     subroutine rninit(iseed)
 
@@ -937,15 +798,8 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/report
-!
-!  NAME
-!    report
-!
-!  DESCRIPTION
-!    Write generation report to standard output
-!
-!  SOURCE
+!>
+!  Write generation report to standard output
 
     subroutine report(me,oldph,fitns,ifit,ig,nnew)
 
@@ -995,16 +849,9 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/encode
-!
-!  NAME
-!    encode
-!
-!  DESCRIPTION
-!    Encode phenotype parameters into integer genotype
-!    ph(k) are x,y coordinates [ 0 < x,y < 1 ]
-!
-!  SOURCE
+!>
+!  Encode phenotype parameters into integer genotype
+!  ph(k) are x,y coordinates [ 0 < x,y < 1 ]
 
     subroutine encode(me,ph,gn)
 
@@ -1032,16 +879,9 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/decode
-!
-!  NAME
-!    decode
-!
-!  DESCRIPTION
-!    decode genotype into phenotype parameters
-!    ph(k) are x,y coordinates [ 0 < x,y < 1 ]
-!
-!  SOURCE
+!>
+!  decode genotype into phenotype parameters
+!  ph(k) are x,y coordinates [ 0 < x,y < 1 ]
 
     subroutine decode(me,gn,ph)
 
@@ -1069,22 +909,14 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/cross
+!>
+!  breeds two parent chromosomes into two offspring chromosomes.
+!  breeding occurs through crossover. If the crossover probability
+!  test yields true (crossover taking place), either one-point or
+!  two-point crossover is used, with equal probabilities.
 !
-!  NAME
-!    cross
-!
-!  DESCRIPTION
-!    breeds two parent chromosomes into two offspring chromosomes.
-!    breeding occurs through crossover. If the crossover probability
-!    test yields true (crossover taking place), either one-point or
-!    two-point crossover is used, with equal probabilities.
-!
-!  NOTES
-!    Compatibility with version 1.0: To enforce 100% use of one-point
-!    crossover, un-comment appropriate line in source code below
-!
-!  SOURCE
+!@note Compatibility with version 1.0: To enforce 100% use of one-point
+!      crossover, un-comment appropriate line in source code below
 
     subroutine cross(me,gn1,gn2)
 
@@ -1129,24 +961,17 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/mutate
+!>
+!  Introduces random mutation in a genotype.
+!  Mutations occur at rate pmut at all gene loci.
 !
-!  NAME
-!    mutate
-!
-!  DESCRIPTION
-!    Introduces random mutation in a genotype.
-!    Mutations occur at rate pmut at all gene loci.
-!
-!  INPUT
-!    * imut=1    Uniform mutation, constant rate
-!    * imut=2    Uniform mutation, variable rate based on fitness
-!    * imut=3    Uniform mutation, variable rate based on distance
-!    * imut=4    Uniform or creep mutation, constant rate
-!    * imut=5    Uniform or creep mutation, variable rate based on fitness
-!    * imut=6    Uniform or creep mutation, variable rate based on distance
-!
-!  SOURCE
+!# Input
+!   * imut=1    Uniform mutation, constant rate
+!   * imut=2    Uniform mutation, variable rate based on fitness
+!   * imut=3    Uniform mutation, variable rate based on distance
+!   * imut=4    Uniform or creep mutation, constant rate
+!   * imut=5    Uniform or creep mutation, variable rate based on fitness
+!   * imut=6    Uniform or creep mutation, variable rate based on distance
 
     subroutine mutate(me,gn)
 
@@ -1245,19 +1070,13 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/adjmut
+!>
+!  Dynamical adjustment of mutation rate:
 !
-!  NAME
-!    adjmut
-!
-!  DESCRIPTION
-!    Dynamical adjustment of mutation rate:
-!    * imut=2 or imut=5 : adjustment based on fitness differential
-!      between best and median individuals
-!    * imut=3 or imut=6 : adjustment based on metric distance
-!      between best and median individuals
-!
-!  SOURCE
+!   * imut=2 or imut=5 : adjustment based on fitness differential
+!     between best and median individuals
+!   * imut=3 or imut=6 : adjustment based on metric distance
+!     between best and median individuals
 
     subroutine adjmut(me,oldph,fitns,ifit)
 
@@ -1303,24 +1122,17 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/select_parents
+!>
+!  Selects two parents from the population, using roulette wheel
+!  algorithm with the relative fitnesses of the phenotypes as
+!  the "hit" probabilities.
 !
-!  NAME
-!    select_parents
+!# Reference
+!  * Davis 1991, chap. 1.
 !
-!  DESCRIPTION
-!    Selects two parents from the population, using roulette wheel
-!    algorithm with the relative fitnesses of the phenotypes as
-!    the "hit" probabilities.
-!
-!  SEE ALSO
-!    * Davis 1991, chap. 1.
-!
-!  HISTORY
-!    Jacob Williams : 3/10/2015 : rewrote this routine to return both parents,
+!# History
+!  * Jacob Williams : 3/10/2015 : rewrote this routine to return both parents,
 !    and also protect against the loop exiting without selecting a parent.
-!
-!  SOURCE
 
     subroutine select_parents(me,jfit,imom,idad)
 
@@ -1361,17 +1173,10 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/rnkpop
-!
-!  NAME
-!    rnkpop
-!
-!  DESCRIPTION
-!    Ranks initial population.
-!    Calls external sort routine to produce key index and rank order
-!    of input array arrin (which is not altered).
-!
-!  SOURCE
+!>
+!  Ranks initial population.
+!  Calls external sort routine to produce key index and rank order
+!  of input array arrin (which is not altered).
 
     subroutine rnkpop(me,arrin,indx,rank)
 
@@ -1396,16 +1201,9 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/genrep
-!
-!  NAME
-!    genrep
-!
-!  DESCRIPTION
-!    Full generational replacement: accumulate offspring into new
-!    population array
-!
-!  SOURCE
+!>
+!  Full generational replacement: accumulate offspring into new
+!  population array
 
     subroutine genrep(me,ip,ph,newph)
 
@@ -1430,17 +1228,10 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/stdrep
-!
-!  NAME
-!    stdrep
-!
-!  DESCRIPTION
-!     Steady-state reproduction: insert offspring pair into population
-!     only if they are fit enough (replace-random if irep=2 or
-!     replace-worst if irep=3).
-!
-!  SOURCE
+!>
+!  Steady-state reproduction: insert offspring pair into population
+!  only if they are fit enough (replace-random if irep=2 or
+!  replace-worst if irep=3).
 
     subroutine stdrep(me,ph,oldph,fitns,ifit,jfit,nnew)
 
@@ -1526,18 +1317,11 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* pikaia_module/newpop
+!>
+!  Replaces old population by new; recomputes fitnesses & ranks
 !
-!  NAME
-!    newpop
-!
-!  DESCRIPTION
-!    Replaces old population by new; recomputes fitnesses & ranks
-!
-!  HISTORY
-!    Jacob Williams : 3/9/2015 : avoid unnecessary function evaluation if ielite/=1.
-!
-!  SOURCE
+!# History
+!  * Jacob Williams : 3/9/2015 : avoid unnecessary function evaluation if `ielite/=1`.
 
     subroutine newpop(me,oldph,newph,ifit,jfit,fitns,nnew)
 

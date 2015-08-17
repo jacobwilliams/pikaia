@@ -3,6 +3,7 @@ bin/
 build/
 lib/
 documentation/
+doc/
 
 # Compiled Object files
 *.slo

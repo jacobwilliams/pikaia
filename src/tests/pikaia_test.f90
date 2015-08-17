@@ -1,17 +1,9 @@
 !*****************************************************************************************
-!****u* PIKAIA/pikaia_test
+!> author: Jacob Williams
+!  date: 3/9/2015
 !
-!  NAME
-!    pikaia_test
-!    
-!  DESCRIPTION
-!    Sample driver program for pikaia.  
-!    Based on the xpikaia routine.
-!
-!  AUTHOR
-!    Jacob Williams : 3/9/2015
-!
-!  SOURCE
+!  Sample driver program for pikaia.  
+!  Based on the xpikaia routine.
 
     program pikaia_test
 
@@ -20,7 +12,7 @@
 
     implicit none
     
-    integer,parameter :: n = 2  !dimension of problem (number of optimization variables)
+    integer,parameter :: n = 2  !! dimension of problem (number of optimization variables)
     
     integer                 :: seed,status
     real(wp),dimension(n)   :: x
@@ -116,8 +108,8 @@
       
         subroutine twod(me,x,f)
 
-        ! Compute sample fitness function 
-        ! (a smooth 2-d landscape)
+        !! Compute sample fitness function 
+        !! (a smooth 2-d landscape)
 
         implicit none
 
@@ -148,9 +140,9 @@
 
         subroutine rosenbrock(me,x,f)
 
-        ! Rosenbrock function for testing the algorithm.
-        ! The minimum is at f(1,1) = 0.
-        ! http://en.wikipedia.org/wiki/Rosenbrock_function
+        !! Rosenbrock function for testing the algorithm.
+        !! The minimum is at f(1,1) = 0.
+        !! http://en.wikipedia.org/wiki/Rosenbrock_function
 
         implicit none
 
@@ -170,8 +162,8 @@
 
         subroutine report_iteration(me,iter,x,f)
 
-        ! A simple iteration reporting function.
-        ! Writes iter,x,f to the output file.
+        !! A simple iteration reporting function.
+        !! Writes iter,x,f to the output file.
 
         implicit none
 
