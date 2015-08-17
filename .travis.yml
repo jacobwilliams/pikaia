@@ -17,7 +17,7 @@ before_script:
   - FoBiS.py build -compiler gnu -cflags "-c -O2 -std=f2008" -dbld ./bin/ -s ./src/tests/ -dmod ./ -dobj ./ -colors -libs ./lib/libpikaia.a --include ./lib/
 
 script:
-  - ./bin/test
+  - ./bin/pikaia_test
 
 after_success:
   - git config --global user.name "TRAVIS-CI-for-$(git --no-pager show -s --format='%cn' $TRAVIS_COMMIT)"
