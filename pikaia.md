@@ -10,10 +10,11 @@ predocmark: <
 docmark_alt:
 docmark: !
 display: public
-display: private
-display: protected
-display: none
+         private
+         protected
+         none
 source: true
+graph: true
 
 Brief description
 ---------------
