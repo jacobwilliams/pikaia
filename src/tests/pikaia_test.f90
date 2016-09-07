@@ -2,8 +2,8 @@
 !> author: Jacob Williams
 !  date: 3/9/2015
 !
-!  Sample driver program for pikaia.  
-!  Based on the xpikaia routine.
+!  Sample driver program for pikaia.
+!  Based on the [xpikaia](http://www.hao.ucar.edu/modeling/pikaia/xpikaia.f) routine.
 
     program pikaia_test
 
@@ -11,13 +11,13 @@
     use,intrinsic :: iso_fortran_env, wp => real64
 
     implicit none
-    
+
     integer,parameter :: n = 2  !! dimension of problem (number of optimization variables)
-    
+
     integer                 :: seed,status
     real(wp),dimension(n)   :: x
     real(wp)                :: f
-    integer                 :: ierr,iunit,istat
+    integer                 :: iunit,istat
     real(wp),dimension(n)   :: xl,xu
     type(pikaia_class)      :: p
     logical                 :: header_written
@@ -25,11 +25,6 @@
 
     character(len=*),parameter :: filename = 'pikaia_test.txt'
 
-    !the user enters a new seed value to use:
-    !write(output_unit,fmt='(A)') 'Enter random number seed: '
-    !read(input_unit,fmt='(I10)',iostat=ierr) seed
-    !if (ierr/=0) stop 'Invalid input.'
-    
     seed = 999  ! specify the random seed
 
     !output file:
@@ -45,7 +40,7 @@
     x = 0.0_wp
     xl = 0.0_wp
     xu = 1.0_wp
-    
+
     !initialize the class:
     call p%init(n,xl,xu,twod,status,&
                 iter_f              = report_iteration,&
@@ -80,7 +75,7 @@
     x  = 0.5_wp
     xl = 0.0_wp
     xu = 2.0_wp
-    
+
     !initialize the class:
     call p%init(n,xl,xu,rosenbrock,status,&
                 np                  = 500,&        !try a larger population for this one
@@ -107,10 +102,10 @@
     close(iunit,iostat=istat)
 
     contains
-      
+
         subroutine twod(me,x,f)
 
-        !! Compute sample fitness function 
+        !! Compute sample fitness function
         !! (a smooth 2-d landscape)
 
         implicit none
@@ -137,14 +132,16 @@
             rr=sqrt( (0.5_wp-x(1))**2+ (0.5_wp-x(2))**2)
             f=cos(rr*nn*pi)**2 *exp(-rr**2/sigma2)
         end if
-        
-        end subroutine twod   
+
+        end subroutine twod
 
         subroutine rosenbrock(me,x,f)
 
         !! Rosenbrock function for testing the algorithm.
         !! The minimum is at f(1,1) = 0.
-        !! http://en.wikipedia.org/wiki/Rosenbrock_function
+        !!
+        !!#Reference
+        !!   * [Rosenbrock function](http://en.wikipedia.org/wiki/Rosenbrock_function)
 
         implicit none
 
@@ -154,24 +151,24 @@
 
         real(wp),parameter :: one     = 1.0_wp
         real(wp),parameter :: hundred = 100.0_wp
-        
+
         !the rosenbrock function:
         f = (one-x(1))**2 + hundred*(x(2)-x(1)**2)**2
 
         f = -f    !since pikaia maximizes
-        
+
         end subroutine rosenbrock
 
         subroutine report_iteration(me,iter,x,f)
 
         !! A simple iteration reporting function.
-        !! Writes iter,x,f to the output file.
+        !! Writes `iter,x,f` to the output file.
 
         implicit none
 
-        class(pikaia_class),intent(inout)  :: me   
-        integer,intent(in)                 :: iter 
-        real(wp),dimension(:),intent(in)   :: x    
+        class(pikaia_class),intent(inout)  :: me
+        integer,intent(in)                 :: iter
+        real(wp),dimension(:),intent(in)   :: x
         real(wp),intent(in)                :: f
 
         character(len=10),dimension(n) :: xheader

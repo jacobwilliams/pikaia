@@ -110,10 +110,18 @@
 
         !private routines:
         procedure,non_overridable :: ff  => func_wrapper  !! internal pikaia function (x:[0,1])
-        procedure,non_overridable :: newpop,stdrep,genrep,&
-                                     adjmut,cross,encode,&
-                                     mutate,decode,select_parents,&
-                                     report,rnkpop,pikaia
+        procedure,non_overridable :: newpop
+        procedure,non_overridable :: stdrep
+        procedure,non_overridable :: genrep
+        procedure,non_overridable :: adjmut
+        procedure,non_overridable :: cross
+        procedure,non_overridable :: encode
+        procedure,non_overridable :: mutate
+        procedure,non_overridable :: decode
+        procedure,non_overridable :: select_parents
+        procedure,non_overridable :: report
+        procedure,non_overridable :: rnkpop
+        procedure,non_overridable :: pikaia
 
     end type pikaia_class
     !*********************************************************
@@ -274,13 +282,13 @@
         write(output_unit,'(A,I4)')    '     Individuals per generation: ',me%np
         write(output_unit,'(A,I4)')    '  Number of Chromosome segments: ',me%n
         write(output_unit,'(A,I4)')    '  Length of Chromosome segments: ',me%nd
-        write(output_unit,'(A,E10.4)') '          Crossover probability: ',me%pcross
-        write(output_unit,'(A,E10.4)') '          Initial mutation rate: ',me%pmuti
-        write(output_unit,'(A,E10.4)') '          Minimum mutation rate: ',me%pmutmn
-        write(output_unit,'(A,E10.4)') '          Maximum mutation rate: ',me%pmutmx
-        write(output_unit,'(A,E10.4)') '  Relative fitness differential: ',me%fdif
-        write(output_unit,'(A,E10.4)') '         Initial guess fraction: ',me%initial_guess_frac
-        write(output_unit,'(A,E10.4)') '          Convergence tolerance: ',me%convergence_tol
+        write(output_unit,'(A,E11.4)') '          Crossover probability: ',me%pcross
+        write(output_unit,'(A,E11.4)') '          Initial mutation rate: ',me%pmuti
+        write(output_unit,'(A,E11.4)') '          Minimum mutation rate: ',me%pmutmn
+        write(output_unit,'(A,E11.4)') '          Maximum mutation rate: ',me%pmutmx
+        write(output_unit,'(A,E11.4)') '  Relative fitness differential: ',me%fdif
+        write(output_unit,'(A,E11.4)') '         Initial guess fraction: ',me%initial_guess_frac
+        write(output_unit,'(A,E11.4)') '          Convergence tolerance: ',me%convergence_tol
         write(output_unit,'(A,I4)')    '             Convergence window: ',me%convergence_window
         select case (me%imut)
         case(1); write(output_unit,'(A)') '                  Mutation Mode: Uniform, Constant Rate'
