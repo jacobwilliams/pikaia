@@ -11,22 +11,22 @@
 !# License
 !
 !    Copyright (c) 2015, Jacob Williams
-! 
+!
 !    http://github.com/jacobwilliams/pikaia
-!    
+!
 !    All rights reserved.
-!    
+!
 !    Redistribution and use in source and binary forms, with or without
 !    modification, are permitted provided that the following conditions are met:
 !    * Redistributions of source code must retain the above copyright notice, this
 !      list of conditions and the following disclaimer.
 !    * Redistributions in binary form must reproduce the above copyright notice,
 !      this list of conditions and the following disclaimer in the documentation
-!      and/or other materials provided with the distribution. 
+!      and/or other materials provided with the distribution.
 !    * Neither the name of pikaia nor the names of its
 !      contributors may be used to endorse or promote products derived from
 !      this software without specific prior written permission.
-!    
+!
 !    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 !    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 !    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -37,10 +37,10 @@
 !    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 !    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 !    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-!    
+!
 !    ------------------------------------------------------------------------------
-!    
-!    The original version of the PIKAIA software is public domain software 
+!
+!    The original version of the PIKAIA software is public domain software
 !    and is available electronically from the High Altitude Observatory.
 !    http://www.hao.ucar.edu/modeling/pikaia/pikaia.php
 !
@@ -55,6 +55,7 @@
     module pikaia_module
 
     use,intrinsic :: iso_fortran_env
+!$  use omp_lib
 
     implicit none
 
@@ -64,7 +65,7 @@
 
     !*********************************************************
     type,public :: pikaia_class
-    
+
         !! Main class for using the Pikaia algorithm.
         !! INIT and SOLVE are the only public methods.
 
@@ -127,8 +128,8 @@
     !*********************************************************
 
     abstract interface
-    
-        subroutine pikaia_func(me,x,f)  
+
+        subroutine pikaia_func(me,x,f)
             !! The interface for the function that pikaia will be maximizing.
         import :: wp,pikaia_class
         implicit none
@@ -149,7 +150,7 @@
         real(wp),dimension(:),intent(in)   :: x     !! optimization variable vector
         real(wp),intent(in)                :: f     !! fitness value
         end subroutine iter_func
-        
+
     end interface
 
     contains
@@ -337,44 +338,44 @@
         write(output_unit,'(A)') ' ERROR: illegal value for Convergence tolerance.'
         status = 101
     end if
- 
+
     if (me%convergence_window<=0) then
         write(output_unit,'(A)') ' ERROR: illegal value for Convergence window.'
         status = 102
     end if
- 
+
     if (me%iseed<=0) then
         write(output_unit,'(A)') ' ERROR: illegal value for iseed.'
         status = 103
     end if
- 
+
     if (me%nd>9 .or. me%nd<1) then
         write(output_unit,'(A)') ' ERROR: illegal value for Chromosome length.'
         status = 104
     end if
- 
+
     if (mod(me%np,2)>0) then
        write(output_unit,'(A)') ' ERROR: population size must be an even number.'
        status = 105
     end if
- 
+
     if (me%initial_guess_frac<0.0_wp .or. me%initial_guess_frac>1.0_wp) then
        write(output_unit,'(A)') ' ERROR: illegal value for Initial guess fraction.'
        status = 106
     end if
- 
+
     if (me%irep==1 .and. me%imut==1 .and. me%pmuti>0.5_wp .and. me%ielite==0) then
        write(output_unit,'(A)') &
         ' WARNING: dangerously high value for Initial mutation rate; '//&
         '(Should enforce elitism with ielite=1.)'
     end if
- 
+
     if (me%irep==1 .and. me%imut==2 .and. me%pmutmx>0.5_wp .and. me%ielite==0) then
        write(output_unit,'(A)') &
        ' WARNING: dangerously high value for Maximum mutation rate; '//&
        '(Should enforce elitism with ielite=1.)'
     end if
- 
+
     if (me%fdif<0.33_wp .and. me%irep/=3) then
        write(output_unit,'(A)') &
        ' WARNING: dangerously low value of Relative fitness differential.'
@@ -426,8 +427,8 @@
 
     !subroutine arguments:
     class(pikaia_class),intent(inout)      :: me
-    real(wp),dimension(:),intent(inout)    :: x      !! Input - initial guess for solution vector. 
-                                                     !! Output - the "fittest" (optimal) solution found, 
+    real(wp),dimension(:),intent(inout)    :: x      !! Input - initial guess for solution vector.
+                                                     !! Output - the "fittest" (optimal) solution found,
                                                      !! i.e., the solution which maximizes the fitness function.
     real(wp),intent(out)                   :: f      !! the (scalar) value of the fitness function at x
     integer,intent(out)                    :: status !! an indicator of the success or failure
@@ -491,11 +492,16 @@
 
     !Compute initial (random but bounded) phenotypes
     do ip=istart,me%np
-        do k=1,me%n
-            oldph(k,ip)=urand()  !from [0,1]
-        end do
-        call me%ff(oldph(:,ip),fitns(ip))
+       do k=1,me%n
+          oldph(k,ip)=urand()  !from [0,1]
+       end do
     end do
+
+    !$omp parallel do private(ip)
+    do ip=istart,me%np
+       call me%ff(oldph(:,ip),fitns(ip))
+    end do
+    !$omp end parallel do
 
     !Rank initial population by fitness order
     call me%rnkpop(fitns,ifit,jfit)
@@ -723,7 +729,7 @@
 
                 do while (a(p(i))<x)
                     i=i+1
-                end do 
+                end do
 
                 do while (x<a(p(j)))
                     j=j-1
@@ -1363,6 +1369,7 @@
     end if
 
     !replace population
+    !$omp parallel do private(i)
     do i=1,me%np
 
         oldph(:,i)=newph(:,i)
@@ -1371,6 +1378,7 @@
         call me%ff(oldph(:,i),fitns(i))
 
     end do
+    !$omp end parallel do
 
     !compute new population fitness rank order
     call me%rnkpop(fitns,ifit,jfit)

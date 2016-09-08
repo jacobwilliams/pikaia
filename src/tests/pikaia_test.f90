@@ -9,6 +9,7 @@
 
     use pikaia_module, only: pikaia_class
     use,intrinsic :: iso_fortran_env, wp => real64
+!$  use omp_lib
 
     implicit none
 
@@ -21,7 +22,8 @@
     real(wp),dimension(n)   :: xl,xu
     type(pikaia_class)      :: p
     logical                 :: header_written
-    real                    :: tstart,tend
+    real(wp)                :: tstart,tend
+!$  real(wp)                :: ostart,oend
 
     character(len=*),parameter :: filename = 'pikaia_test.txt'
 
@@ -53,8 +55,10 @@
 
     !Now call pikaia:
     call cpu_time(tstart)
+!$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
     call cpu_time(tend)
+!$  oend = omp_get_wtime()
 
     !Print the results:
     write(output_unit,'(A)') ''
@@ -62,7 +66,8 @@
     write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
     write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
     write(output_unit,'(A)') ''
-    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
+    write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
+!$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
     write(output_unit,'(A)') ''
 
     !-------------------------
@@ -87,8 +92,10 @@
 
     !Now call pikaia:
     call cpu_time(tstart)
+!$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
     call cpu_time(tend)
+!$  oend = omp_get_wtime()
 
     !Print the results:
     write(output_unit,'(A)') ''
@@ -96,7 +103,8 @@
     write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
     write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
     write(output_unit,'(A)') ''
-    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
+    write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
+!$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
     write(output_unit,'(A)') ''
 
     close(iunit,iostat=istat)
@@ -122,6 +130,8 @@
 
         !Local
         real(wp) :: rr
+
+!$      call slowdown(f)
 
         if (x(1)>1.0_wp .or. x(2)>1.0_wp) then
             write(output_unit,*) 'Error in function twod: invalid inputs.'
@@ -151,6 +161,8 @@
 
         real(wp),parameter :: one     = 1.0_wp
         real(wp),parameter :: hundred = 100.0_wp
+
+!$      call slowdown(f)
 
         !the rosenbrock function:
         f = (one-x(1))**2 + hundred*(x(2)-x(1)**2)**2
@@ -188,6 +200,22 @@
         write(iunit,'(I5,1X,*(F10.6,1X))') iter,x,f
 
         end subroutine report_iteration
+
+        subroutine slowdown(f)
+        !! for the openmp test.
+        !! just a function to slow things down
+
+        implicit none
+
+        real(wp),intent(out) :: f
+        integer :: i !! counter
+
+        f=1.0_wp
+        do i=1,1000000
+            f=f+1.0_wp
+        end do
+
+        end subroutine slowdown
 
     end program pikaia_test
 !*****************************************************************************************
