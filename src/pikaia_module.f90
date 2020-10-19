@@ -10,8 +10,7 @@
 !
 !# License
 !
-!    Copyright (c) 2015, Jacob Williams
-!
+!    Copyright (c) 2015-2020, Jacob Williams
 !    http://github.com/jacobwilliams/pikaia
 !
 !    All rights reserved.
@@ -49,12 +48,11 @@
 !  * Jacob Williams : 3/8/2015 : Significant refactoring of original PIKAIA code.
 !    Converted to free-form source, double precision real variables, added various
 !    new features, and an object-oriented interface.
-!
-!*****************************************************************************************
 
     module pikaia_module
 
     use,intrinsic :: iso_fortran_env
+    use mt19937_64
 !$  use omp_lib
 
     implicit none
@@ -72,8 +70,8 @@
         private
 
         integer :: n = 0  !number of solution variables
-        real(wp),dimension(:),allocatable :: xl    !! lower bounds of x
-        real(wp),dimension(:),allocatable :: xu    !! upper bound of x
+        real(wp),dimension(:),allocatable :: xl    !! lower bounds of `x`
+        real(wp),dimension(:),allocatable :: xu    !! upper bound of `x`
         real(wp),dimension(:),allocatable :: del
 
         !other solution inputs (with default values):
@@ -82,7 +80,7 @@
         integer  :: nd                 = 5
         real(wp) :: pcross             = 0.85_wp
         integer  :: imut               = 2
-        real(wp) :: pmuti              = 0.005_wp  !! initial value of pmut
+        real(wp) :: pmuti              = 0.005_wp  !! initial value of `pmut`
         real(wp) :: pmutmn             = 0.0005_wp
         real(wp) :: pmutmx             = 0.25_wp
         real(wp) :: fdif               = 1.0_wp
@@ -98,6 +96,8 @@
         real(wp) :: pmut   = -huge(1.0_wp)
         real(wp) :: bestft = huge(1.0_wp)
         real(wp) :: pmutpv = huge(1.0_wp)
+
+        type(mt19937) :: rand !! random number generator
 
         !user-supplied procedures:
         procedure(pikaia_func),pointer :: user_f => null()  !! fitness function
@@ -123,6 +123,8 @@
         procedure,non_overridable :: report
         procedure,non_overridable :: rnkpop
         procedure,non_overridable :: pikaia
+        procedure,non_overridable :: rninit
+        procedure,non_overridable :: urand
 
     end type pikaia_class
     !*********************************************************
@@ -451,7 +453,7 @@
     real(wp),parameter :: big = huge(1.0_wp)    !! a large number
 
     !initialize:
-    call rninit(me%iseed)
+    call me%rninit()
     me%bestft   = -big
     me%pmutpv   = -big
     me%pmut     = me%pmuti  !set initial mutation rate (it can change)
@@ -493,7 +495,7 @@
     !Compute initial (random but bounded) phenotypes
     do ip=istart,me%np
        do k=1,me%n
-          oldph(k,ip)=urand()  !from [0,1]
+          oldph(k,ip) = me%urand()  !from [0,1]
        end do
     end do
 
@@ -766,47 +768,34 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!> author: Jacob Williams
-!  date: 3/8/2015
-!
+!>
 !  Return the next pseudo-random deviate from a sequence which is
 !  uniformly distributed in the interval [0,1]
-!
-!@note This is now just a wrapper for the intrinsic random_number function.
 
-    function urand() result(r)
+    function urand(me) result(r)
 
     implicit none
 
+    class(pikaia_class),intent(inout) :: me
+
     real(wp) :: r
 
-    call random_number(r)
+    r = me%rand%genrand64_real1()
 
     end function urand
 !*****************************************************************************************
 
 !*****************************************************************************************
-!> author: Jacob Williams
-!  date: 3/8/2015
-!
+!>
 !  Initialize the random number generator with the input seed value.
-!
-!@note This is now just a wrapper for the intrinsic random_seed function.
 
-    subroutine rninit(iseed)
+    subroutine rninit(me)
 
     implicit none
 
-    integer,intent(in) :: iseed
+    class(pikaia_class),intent(inout) :: me
 
-    integer,dimension(:),allocatable :: seed
-    integer :: n
-
-    call random_seed(size=n)
-    allocate(seed(n))
-    seed = iseed
-    call random_seed(put=seed)
-    deallocate(seed)
+    call me%rand%initialize(me%iseed)
 
     end subroutine rninit
 !*****************************************************************************************
@@ -943,16 +932,16 @@
     integer :: i, ispl, ispl2, itmp, t
 
     !Use crossover probability to decide whether a crossover occurs
-    if (urand()<me%pcross) then
+    if (me%urand()<me%pcross) then
 
         !Compute first crossover point
-        ispl=int(urand()*me%n*me%nd)+1
+        ispl=int(me%urand()*me%n*me%nd)+1
 
         !Now choose between one-point and two-point crossover
-        if (urand()<0.5_wp) then
+        if (me%urand()<0.5_wp) then
             ispl2=me%n*me%nd
         else
-            ispl2=int(urand()*me%n*me%nd)+1
+            ispl2=int(me%urand()*me%n*me%nd)+1
             !Un-comment following line to enforce one-point crossover
             !ispl2=me%n*me%nd
             if (ispl2<ispl) then
@@ -998,18 +987,18 @@
     logical :: fix
 
     !Decide which type of mutation is to occur
-    if (me%imut>=4 .and. urand()<=0.5_wp) then
+    if (me%imut>=4 .and. me%urand()<=0.5_wp) then
 
         !CREEP MUTATION OPERATOR
         !Subject each locus to random +/- 1 increment at the rate pmut
         do i=1,me%n
             do j=1,me%nd
 
-                if (urand()<me%pmut) then
+                if (me%urand()<me%pmut) then
 
                     !Construct integer
                     loc=(i-1)*me%nd+j
-                    inc=nint( urand() )*2-1
+                    inc=nint( me%urand() )*2-1
                     ist=(i-1)*me%nd+1
                     gn(loc)=gn(loc)+inc
 
@@ -1073,8 +1062,8 @@
         !UNIFORM MUTATION OPERATOR
         !Subject each locus to random mutation at the rate pmut
         do i=1,me%n*me%nd
-            if (urand()<me%pmut) then
-                gn(i)=int(urand()*10.0_wp)
+            if (me%urand()<me%pmut) then
+                gn(i)=int(me%urand()*10.0_wp)
             end if
         end do
 
@@ -1168,7 +1157,7 @@
     !get two (unequal) parents:
     do j=1,2
         main: do
-            dice = urand()*me%np*np1
+            dice = me%urand()*me%np*np1
             rtfit = 0.0_wp
             do i=1,me%np
                 rtfit = rtfit+np1+me%fdif*(np1-2*jfit(i))
@@ -1261,13 +1250,21 @@
 
     integer  :: i,j,k,i1,if1
     real(wp) :: fit
+    real(wp),dimension(2) :: fits
 
     nnew = 0
 
+    !$omp parallel do private(j)
+    do j = 1, 2
+        ! compute offspring fitness (with caller's fitness function)
+        call me%ff(ph(:,j),fits(j))
+    end do
+    !$omp end parallel do
+
     main_loop : do j=1,2
 
-        !1. compute offspring fitness (with caller's fitness function)
-        call me%ff(ph(:,j),fit)
+        !1. get offspring fitness
+        fit = fits(j)
 
         !2. if fit enough, insert in population
         do i=me%np,1,-1
@@ -1285,9 +1282,9 @@
                 if (me%irep==3) then
                     i1=1
                 else if (me%ielite==0 .or. i==me%np) then
-                    i1=int(urand()*me%np)+1
+                    i1=int(me%urand()*me%np)+1
                 else
-                    i1=int(urand()*(me%np-1))+1
+                    i1=int(me%urand()*(me%np-1))+1
                 end if
                 if1 = ifit(i1)
                 fitns(if1)=fit
@@ -1369,14 +1366,12 @@
     end if
 
     !replace population
+    oldph = newph
+
+    !get fitness using caller's fitness function
     !$omp parallel do private(i)
     do i=1,me%np
-
-        oldph(:,i)=newph(:,i)
-
-        !get fitness using caller's fitness function
         call me%ff(oldph(:,i),fitns(i))
-
     end do
     !$omp end parallel do
 

@@ -45,12 +45,13 @@
 
     !initialize the class:
     call p%init(n,xl,xu,twod,status,&
-                iter_f              = report_iteration,&
+                !iter_f              = report_iteration,&
                 ngen                = 1000,&
                 nd                  = 9,&
-                ivrb                = 1,&    !0,1,2
+                !ivrb                = 1,&    !0,1,2
                 convergence_tol     = 1.0e-6_wp,&
                 convergence_window  = 200,&
+                !irep                = 1, &
                 iseed               = seed)
 
     !Now call pikaia:
@@ -63,8 +64,8 @@
     !Print the results:
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,*(I4))')    '  status: ',status
-    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
-    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A,1X,*(F27.16))') '       x: ',x
+    write(output_unit,'(A,1X,*(F27.16))') '       f: ',f
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
 !$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
@@ -83,11 +84,13 @@
 
     !initialize the class:
     call p%init(n,xl,xu,rosenbrock,status,&
+                iter_f              = report_iteration,&
                 np                  = 500,&        !try a larger population for this one
                 ngen                = 1000,&
                 nd                  = 9,&
                 convergence_tol     = 1.0e-10_wp,& !tighter tolerance also
                 convergence_window  = 200,&
+                !irep               = 1, &
                 iseed               = seed)
 
     !Now call pikaia:
@@ -100,8 +103,8 @@
     !Print the results:
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,*(I4))')    '  status: ',status
-    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
-    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A,1X,*(F27.16))') '       x: ',x
+    write(output_unit,'(A,1X,*(F27.16))') '       f: ',f
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
 !$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
@@ -131,7 +134,7 @@
         !Local
         real(wp) :: rr
 
-!$      call slowdown(f)
+        call slowdown(f)
 
         if (x(1)>1.0_wp .or. x(2)>1.0_wp) then
             write(output_unit,*) 'Error in function twod: invalid inputs.'
@@ -162,7 +165,7 @@
         real(wp),parameter :: one     = 1.0_wp
         real(wp),parameter :: hundred = 100.0_wp
 
-!$      call slowdown(f)
+        call slowdown(f)
 
         !the rosenbrock function:
         f = (one-x(1))**2 + hundred*(x(2)-x(1)**2)**2
@@ -197,7 +200,7 @@
             header_written = .true.
         end if
 
-        write(iunit,'(I5,1X,*(F10.6,1X))') iter,x,f
+        write(iunit,'(I5,1X,*(F27.16,1X))') iter,x,f
 
         end subroutine report_iteration
 
@@ -207,7 +210,7 @@
 
         implicit none
 
-        real(wp),intent(out) :: f
+        real(wp),intent(inout) :: f
         integer :: i !! counter
 
         f=1.0_wp
