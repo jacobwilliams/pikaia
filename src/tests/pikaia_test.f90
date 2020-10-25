@@ -24,8 +24,21 @@
     logical                 :: header_written
     real(wp)                :: tstart,tend
 !$  real(wp)                :: ostart,oend
+!$  integer                 :: tid, nthreads
 
     character(len=*),parameter :: filename = 'pikaia_test.txt'
+
+!$OMP PARALLEL PRIVATE(NTHREADS, TID)
+!$
+!$  tid = omp_get_thread_num()
+!$
+!$  if (tid == 0) then
+!$      nthreads = omp_get_num_threads()
+!$      write(output_unit,'(A)') '--------------'
+!$      write(output_unit,'(A,1X,I5)') 'number of OMP threads: ', OMP_get_num_threads()
+!$      write(output_unit,'(A)') '--------------'
+!$  end if
+!$OMP END PARALLEL
 
     seed = 999  ! specify the random seed
 
@@ -51,15 +64,15 @@
                 !ivrb                = 1,&    !0,1,2
                 convergence_tol     = 1.0e-6_wp,&
                 convergence_window  = 200,&
-                !irep                = 1, &
+                irep                = 3, &
                 iseed               = seed)
 
     !Now call pikaia:
     call cpu_time(tstart)
 !$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
-    call cpu_time(tend)
 !$  oend = omp_get_wtime()
+    call cpu_time(tend)
 
     !Print the results:
     write(output_unit,'(A)') ''
@@ -90,15 +103,15 @@
                 nd                  = 9,&
                 convergence_tol     = 1.0e-10_wp,& !tighter tolerance also
                 convergence_window  = 200,&
-                !irep               = 1, &
+                irep                = 1, &
                 iseed               = seed)
 
     !Now call pikaia:
     call cpu_time(tstart)
 !$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
-    call cpu_time(tend)
 !$  oend = omp_get_wtime()
+    call cpu_time(tend)
 
     !Print the results:
     write(output_unit,'(A)') ''
@@ -108,6 +121,7 @@
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
 !$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
+
     write(output_unit,'(A)') ''
 
     close(iunit,iostat=istat)

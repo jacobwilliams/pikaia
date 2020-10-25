@@ -437,18 +437,19 @@
                                                      !! of the call to pikaia (0=success; non-zero=failure)
 
     !Local variables
-    integer  :: k,ip,ig,ip1,ip2,new,newtot,istart,i_window
+    integer  :: k,ip,ig,ip1,ip2,new,newtot,istart,i_window,j
     real(wp) :: current_best_f, last_best_f, fguess
     logical  :: convergence
-    real(wp),dimension(me%n,2)     :: ph
-    real(wp),dimension(me%n,me%np) :: oldph
-    real(wp),dimension(me%n,me%np) :: newph
-    integer,dimension(me%n*me%nd)  :: gn1
-    integer,dimension(me%n*me%nd)  :: gn2
-    integer,dimension(me%np)       :: ifit
-    integer,dimension(me%np)       :: jfit
-    real(wp),dimension(me%np)      :: fitns
-    real(wp),dimension(me%n)       :: xguess
+    real(wp),dimension(me%n,2,me%np/2) :: ph
+    real(wp),dimension(me%n,me%np)     :: oldph
+    real(wp),dimension(me%n,me%np)     :: newph
+    integer,dimension(me%n*me%nd)      :: gn1
+    integer,dimension(me%n*me%nd)      :: gn2
+    integer,dimension(me%np)           :: ifit
+    integer,dimension(me%np)           :: jfit
+    real(wp),dimension(me%np)          :: fitns
+    real(wp),dimension(me%n)           :: xguess
+    real(wp),dimension(2,me%np/2)      :: fits
 
     real(wp),parameter :: big = huge(1.0_wp)    !! a large number
 
@@ -509,10 +510,13 @@
     call me%rnkpop(fitns,ifit,jfit)
 
     !Main Generation Loop
+    ! This is modified from the original for parallelization.
+    ! Note that, now, in a generation, the population is not changed until
+    ! all the new members are computed. So only the current members are used
+    ! in this process.
     do ig=1,me%ngen
 
         !Main Population Loop
-        newtot=0
         do ip=1,me%np/2
 
             !1. pick two parents
@@ -528,18 +532,36 @@
             call me%mutate(gn2)
 
             !4. decode offspring genotypes
-            call me%decode(gn1,ph(:,1))
-            call me%decode(gn2,ph(:,2))
+            call me%decode(gn1,ph(:,1,ip))
+            call me%decode(gn2,ph(:,2,ip))
 
             !5. insert into population
             if (me%irep==1) then
-                call me%genrep(ip,ph,newph)
-            else
-                call me%stdrep(ph,oldph,fitns,ifit,jfit,new)
-                newtot = newtot+new
+                call me%genrep(ip,ph(:,:,ip),newph)
             end if
 
-        end do    !End of Main Population Loop
+        end do
+
+        !5. insert into population if not already done
+        if (me%irep/=1) then
+            ! compute all the fitnesses in the parallel
+            !$omp parallel do private(ip)
+            do ip=1,me%np/2
+                !$omp parallel do private(j)
+                do j = 1, 2
+                    ! compute offspring fitness (with caller's fitness function)
+                    call me%ff(ph(:,j,ip),fits(j,ip))
+                end do
+                !$omp end parallel do
+            end do
+            !$omp end parallel do
+            newtot=0
+            do ip=1,me%np/2
+                call me%stdrep(ph(:,:,ip),fits(:,ip),oldph,fitns,ifit,jfit,new)
+                newtot = newtot+new
+            end do
+        end if
+        !End of Main Population Loop
 
         !if running full generational replacement: swap populations
         if (me%irep==1) call me%newpop(oldph,newph,ifit,jfit,fitns,newtot)
@@ -860,7 +882,7 @@
 
     implicit none
 
-    class(pikaia_class),intent(inout)         :: me
+    class(pikaia_class),intent(in)            :: me
     real(wp),dimension(me%n),intent(in)       :: ph
     integer,dimension(me%n*me%nd),intent(out) :: gn
 
@@ -890,7 +912,7 @@
 
     implicit none
 
-    class(pikaia_class),intent(inout)        :: me
+    class(pikaia_class),intent(in)           :: me
     integer,dimension(me%n*me%nd),intent(in) :: gn
     real(wp),dimension(me%n),intent(out)     :: ph
 
@@ -1236,12 +1258,13 @@
 !  only if they are fit enough (replace-random if irep=2 or
 !  replace-worst if irep=3).
 
-    subroutine stdrep(me,ph,oldph,fitns,ifit,jfit,nnew)
+    subroutine stdrep(me,ph,fits,oldph,fitns,ifit,jfit,nnew)
 
     implicit none
 
     class(pikaia_class),intent(inout)             :: me
     real(wp),dimension(me%n,2),intent(in)         :: ph
+    real(wp),dimension(2),intent(in)              :: fits
     real(wp),dimension(me%n,me%np),intent(inout)  :: oldph
     real(wp),dimension(me%np),intent(inout)       :: fitns
     integer,dimension(me%np),intent(inout)        :: ifit
@@ -1250,17 +1273,8 @@
 
     integer  :: i,j,k,i1,if1
     real(wp) :: fit
-    real(wp),dimension(2) :: fits
 
     nnew = 0
-
-    !$omp parallel do private(j)
-    do j = 1, 2
-        ! compute offspring fitness (with caller's fitness function)
-        call me%ff(ph(:,j),fits(j))
-    end do
-    !$omp end parallel do
-
     main_loop : do j=1,2
 
         !1. get offspring fitness
