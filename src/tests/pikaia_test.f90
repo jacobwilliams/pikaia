@@ -148,7 +148,8 @@
         !Local
         real(wp) :: rr
 
-        call slowdown(f)
+        call slowdown(f,1000000)
+        if (f<0.0_wp) return
 
         if (x(1)>1.0_wp .or. x(2)>1.0_wp) then
             write(output_unit,*) 'Error in function twod: invalid inputs.'
@@ -179,7 +180,8 @@
         real(wp),parameter :: one     = 1.0_wp
         real(wp),parameter :: hundred = 100.0_wp
 
-        call slowdown(f)
+        call slowdown(f,10000)
+        if (f<0.0_wp) return
 
         !the rosenbrock function:
         f = (one-x(1))**2 + hundred*(x(2)-x(1)**2)**2
@@ -218,17 +220,19 @@
 
         end subroutine report_iteration
 
-        subroutine slowdown(f)
+        subroutine slowdown(f,n)
         !! for the openmp test.
         !! just a function to slow things down
 
         implicit none
 
         real(wp),intent(inout) :: f
+        integer,intent(in) :: n
+
         integer :: i !! counter
 
         f=1.0_wp
-        do i=1,1000000
+        do i=1,n
             f=f+1.0_wp
         end do
 
