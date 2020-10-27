@@ -440,6 +440,7 @@
     integer  :: k,ip,ig,ip1,ip2,new,newtot,istart,i_window,j
     real(wp) :: current_best_f, last_best_f, fguess
     logical  :: convergence
+    logical  :: use_openmp !! if OpenMP is being used
     real(wp),dimension(me%n,2,me%np/2) :: ph
     real(wp),dimension(me%n,me%np)     :: oldph
     real(wp),dimension(me%n,me%np)     :: newph
@@ -462,6 +463,10 @@
     last_best_f = -big
     convergence = .false.
     status      = 0
+
+    ! if OpenMP is being used:
+    use_openmp = .false.
+!$  use_openmp = .true.
 
     !Handle the initial guess:
     if (me%initial_guess_frac==0.0_wp) then
@@ -517,6 +522,7 @@
     do ig=1,me%ngen
 
         !Main Population Loop
+        newtot = 0
         do ip=1,me%np/2
 
             !1. pick two parents
@@ -538,28 +544,40 @@
             !5. insert into population
             if (me%irep==1) then
                 call me%genrep(ip,ph(:,:,ip),newph)
+            else
+                if (.not. use_openmp) then
+                    ! compute all the fitnesses in the parallel
+                    do j = 1, 2
+                        ! compute offspring fitness (with caller's fitness function)
+                        call me%ff(ph(:,j,ip),fits(j,ip))
+                    end do
+                    call me%stdrep(ph(:,:,ip),fits(:,ip),oldph,fitns,ifit,jfit,new)
+                    newtot = newtot+new
+               end if
             end if
 
         end do
 
-        !5. insert into population if not already done
-        if (me%irep/=1) then
-            ! compute all the fitnesses in the parallel
-            !$omp parallel do private(ip)
-            do ip=1,me%np/2
-                !$omp parallel do private(j)
-                do j = 1, 2
-                    ! compute offspring fitness (with caller's fitness function)
-                    call me%ff(ph(:,j,ip),fits(j,ip))
+        if (use_openmp) then
+            !5. insert into population if not already done
+            if (me%irep/=1) then
+                ! compute all the fitnesses in the parallel
+                !$omp parallel do private(ip)
+                do ip=1,me%np/2
+                    !$omp parallel do private(j)
+                    do j = 1, 2
+                        ! compute offspring fitness (with caller's fitness function)
+                        call me%ff(ph(:,j,ip),fits(j,ip))
+                    end do
+                    !$omp end parallel do
                 end do
                 !$omp end parallel do
-            end do
-            !$omp end parallel do
-            newtot=0
-            do ip=1,me%np/2
-                call me%stdrep(ph(:,:,ip),fits(:,ip),oldph,fitns,ifit,jfit,new)
-                newtot = newtot+new
-            end do
+                newtot=0
+                do ip=1,me%np/2
+                    call me%stdrep(ph(:,:,ip),fits(:,ip),oldph,fitns,ifit,jfit,new)
+                    newtot = newtot+new
+                end do
+            end if
         end if
         !End of Main Population Loop
 
