@@ -1,4 +1,4 @@
-![pikaia](/media/logo.png)
+![pikaia](media/logo.png)
 ============
 
 # pikaia [![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg?style=plastic)](https://github.com/jacobwilliams/pikaia/releases/latest)
