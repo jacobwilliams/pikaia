@@ -10,6 +10,7 @@ jobs:
         os: [ubuntu-latest]
         gcc_v: [9] # Version of GFortran we want to use.
         python-version: [3.7]
+        open-mp: ['yes', 'no']
     env:
       FC: gfortran-${{ matrix.gcc_v }}
       GCC_V: ${{ matrix.gcc_v }}
@@ -45,20 +46,22 @@ jobs:
         --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
         --slave /usr/bingcov gcov /usr/bin/gcov-${GCC_V}
 
-    - name: Compile  # clean this up later (add FPM)
-      run: |
-        mkdir ./bin
-        gfortran -O2 ./src/mt19937-64.f90 ./src/pikaia_module.f90 ./src/tests/pikaia_test.f90 -o ./bin/test
+    - name: Compile-OpenMP
+      if: contains( matrix.open-mp, 'yes')
+      run: FoBiS.py build -f pikaia.fobis -mode tests-gnu-openmp
+
+    - name: Compile
+      if: contains( matrix.open-mp, 'no')
+      run: FoBiS.py build -f pikaia.fobis -mode tests-gnu
 
     - name: Run tests
-      run: |
-        ./bin/test
+      run: ./bin/test
 
     - name: Build documentation
       run: ford ./pikaia.md
 
     - name: Deploy Documentation
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/master' && contains( matrix.open-mp, 'no')
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
         branch: gh-pages # The branch the action should deploy to.
