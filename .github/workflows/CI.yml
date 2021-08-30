@@ -45,10 +45,10 @@ jobs:
         --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
         --slave /usr/bingcov gcov /usr/bin/gcov-${GCC_V}
 
-    - name: Compile  # clean this up later
+    - name: Compile  # clean this up later (add FPM)
       run: |
         mkdir ./bin
-        gfortran -O2 ./src/pikaia_module.f90 ./src/tests/pikaia_test.f90 -o ./bin/test
+        gfortran -O2 ./src/mt19937-64.f90 ./src/pikaia_module.f90 ./src/tests/pikaia_test.f90 -o ./bin/test
 
     - name: Run tests
       run: |
