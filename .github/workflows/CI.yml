@@ -55,9 +55,10 @@ jobs:
       run: FoBiS.py build -f pikaia.fobis -mode tests-gnu
 
     - name: Run tests
-      run: ./bin/test
+      run: ./bin/pikaia_test
 
     - name: Build documentation
+      if: contains( matrix.open-mp, 'no')
       run: ford ./pikaia.md
 
     - name: Deploy Documentation
