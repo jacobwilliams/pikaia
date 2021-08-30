@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="85.651039mm"
+   height="55.735489mm"
+   viewBox="0 0 85.651039 55.735487"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-xdpi="147.19942"
+   inkscape:export-ydpi="147.19942"
+   inkscape:export-filename="logo.png">
+  <defs
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath849">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.358002;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect851"
+         width="57.804474"
+         height="76.351196"
+         x="32.322227"
+         y="61.232143" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath859">
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.352777;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect861"
+         width="57.058426"
+         height="72.259254"
+         x="40.325314"
+         y="51.641022" />
+    </clipPath>
+    <linearGradient
+       id="linearGradient8385">
+      <stop
+         id="stop8387"
+         style="stop-color:#0d0079;stop-opacity:1;"
+         offset="0" />
+      <stop
+         id="stop8389"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath875">
+      <ellipse
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+         id="ellipse877"
+         cx="168.88336"
+         cy="203.5773"
+         rx="36.986324"
+         ry="23.827726" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath917">
+      <ellipse
+         style="fill:none;fill-opacity:1;stroke:#4d4d4d;stroke-width:1.32292;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+         id="ellipse919"
+         cx="168.88338"
+         cy="203.57732"
+         rx="37.190262"
+         ry="23.959703" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6320713"
+     inkscape:cx="117.72616"
+     inkscape:cy="130.2566"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="793"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-126.05784,-175.70957)">
+    <ellipse
+       style="fill:#734f96;fill-opacity:1;stroke:#000000;stroke-width:1.32292;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="ellipse881"
+       cx="168.88336"
+       cy="203.57732"
+       rx="42.164062"
+       ry="27.206285" />
+    <image
+       sodipodi:absref="Pikaia_Smithsonian.jpg"
+       xlink:href="Pikaia_Smithsonian.jpg"
+       clip-path="url(#clipPath875)"
+       y="177.088"
+       x="124.36567"
+       id="image861"
+       preserveAspectRatio="none"
+       height="54.045555"
+       width="89.746674" />
+    <text
+       xml:space="preserve"
+       style="font-size:2.52072999999999992px;line-height:1.25;font-family:'Clarendon BT';-inkscape-font-specification:'Clarendon BT';stroke-width:0.264583;fill:#808080;"
+       x="131.92587"
+       y="183.72293"
+       id="text887"
+       clip-path="url(#clipPath917)"><tspan
+         sodipodi:role="line"
+         id="tspan885"
+         x="131.92587"
+         y="183.72293"
+         style="stroke-width:0.264583;fill:#808080;"></tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="186.87384"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan889">        !if running full generational replacement: swap populations</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="190.02475"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan891">        if (me%irep==1) call me%newpop(oldph,newph,ifit,jfit,fitns,newtot)</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="193.17567"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan893"></tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="196.32658"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan895">        !adjust mutation rate?</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="199.47749"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan897">        if (any(me%imut==[2,3,5,6])) call adjmut(me,oldph,fitns,ifit)</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="202.6284"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan899"></tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="205.77931"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan901">        !report this iteration:</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="208.93024"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan903">        if (me%ivrb&gt;0) call me%report(oldph,fitns,ifit,ig,newtot)</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="212.08115"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan905"></tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="215.23206"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan907">        !report (unscaled) x:</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="218.38297"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan909">        if (associated(me%iter_f)) &amp;</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="221.53387"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan911">            call me%iter_f(ig,me%xl+me%del*oldph(1:me%n,ifit(me%np)),fitns(ifit(me%np)))</tspan><tspan
+         sodipodi:role="line"
+         x="131.92587"
+         y="224.6848"
+         style="stroke-width:0.264583;fill:#808080;"
+         id="tspan913" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18.5207px;line-height:1.25;font-family:'Clarendon BT';-inkscape-font-specification:'Clarendon BT';fill:#000000;stroke-width:0.372806"
+       x="139.70964"
+       y="209.69962"
+       id="text869"><tspan
+         sodipodi:role="line"
+         id="tspan867"
+         x="139.70964"
+         y="209.69962"
+         style="fill:#ffffff;stroke-width:0.372806">Pikaia</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#4d4d4d;stroke-width:1.32292;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="ellipse883"
+       cx="168.88338"
+       cy="203.57732"
+       rx="37.190262"
+       ry="23.959703" />
+  </g>
+</svg>

@@ -1,3 +1,6 @@
+![pikaia](/media/logo.png)
+============
+
 # pikaia [![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg?style=plastic)](https://github.com/jacobwilliams/pikaia/releases/latest)
 Modern Fortran Edition of the Pikaia Genetic Algorithm
 ### Status
