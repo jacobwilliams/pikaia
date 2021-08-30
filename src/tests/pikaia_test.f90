@@ -9,6 +9,7 @@
 
     use pikaia_module, only: pikaia_class
     use,intrinsic :: iso_fortran_env, wp => real64
+!$  use omp_lib
 
     implicit none
 
@@ -21,9 +22,23 @@
     real(wp),dimension(n)   :: xl,xu
     type(pikaia_class)      :: p
     logical                 :: header_written
-    real                    :: tstart,tend
+    real(wp)                :: tstart,tend
+!$  real(wp)                :: ostart,oend
+!$  integer                 :: tid, nthreads
 
     character(len=*),parameter :: filename = 'pikaia_test.txt'
+
+!$OMP PARALLEL PRIVATE(NTHREADS, TID)
+!$
+!$  tid = omp_get_thread_num()
+!$
+!$  if (tid == 0) then
+!$      nthreads = omp_get_num_threads()
+!$      write(output_unit,'(A)') '--------------'
+!$      write(output_unit,'(A,1X,I5)') 'number of OMP threads: ', OMP_get_num_threads()
+!$      write(output_unit,'(A)') '--------------'
+!$  end if
+!$OMP END PARALLEL
 
     seed = 999  ! specify the random seed
 
@@ -43,26 +58,30 @@
 
     !initialize the class:
     call p%init(n,xl,xu,twod,status,&
-                iter_f              = report_iteration,&
+                !iter_f              = report_iteration,&
                 ngen                = 1000,&
                 nd                  = 9,&
-                ivrb                = 1,&    !0,1,2
+                !ivrb                = 1,&    !0,1,2
                 convergence_tol     = 1.0e-6_wp,&
                 convergence_window  = 200,&
+                irep                = 3, &
                 iseed               = seed)
 
     !Now call pikaia:
     call cpu_time(tstart)
+!$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
+!$  oend = omp_get_wtime()
     call cpu_time(tend)
 
     !Print the results:
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,*(I4))')    '  status: ',status
-    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
-    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A,1X,*(F27.16))') '       x: ',x
+    write(output_unit,'(A,1X,*(F27.16))') '       f: ',f
     write(output_unit,'(A)') ''
-    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
+    write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
+!$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
     write(output_unit,'(A)') ''
 
     !-------------------------
@@ -78,25 +97,31 @@
 
     !initialize the class:
     call p%init(n,xl,xu,rosenbrock,status,&
+                iter_f              = report_iteration,&
                 np                  = 500,&        !try a larger population for this one
                 ngen                = 1000,&
                 nd                  = 9,&
                 convergence_tol     = 1.0e-10_wp,& !tighter tolerance also
                 convergence_window  = 200,&
+                irep                = 1, &
                 iseed               = seed)
 
     !Now call pikaia:
     call cpu_time(tstart)
+!$  ostart = omp_get_wtime()
     call p%solve(x,f,status)
+!$  oend = omp_get_wtime()
     call cpu_time(tend)
 
     !Print the results:
     write(output_unit,'(A)') ''
     write(output_unit,'(A,1X,*(I4))')    '  status: ',status
-    write(output_unit,'(A,1X,*(F12.6))') '       x: ',x
-    write(output_unit,'(A,1X,*(F12.6))') '       f: ',f
+    write(output_unit,'(A,1X,*(F27.16))') '       x: ',x
+    write(output_unit,'(A,1X,*(F27.16))') '       f: ',f
     write(output_unit,'(A)') ''
-    write(output_unit,'(A,1X,F12.6,A)')  'run time: ',tend-tstart,' sec'
+    write(output_unit,'(A,1X,F12.6,A)')  'cpu time : ',tend-tstart,' sec'
+!$  write(output_unit,'(A,1X,F12.6,A)')  'wall time: ',oend-ostart,' sec'
+
     write(output_unit,'(A)') ''
 
     close(iunit,iostat=istat)
@@ -122,6 +147,9 @@
 
         !Local
         real(wp) :: rr
+
+        call slowdown(f,1000000)
+        if (f<0.0_wp) return
 
         if (x(1)>1.0_wp .or. x(2)>1.0_wp) then
             write(output_unit,*) 'Error in function twod: invalid inputs.'
@@ -151,6 +179,9 @@
 
         real(wp),parameter :: one     = 1.0_wp
         real(wp),parameter :: hundred = 100.0_wp
+
+        call slowdown(f,10000)
+        if (f<0.0_wp) return
 
         !the rosenbrock function:
         f = (one-x(1))**2 + hundred*(x(2)-x(1)**2)**2
@@ -185,9 +216,27 @@
             header_written = .true.
         end if
 
-        write(iunit,'(I5,1X,*(F10.6,1X))') iter,x,f
+        write(iunit,'(I5,1X,*(F27.16,1X))') iter,x,f
 
         end subroutine report_iteration
+
+        subroutine slowdown(f,n)
+        !! for the openmp test.
+        !! just a function to slow things down
+
+        implicit none
+
+        real(wp),intent(inout) :: f
+        integer,intent(in) :: n
+
+        integer :: i !! counter
+
+        f=1.0_wp
+        do i=1,n
+            f=f+1.0_wp
+        end do
+
+        end subroutine slowdown
 
     end program pikaia_test
 !*****************************************************************************************
