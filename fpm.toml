@@ -1,0 +1,23 @@
+name = "pikaia"
+author = "Jacob Williams"
+copyright  = "Copyright (c) 2015-2021, Jacob Williams"
+license = "BSD-3"
+description = "Modern Fortran Edition of the Pikaia Genetic Algorithm"
+homepage = "https://github.com/jacobwilliams/pikaia"
+keywords = ["optimization", "genetic algorithms"]
+
+[build]
+auto-executables = false
+auto-examples = false
+auto-tests = false
+
+[library]
+source-dir = "src"
+
+[install]
+library = true
+
+[[test]]
+name = "pikaia_test"
+source-dir = "src/tests"
+main = "pikaia_test.f90"
