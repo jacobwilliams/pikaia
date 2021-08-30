@@ -715,32 +715,33 @@
     integer :: s,t,l,m,r,i,j
 
     !Initialize the stack
-    stackl(1)=1
-    stackr(1)=n
-    s=1
+    stackl(1) = 1
+    stackr(1) = n
+    l = stackl(1)
+    r = stackr(1)
+    s = 0
 
     !Initialize the pointer array
     p = [(i, i=1,n)]
 
     do while (s>0)
 
-        l=stackl(s)
-        r=stackr(s)
-        s=s-1
-
-3       if ((r-l)<Q) then
+        if ((r-l)<Q) then
 
             !Use straight insertion
-            do i=l+1,r
+            insertion: do i=l+1,r
                 t = p(i)
                 x = a(t)
                 do j=i-1,l,-1
-                    if (a(p(j))<=x) goto 5
+                    if (a(p(j))<=x) then
+                        p(j+1) = t
+                        cycle insertion
+                    end if
                     p(j+1) = p(j)
                 end do
                 j=l-1
-5               p(j+1) = t
-            end do
+                p(j+1) = t
+            end do insertion
 
         else
 
@@ -799,8 +800,12 @@
                 r=j
             end if
 
-            goto 3
+            cycle
         end if
+
+        l = stackl(s)
+        r = stackr(s)
+        s = s-1
 
     end do
 
