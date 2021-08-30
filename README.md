@@ -1,23 +1,24 @@
 ![pikaia](media/logo.png)
 ============
 
-# pikaia [![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg?style=plastic)](https://github.com/jacobwilliams/pikaia/releases/latest)
-Modern Fortran Edition of the Pikaia Genetic Algorithm
+**Pikaia**: Modern Fortran Edition of the PIKAIA Genetic Algorithm
+
 ### Status
 
-![Build Status](https://github.com/jacobwilliams/pikaia/actions/workflows/CI.yml/badge.svg)
+![Build Status](https://github.com/jacobwilliams/pikaia/actions/workflows/CI.yml/badge.svg) [![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg?style=plastic)](https://github.com/jacobwilliams/pikaia/releases/latest)
 
 ### Overview
 
 This is a refactoring of the PIKAIA unconstrained optimization code from the [High Altitude Observatory](http://www.hao.ucar.edu/modeling/pikaia/pikaia.php).  The original code is public domain and was written by Paul Charbonneau & Barry Knapp.  The new code differs from the old code in the following respects:
- * The original fixed-form source (FORTRAN 77) was converted to free-form source.
- * The code is now object-oriented Fortran 2003/2008.  All user interaction is now through the ```pikaia_class```.
- * All real variables are now double precision.
- * The original random number generator was replaced with MT19937-64 (64-bit Mersenne Twister).
- * There are various new options (e.g., a convergence window with a tolerance can be specified as a stopping condition, and the user can specify a subroutine for reporting iterations).
- * Mapping the variables to be between 0 and 1 now occurs internally, rather than requiring the user to do it.
- * Can now include an initial guess in the initial population.
- * Some OpenMP support has been added.
+
+  * The original fixed-form source (FORTRAN 77) was converted to free-form source.
+  * The code is now object-oriented Fortran 2003/2008.  All user interaction is now through the   ```pikaia_class```.
+  * All real variables are now double precision.
+  * The original random number generator was replaced with MT19937-64 (64-bit Mersenne Twister).
+  * There are various new options (e.g., a convergence window with a tolerance can be specified as a   stopping condition, and the user can specify a subroutine for reporting iterations).
+  * Mapping the variables to be between 0 and 1 now occurs internally, rather than requiring the user   to do it.
+  * Can now include an initial guess in the initial population.
+  * Some OpenMP support has been added.
 
 ### Compiling
 
