@@ -719,12 +719,14 @@
     stackr(1) = n
     l = stackl(1)
     r = stackr(1)
-    s = 0
+    s = 1
 
     !Initialize the pointer array
     p = [(i, i=1,n)]
 
     do while (s>0)
+
+        s = s - 1
 
         if ((r-l)<Q) then
 
@@ -800,12 +802,12 @@
                 r=j
             end if
 
+            s = s + 1 ! since it will be decremented next cycle
             cycle
         end if
 
         l = stackl(s)
         r = stackr(s)
-        s = s-1
 
     end do
 
