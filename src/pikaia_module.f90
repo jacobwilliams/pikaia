@@ -806,8 +806,10 @@
             cycle
         end if
 
-        l = stackl(s)
-        r = stackr(s)
+        if (s>0) then
+            l = stackl(s)
+            r = stackr(s)
+        end if
 
     end do
 
