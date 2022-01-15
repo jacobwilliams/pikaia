@@ -132,13 +132,13 @@ All Procedures &ndash; Pikaia
   two-point crossover is used, with equal probabilities.</p><a href="../proc/cross.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
 			 
 			   <tr><td><a href='../proc/decode.html'>decode</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>decode genotype into phenotype parameters
-  ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p></td></tr>
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p></td></tr>
 			 
 			   <tr><td><a href='../proc/encode.html'>encode</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Encode phenotype parameters into integer genotype
-  ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p></td></tr>
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p></td></tr>
 			 
 			   <tr><td><a href='../proc/func_wrapper.html'>func_wrapper</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Wrapper for the user's function that is used by the main pikaia routine
-  The x input to this function comes from pikaia, and will be between [0,1].</p></td></tr>
+ The x input to this function comes from pikaia, and will be between [0,1].</p></td></tr>
 			 
 			   <tr><td><a href='../proc/genrand64_int64.html'>genrand64_int64</a></td><td><a href='../module/mt19937_64.html'>mt19937_64</a></td><td>Function</td><td><p>Generates a random number on [-2^63, 2^63-1]-interval</p></td></tr>
 			 
@@ -149,10 +149,10 @@ All Procedures &ndash; Pikaia
 			   <tr><td><a href='../proc/genrand64_real3.html'>genrand64_real3</a></td><td><a href='../module/mt19937_64.html'>mt19937_64</a></td><td>Function</td><td><p>Generates a random number on (0,1)-real-interval</p></td></tr>
 			 
 			   <tr><td><a href='../proc/genrep.html'>genrep</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Full generational replacement: accumulate offspring into new
-  population array</p></td></tr>
+population array</p></td></tr>
 			 
 			   <tr><td><a href='../proc/init_by_array64.html'>init_by_array64</a></td><td><a href='../module/mt19937_64.html'>mt19937_64</a></td><td>Subroutine</td><td><p>Initializes by an array with array-length
- <code>init_key</code> is the array for initializing keys</p></td></tr>
+<code>init_key</code> is the array for initializing keys</p></td></tr>
 			 
 			   <tr><td><a href='../proc/init_genrand64.html'>init_genrand64</a></td><td><a href='../module/mt19937_64.html'>mt19937_64</a></td><td>Subroutine</td><td><p>Initializes me%mt(nn) with a seed</p></td></tr>
 			 
@@ -172,8 +172,8 @@ All Procedures &ndash; Pikaia
 			   <tr><td><a href='../proc/rninit.html'>rninit</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Initialize the random number generator with the input seed value.</p></td></tr>
 			 
 			   <tr><td><a href='../proc/rnkpop.html'>rnkpop</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Ranks initial population.
-  Calls external sort routine to produce key index and rank order
-  of input array arrin (which is not altered).</p></td></tr>
+Calls external sort routine to produce key index and rank order
+of input array arrin (which is not altered).</p></td></tr>
 			 
 			   <tr><td><a href='../proc/rqsort.html'>rqsort</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Return integer array p which indexes array a in increasing order.
   Array a is not disturbed.  The Quicksort algorithm is used.</p><a href="../proc/rqsort.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
@@ -188,11 +188,11 @@ All Procedures &ndash; Pikaia
 			   <tr><td><a href='../proc/solve_with_pikaia.html'>solve_with_pikaia</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Main pikaia wrapper used by the class.</p></td></tr>
 			 
 			   <tr><td><a href='../proc/stdrep.html'>stdrep</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Subroutine</td><td><p>Steady-state reproduction: insert offspring pair into population
-  only if they are fit enough (replace-random if irep=2 or
-  replace-worst if irep=3).</p></td></tr>
+only if they are fit enough (replace-random if irep=2 or
+replace-worst if irep=3).</p></td></tr>
 			 
 			   <tr><td><a href='../proc/urand.html'>urand</a></td><td><a href='../module/pikaia_module.html'>pikaia_module</a></td><td>Function</td><td><p>Return the next pseudo-random deviate from a sequence which is
-  uniformly distributed in the interval [0,1]</p></td></tr>
+uniformly distributed in the interval [0,1]</p></td></tr>
 			 
 			 </tbody></table>
              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -206,105 +206,90 @@ All Procedures &ndash; Pikaia
 <g id="call~~graph~~CallGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 952)">
 <title>call~~graph~~CallGraph</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-952 202,-952 202,4 -4,4"/>
-<!-- proc~solve_with_pikaia -->
-<g id="call~~graph~~CallGraph_node1" class="node">
-<title>proc~solve_with_pikaia</title>
-<g id="a_call~~graph~~CallGraph_node1"><a xlink:href=".././proc/solve_with_pikaia.html" xlink:title="solve_with_pikaia">
-<polygon fill="#d9534f" stroke="#d9534f" points="106.5,-24 1.5,-24 1.5,0 106.5,0 106.5,-24"/>
-<text text-anchor="middle" x="54" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">solve_with_pikaia</text>
-</a>
-</g>
-</g>
-<!-- proc~stdrep -->
-<g id="call~~graph~~CallGraph_node2" class="node">
-<title>proc~stdrep</title>
-<g id="a_call~~graph~~CallGraph_node2"><a xlink:href=".././proc/stdrep.html" xlink:title="stdrep">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-66 27,-66 27,-42 81,-42 81,-66"/>
-<text text-anchor="middle" x="54" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stdrep</text>
-</a>
-</g>
-</g>
 <!-- proc~func_wrapper -->
-<g id="call~~graph~~CallGraph_node3" class="node">
+<g id="call~~graph~~CallGraph_node1" class="node">
 <title>proc~func_wrapper</title>
-<g id="a_call~~graph~~CallGraph_node3"><a xlink:href=".././proc/func_wrapper.html" xlink:title="func_wrapper">
-<polygon fill="#d9534f" stroke="#d9534f" points="96.5,-108 11.5,-108 11.5,-84 96.5,-84 96.5,-108"/>
-<text text-anchor="middle" x="54" y="-93.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">func_wrapper</text>
+<g id="a_call~~graph~~CallGraph_node1"><a xlink:href=".././proc/func_wrapper.html" xlink:title="func_wrapper">
+<polygon fill="#d9534f" stroke="#d9534f" points="96.5,-24 11.5,-24 11.5,0 96.5,0 96.5,-24"/>
+<text text-anchor="middle" x="54" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">func_wrapper</text>
 </a>
 </g>
 </g>
 <!-- proc~rnkpop -->
-<g id="call~~graph~~CallGraph_node4" class="node">
+<g id="call~~graph~~CallGraph_node2" class="node">
 <title>proc~rnkpop</title>
-<g id="a_call~~graph~~CallGraph_node4"><a xlink:href=".././proc/rnkpop.html" xlink:title="rnkpop">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-150 27,-150 27,-126 81,-126 81,-150"/>
-<text text-anchor="middle" x="54" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rnkpop</text>
+<g id="a_call~~graph~~CallGraph_node2"><a xlink:href=".././proc/rnkpop.html" xlink:title="rnkpop">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-66 27,-66 27,-42 81,-42 81,-66"/>
+<text text-anchor="middle" x="54" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rnkpop</text>
 </a>
 </g>
 </g>
 <!-- proc~rqsort -->
-<g id="call~~graph~~CallGraph_node25" class="node">
+<g id="call~~graph~~CallGraph_node19" class="node">
 <title>proc~rqsort</title>
-<g id="a_call~~graph~~CallGraph_node25"><a xlink:href=".././proc/rqsort.html" xlink:title="rqsort">
-<polygon fill="#d9534f" stroke="#d9534f" points="198,-150 144,-150 144,-126 198,-126 198,-150"/>
-<text text-anchor="middle" x="171" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rqsort</text>
+<g id="a_call~~graph~~CallGraph_node19"><a xlink:href=".././proc/rqsort.html" xlink:title="rqsort">
+<polygon fill="#d9534f" stroke="#d9534f" points="198,-66 144,-66 144,-42 198,-42 198,-66"/>
+<text text-anchor="middle" x="171" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rqsort</text>
 </a>
 </g>
 </g>
 <!-- proc~rnkpop&#45;&gt;proc~rqsort -->
 <g id="call~~graph~~CallGraph_edge1" class="edge">
 <title>proc~rnkpop&#45;&gt;proc~rqsort</title>
-<path fill="none" stroke="#000000" d="M81.1,-138C96.57,-138 116.43,-138 133.44,-138"/>
-<polygon fill="#000000" stroke="#000000" points="133.61,-141.5 143.61,-138 133.61,-134.5 133.61,-141.5"/>
+<path fill="none" stroke="#000000" d="M81.1,-54C96.57,-54 116.43,-54 133.44,-54"/>
+<polygon fill="#000000" stroke="#000000" points="133.61,-57.5 143.61,-54 133.61,-50.5 133.61,-57.5"/>
 </g>
-<!-- proc~urand -->
+<!-- proc~newpop -->
+<g id="call~~graph~~CallGraph_node3" class="node">
+<title>proc~newpop</title>
+<g id="a_call~~graph~~CallGraph_node3"><a xlink:href=".././proc/newpop.html" xlink:title="newpop">
+<polygon fill="#d9534f" stroke="#d9534f" points="81.5,-108 26.5,-108 26.5,-84 81.5,-84 81.5,-108"/>
+<text text-anchor="middle" x="54" y="-93.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">newpop</text>
+</a>
+</g>
+</g>
+<!-- proc~select_parents -->
+<g id="call~~graph~~CallGraph_node4" class="node">
+<title>proc~select_parents</title>
+<g id="a_call~~graph~~CallGraph_node4"><a xlink:href=".././proc/select_parents.html" xlink:title="select_parents">
+<polygon fill="#d9534f" stroke="#d9534f" points="98.5,-150 9.5,-150 9.5,-126 98.5,-126 98.5,-150"/>
+<text text-anchor="middle" x="54" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">select_parents</text>
+</a>
+</g>
+</g>
+<!-- proc~genrand64_real2 -->
 <g id="call~~graph~~CallGraph_node5" class="node">
-<title>proc~urand</title>
-<g id="a_call~~graph~~CallGraph_node5"><a xlink:href=".././proc/urand.html" xlink:title="urand">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="81,-192 27,-192 27,-168 81,-168 81,-192"/>
-<text text-anchor="middle" x="54" y="-177.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">urand</text>
+<title>proc~genrand64_real2</title>
+<g id="a_call~~graph~~CallGraph_node5"><a xlink:href=".././proc/genrand64_real2.html" xlink:title="genrand64_real2">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-192 2.5,-192 2.5,-168 105.5,-168 105.5,-192"/>
+<text text-anchor="middle" x="54" y="-177.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real2</text>
 </a>
 </g>
 </g>
-<!-- proc~pikaia -->
+<!-- proc~cross -->
 <g id="call~~graph~~CallGraph_node6" class="node">
-<title>proc~pikaia</title>
-<g id="a_call~~graph~~CallGraph_node6"><a xlink:href=".././proc/pikaia.html" xlink:title="pikaia">
+<title>proc~cross</title>
+<g id="a_call~~graph~~CallGraph_node6"><a xlink:href=".././proc/cross.html" xlink:title="cross">
 <polygon fill="#d9534f" stroke="#d9534f" points="81,-234 27,-234 27,-210 81,-210 81,-234"/>
-<text text-anchor="middle" x="54" y="-219.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia</text>
+<text text-anchor="middle" x="54" y="-219.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cross</text>
 </a>
 </g>
 </g>
-<!-- proc~adjmut -->
-<g id="call~~graph~~CallGraph_node24" class="node">
-<title>proc~adjmut</title>
-<g id="a_call~~graph~~CallGraph_node24"><a xlink:href=".././proc/adjmut.html" xlink:title="adjmut">
-<polygon fill="#d9534f" stroke="#d9534f" points="198,-234 144,-234 144,-210 198,-210 198,-234"/>
-<text text-anchor="middle" x="171" y="-219.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">adjmut</text>
-</a>
-</g>
-</g>
-<!-- proc~pikaia&#45;&gt;proc~adjmut -->
-<g id="call~~graph~~CallGraph_edge2" class="edge">
-<title>proc~pikaia&#45;&gt;proc~adjmut</title>
-<path fill="none" stroke="#000000" d="M81.1,-222C96.57,-222 116.43,-222 133.44,-222"/>
-<polygon fill="#000000" stroke="#000000" points="133.61,-225.5 143.61,-222 133.61,-218.5 133.61,-225.5"/>
-</g>
-<!-- proc~mutate -->
+<!-- proc~solve_with_pikaia -->
 <g id="call~~graph~~CallGraph_node7" class="node">
-<title>proc~mutate</title>
-<g id="a_call~~graph~~CallGraph_node7"><a xlink:href=".././proc/mutate.html" xlink:title="mutate">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-276 27,-276 27,-252 81,-252 81,-276"/>
-<text text-anchor="middle" x="54" y="-261.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">mutate</text>
+<title>proc~solve_with_pikaia</title>
+<g id="a_call~~graph~~CallGraph_node7"><a xlink:href=".././proc/solve_with_pikaia.html" xlink:title="solve_with_pikaia">
+<polygon fill="#d9534f" stroke="#d9534f" points="106.5,-276 1.5,-276 1.5,-252 106.5,-252 106.5,-276"/>
+<text text-anchor="middle" x="54" y="-261.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">solve_with_pikaia</text>
 </a>
 </g>
 </g>
-<!-- proc~genrep -->
+<!-- proc~genrand64_real3 -->
 <g id="call~~graph~~CallGraph_node8" class="node">
-<title>proc~genrep</title>
-<g id="a_call~~graph~~CallGraph_node8"><a xlink:href=".././proc/genrep.html" xlink:title="genrep">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-318 27,-318 27,-294 81,-294 81,-318"/>
-<text text-anchor="middle" x="54" y="-303.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrep</text>
+<title>proc~genrand64_real3</title>
+<g id="a_call~~graph~~CallGraph_node8"><a xlink:href=".././proc/genrand64_real3.html" xlink:title="genrand64_real3">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-318 2.5,-318 2.5,-294 105.5,-294 105.5,-318"/>
+<text text-anchor="middle" x="54" y="-303.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real3</text>
 </a>
 </g>
 </g>
@@ -317,129 +302,144 @@ All Procedures &ndash; Pikaia
 </a>
 </g>
 </g>
-<!-- proc~genrand64_real2 -->
+<!-- proc~set_inputs -->
 <g id="call~~graph~~CallGraph_node10" class="node">
-<title>proc~genrand64_real2</title>
-<g id="a_call~~graph~~CallGraph_node10"><a xlink:href=".././proc/genrand64_real2.html" xlink:title="genrand64_real2">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-402 2.5,-402 2.5,-378 105.5,-378 105.5,-402"/>
-<text text-anchor="middle" x="54" y="-387.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real2</text>
+<title>proc~set_inputs</title>
+<g id="a_call~~graph~~CallGraph_node10"><a xlink:href=".././proc/set_inputs.html" xlink:title="set_inputs">
+<polygon fill="#d9534f" stroke="#d9534f" points="87,-402 21,-402 21,-378 87,-378 87,-402"/>
+<text text-anchor="middle" x="54" y="-387.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">set_inputs</text>
 </a>
 </g>
 </g>
-<!-- proc~init_genrand64 -->
+<!-- proc~stdrep -->
 <g id="call~~graph~~CallGraph_node11" class="node">
-<title>proc~init_genrand64</title>
-<g id="a_call~~graph~~CallGraph_node11"><a xlink:href=".././proc/init_genrand64.html" xlink:title="init_genrand64">
-<polygon fill="#d9534f" stroke="#d9534f" points="100.5,-444 7.5,-444 7.5,-420 100.5,-420 100.5,-444"/>
-<text text-anchor="middle" x="54" y="-429.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">init_genrand64</text>
+<title>proc~stdrep</title>
+<g id="a_call~~graph~~CallGraph_node11"><a xlink:href=".././proc/stdrep.html" xlink:title="stdrep">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-444 27,-444 27,-420 81,-420 81,-444"/>
+<text text-anchor="middle" x="54" y="-429.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stdrep</text>
 </a>
 </g>
 </g>
-<!-- proc~init_genrand64_i4 -->
+<!-- proc~mutate -->
 <g id="call~~graph~~CallGraph_node12" class="node">
-<title>proc~init_genrand64_i4</title>
-<g id="a_call~~graph~~CallGraph_node12"><a xlink:href=".././proc/init_genrand64_i4.html" xlink:title="init_genrand64_i4">
-<polygon fill="#d9534f" stroke="#d9534f" points="108,-486 0,-486 0,-462 108,-462 108,-486"/>
-<text text-anchor="middle" x="54" y="-471.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">init_genrand64_i4</text>
+<title>proc~mutate</title>
+<g id="a_call~~graph~~CallGraph_node12"><a xlink:href=".././proc/mutate.html" xlink:title="mutate">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-486 27,-486 27,-462 81,-462 81,-486"/>
+<text text-anchor="middle" x="54" y="-471.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">mutate</text>
 </a>
 </g>
 </g>
-<!-- proc~newpop -->
+<!-- proc~urand -->
 <g id="call~~graph~~CallGraph_node13" class="node">
-<title>proc~newpop</title>
-<g id="a_call~~graph~~CallGraph_node13"><a xlink:href=".././proc/newpop.html" xlink:title="newpop">
-<polygon fill="#d9534f" stroke="#d9534f" points="81.5,-528 26.5,-528 26.5,-504 81.5,-504 81.5,-528"/>
-<text text-anchor="middle" x="54" y="-513.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">newpop</text>
+<title>proc~urand</title>
+<g id="a_call~~graph~~CallGraph_node13"><a xlink:href=".././proc/urand.html" xlink:title="urand">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="81,-528 27,-528 27,-504 81,-504 81,-528"/>
+<text text-anchor="middle" x="54" y="-513.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">urand</text>
 </a>
 </g>
 </g>
-<!-- proc~encode -->
+<!-- proc~pikaia -->
 <g id="call~~graph~~CallGraph_node14" class="node">
-<title>proc~encode</title>
-<g id="a_call~~graph~~CallGraph_node14"><a xlink:href=".././proc/encode.html" xlink:title="encode">
+<title>proc~pikaia</title>
+<g id="a_call~~graph~~CallGraph_node14"><a xlink:href=".././proc/pikaia.html" xlink:title="pikaia">
 <polygon fill="#d9534f" stroke="#d9534f" points="81,-570 27,-570 27,-546 81,-546 81,-570"/>
-<text text-anchor="middle" x="54" y="-555.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">encode</text>
+<text text-anchor="middle" x="54" y="-555.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia</text>
+</a>
+</g>
+</g>
+<!-- proc~adjmut -->
+<g id="call~~graph~~CallGraph_node21" class="node">
+<title>proc~adjmut</title>
+<g id="a_call~~graph~~CallGraph_node21"><a xlink:href=".././proc/adjmut.html" xlink:title="adjmut">
+<polygon fill="#d9534f" stroke="#d9534f" points="198,-570 144,-570 144,-546 198,-546 198,-570"/>
+<text text-anchor="middle" x="171" y="-555.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">adjmut</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~adjmut -->
+<g id="call~~graph~~CallGraph_edge2" class="edge">
+<title>proc~pikaia&#45;&gt;proc~adjmut</title>
+<path fill="none" stroke="#000000" d="M81.1,-558C96.57,-558 116.43,-558 133.44,-558"/>
+<polygon fill="#000000" stroke="#000000" points="133.61,-561.5 143.61,-558 133.61,-554.5 133.61,-561.5"/>
+</g>
+<!-- proc~genrand64_real1 -->
+<g id="call~~graph~~CallGraph_node15" class="node">
+<title>proc~genrand64_real1</title>
+<g id="a_call~~graph~~CallGraph_node15"><a xlink:href=".././proc/genrand64_real1.html" xlink:title="genrand64_real1">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-612 2.5,-612 2.5,-588 105.5,-588 105.5,-612"/>
+<text text-anchor="middle" x="54" y="-597.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real1</text>
 </a>
 </g>
 </g>
 <!-- proc~report -->
-<g id="call~~graph~~CallGraph_node15" class="node">
-<title>proc~report</title>
-<g id="a_call~~graph~~CallGraph_node15"><a xlink:href=".././proc/report.html" xlink:title="report">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-612 27,-612 27,-588 81,-588 81,-612"/>
-<text text-anchor="middle" x="54" y="-597.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">report</text>
-</a>
-</g>
-</g>
-<!-- proc~cross -->
 <g id="call~~graph~~CallGraph_node16" class="node">
-<title>proc~cross</title>
-<g id="a_call~~graph~~CallGraph_node16"><a xlink:href=".././proc/cross.html" xlink:title="cross">
+<title>proc~report</title>
+<g id="a_call~~graph~~CallGraph_node16"><a xlink:href=".././proc/report.html" xlink:title="report">
 <polygon fill="#d9534f" stroke="#d9534f" points="81,-654 27,-654 27,-630 81,-630 81,-654"/>
-<text text-anchor="middle" x="54" y="-639.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cross</text>
+<text text-anchor="middle" x="54" y="-639.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">report</text>
 </a>
 </g>
 </g>
-<!-- proc~select_parents -->
+<!-- proc~genrep -->
 <g id="call~~graph~~CallGraph_node17" class="node">
-<title>proc~select_parents</title>
-<g id="a_call~~graph~~CallGraph_node17"><a xlink:href=".././proc/select_parents.html" xlink:title="select_parents">
-<polygon fill="#d9534f" stroke="#d9534f" points="98.5,-696 9.5,-696 9.5,-672 98.5,-672 98.5,-696"/>
-<text text-anchor="middle" x="54" y="-681.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">select_parents</text>
+<title>proc~genrep</title>
+<g id="a_call~~graph~~CallGraph_node17"><a xlink:href=".././proc/genrep.html" xlink:title="genrep">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-696 27,-696 27,-672 81,-672 81,-696"/>
+<text text-anchor="middle" x="54" y="-681.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrep</text>
+</a>
+</g>
+</g>
+<!-- proc~encode -->
+<g id="call~~graph~~CallGraph_node18" class="node">
+<title>proc~encode</title>
+<g id="a_call~~graph~~CallGraph_node18"><a xlink:href=".././proc/encode.html" xlink:title="encode">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-738 27,-738 27,-714 81,-714 81,-738"/>
+<text text-anchor="middle" x="54" y="-723.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">encode</text>
 </a>
 </g>
 </g>
 <!-- proc~genrand64_int64 -->
-<g id="call~~graph~~CallGraph_node18" class="node">
+<g id="call~~graph~~CallGraph_node20" class="node">
 <title>proc~genrand64_int64</title>
-<g id="a_call~~graph~~CallGraph_node18"><a xlink:href=".././proc/genrand64_int64.html" xlink:title="genrand64_int64">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-738 2.5,-738 2.5,-714 105.5,-714 105.5,-738"/>
-<text text-anchor="middle" x="54" y="-723.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_int64</text>
-</a>
-</g>
-</g>
-<!-- proc~set_inputs -->
-<g id="call~~graph~~CallGraph_node19" class="node">
-<title>proc~set_inputs</title>
-<g id="a_call~~graph~~CallGraph_node19"><a xlink:href=".././proc/set_inputs.html" xlink:title="set_inputs">
-<polygon fill="#d9534f" stroke="#d9534f" points="87,-780 21,-780 21,-756 87,-756 87,-780"/>
-<text text-anchor="middle" x="54" y="-765.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">set_inputs</text>
+<g id="a_call~~graph~~CallGraph_node20"><a xlink:href=".././proc/genrand64_int64.html" xlink:title="genrand64_int64">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-780 2.5,-780 2.5,-756 105.5,-756 105.5,-780"/>
+<text text-anchor="middle" x="54" y="-765.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_int64</text>
 </a>
 </g>
 </g>
 <!-- proc~init_by_array64 -->
-<g id="call~~graph~~CallGraph_node20" class="node">
+<g id="call~~graph~~CallGraph_node22" class="node">
 <title>proc~init_by_array64</title>
-<g id="a_call~~graph~~CallGraph_node20"><a xlink:href=".././proc/init_by_array64.html" xlink:title="init_by_array64">
+<g id="a_call~~graph~~CallGraph_node22"><a xlink:href=".././proc/init_by_array64.html" xlink:title="init_by_array64">
 <polygon fill="#d9534f" stroke="#d9534f" points="101,-822 7,-822 7,-798 101,-798 101,-822"/>
 <text text-anchor="middle" x="54" y="-807.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">init_by_array64</text>
 </a>
 </g>
 </g>
-<!-- proc~genrand64_real1 -->
-<g id="call~~graph~~CallGraph_node21" class="node">
-<title>proc~genrand64_real1</title>
-<g id="a_call~~graph~~CallGraph_node21"><a xlink:href=".././proc/genrand64_real1.html" xlink:title="genrand64_real1">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-864 2.5,-864 2.5,-840 105.5,-840 105.5,-864"/>
-<text text-anchor="middle" x="54" y="-849.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real1</text>
+<!-- proc~init_genrand64 -->
+<g id="call~~graph~~CallGraph_node23" class="node">
+<title>proc~init_genrand64</title>
+<g id="a_call~~graph~~CallGraph_node23"><a xlink:href=".././proc/init_genrand64.html" xlink:title="init_genrand64">
+<polygon fill="#d9534f" stroke="#d9534f" points="100.5,-864 7.5,-864 7.5,-840 100.5,-840 100.5,-864"/>
+<text text-anchor="middle" x="54" y="-849.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">init_genrand64</text>
+</a>
+</g>
+</g>
+<!-- proc~init_genrand64_i4 -->
+<g id="call~~graph~~CallGraph_node24" class="node">
+<title>proc~init_genrand64_i4</title>
+<g id="a_call~~graph~~CallGraph_node24"><a xlink:href=".././proc/init_genrand64_i4.html" xlink:title="init_genrand64_i4">
+<polygon fill="#d9534f" stroke="#d9534f" points="108,-906 0,-906 0,-882 108,-882 108,-906"/>
+<text text-anchor="middle" x="54" y="-891.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">init_genrand64_i4</text>
 </a>
 </g>
 </g>
 <!-- proc~decode -->
-<g id="call~~graph~~CallGraph_node22" class="node">
+<g id="call~~graph~~CallGraph_node25" class="node">
 <title>proc~decode</title>
-<g id="a_call~~graph~~CallGraph_node22"><a xlink:href=".././proc/decode.html" xlink:title="decode">
-<polygon fill="#d9534f" stroke="#d9534f" points="81,-906 27,-906 27,-882 81,-882 81,-906"/>
-<text text-anchor="middle" x="54" y="-891.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">decode</text>
-</a>
-</g>
-</g>
-<!-- proc~genrand64_real3 -->
-<g id="call~~graph~~CallGraph_node23" class="node">
-<title>proc~genrand64_real3</title>
-<g id="a_call~~graph~~CallGraph_node23"><a xlink:href=".././proc/genrand64_real3.html" xlink:title="genrand64_real3">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="105.5,-948 2.5,-948 2.5,-924 105.5,-924 105.5,-948"/>
-<text text-anchor="middle" x="54" y="-933.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real3</text>
+<g id="a_call~~graph~~CallGraph_node25"><a xlink:href=".././proc/decode.html" xlink:title="decode">
+<polygon fill="#d9534f" stroke="#d9534f" points="81,-948 27,-948 27,-924 81,-924 81,-948"/>
+<text text-anchor="middle" x="54" y="-933.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">decode</text>
 </a>
 </g>
 </g>
@@ -512,7 +512,7 @@ All Procedures &ndash; Pikaia
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">

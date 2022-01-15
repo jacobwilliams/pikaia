@@ -222,7 +222,7 @@ private subroutine func_wrapper(me, x, f)
 
     
     <p>Wrapper for the user's function that is used by the main pikaia routine
-  The x input to this function comes from pikaia, and will be between [0,1].</p>
+ The x input to this function comes from pikaia, and will be between [0,1].</p>
     
 
     <h3>Arguments</h3>
@@ -349,23 +349,23 @@ private subroutine func_wrapper(me, x, f)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>    <span class="k">subroutine </span><span class="n">func_wrapper</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">func_wrapper</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">implicit none</span>
+<span class="w">    </span><span class="k">implicit none</span>
 
-<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">me</span>   <span class="c">! pikaia class</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">x</span>    <span class="c">! optimization variable vector [0,1]</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>              <span class="kd">::</span> <span class="n">f</span>    <span class="c">! fitness value</span>
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w">   </span><span class="c">! pikaia class</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="w">    </span><span class="c">! optimization variable vector [0,1]</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">              </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span><span class="w">    </span><span class="c">! fitness value</span>
 
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">xp</span>    <span class="c">!unscaled x vector: [xu,xl]</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xp</span><span class="w">    </span><span class="c">!unscaled x vector: [xu,xl]</span>
 
-    <span class="c">!map each x variable from [0,1] to [xl,xu]:</span>
-    <span class="n">xp</span> <span class="o">=</span> <span class="n">me</span><span class="p">%</span><span class="n">xl</span> <span class="o">+</span> <span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="o">*</span><span class="n">x</span>
+<span class="w">    </span><span class="c">!map each x variable from [0,1] to [xl,xu]:</span>
+<span class="w">    </span><span class="n">xp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="o">*</span><span class="n">x</span><span class="w"></span>
 
-    <span class="c">!call the user&#39;s function with xp:</span>
-    <span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">user_f</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+<span class="w">    </span><span class="c">!call the user&#39;s function with xp:</span>
+<span class="w">    </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">user_f</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">end subroutine </span><span class="n">func_wrapper</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">func_wrapper</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -381,7 +381,7 @@ private subroutine func_wrapper(me, x, f)
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">

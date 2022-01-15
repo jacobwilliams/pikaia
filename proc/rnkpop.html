@@ -220,8 +220,8 @@ private subroutine rnkpop(me, arrin, indx, rank)
 
     
     <p>Ranks initial population.
-  Calls external sort routine to produce key index and rank order
-  of input array arrin (which is not altered).</p>
+Calls external sort routine to produce key index and rank order
+of input array arrin (which is not altered).</p>
     
 
     <h3>Arguments</h3>
@@ -466,26 +466,26 @@ private subroutine rnkpop(me, arrin, indx, rank)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>    <span class="k">subroutine </span><span class="n">rnkpop</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">arrin</span><span class="p">,</span><span class="n">indx</span><span class="p">,</span><span class="n">rank</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">rnkpop</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">arrin</span><span class="p">,</span><span class="n">indx</span><span class="p">,</span><span class="n">rank</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">implicit none</span>
+<span class="w">    </span><span class="k">implicit none</span>
 
-<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>     <span class="kd">::</span> <span class="n">me</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">arrin</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">indx</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">rank</span>
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">     </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">arrin</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">indx</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">rank</span><span class="w"></span>
 
-    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
 
-    <span class="c">!Compute the key index</span>
-    <span class="k">call </span><span class="n">rqsort</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">,</span><span class="n">arrin</span><span class="p">,</span><span class="n">indx</span><span class="p">)</span>
+<span class="w">    </span><span class="c">!Compute the key index</span>
+<span class="w">    </span><span class="k">call </span><span class="n">rqsort</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">,</span><span class="n">arrin</span><span class="p">,</span><span class="n">indx</span><span class="p">)</span><span class="w"></span>
 
-    <span class="c">!and the rank order</span>
-    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span>
-        <span class="n">rank</span><span class="p">(</span><span class="n">indx</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">=</span> <span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
-    <span class="k">end do</span>
+<span class="w">    </span><span class="c">!and the rank order</span>
+<span class="w">    </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="w"></span>
+<span class="w">        </span><span class="n">rank</span><span class="p">(</span><span class="n">indx</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">end do</span>
 
-<span class="k">    end subroutine </span><span class="n">rnkpop</span>
+<span class="k">    end subroutine </span><span class="n">rnkpop</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -501,7 +501,7 @@ private subroutine rnkpop(me, arrin, indx, rank)
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">

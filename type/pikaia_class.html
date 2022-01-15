@@ -316,7 +316,7 @@
     <div class="col-md-9" id='text'>
       <h2>type, public :: pikaia_class</h2>
     <p>Main class for using the Pikaia algorithm.
- INIT and SOLVE are the only public methods.</p>
+INIT and SOLVE are the only public methods.</p>
     <br>
     
     <div class="panel panel-default">
@@ -1016,7 +1016,7 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>n</strong></td><td><p>the parameter space dimension, i.e., the number
- of adjustable parameters (size of the x vector).</p></td>
+of adjustable parameters (size of the x vector).</p></td>
   
 </tr>
 
@@ -1062,11 +1062,11 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>f</strong></td><td><p>user-supplied scalar function of n variables,
- which must have the <a href="../interface/pikaia_func.html">pikaia_func</a> procedure interface.
- By convention, f should return higher values for more optimal
- parameter values (i.e., individuals which are more "fit").
- For example, in fitting a function through data points, f
- could return the inverse of chi**2.</p></td>
+which must have the <a href="../interface/pikaia_func.html">pikaia_func</a> procedure interface.
+By convention, f should return higher values for more optimal
+parameter values (i.e., individuals which are more "fit").
+For example, in fitting a function through data points, f
+could return the inverse of chi**2.</p></td>
   
 </tr>
 
@@ -1097,9 +1097,9 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>iter_f</strong></td><td><p>user-supplied subroutine that will report the
- best solution for each generation.
- It must have the <a href="../interface/iter_func.html">iter_func</a> procedure interface.  If not present,
- then it is not used.  (note: this is independent of ivrb).</p></td>
+best solution for each generation.
+It must have the <a href="../interface/iter_func.html">iter_func</a> procedure interface.  If not present,
+then it is not used.  (note: this is independent of ivrb).</p></td>
   
 </tr>
 
@@ -1145,7 +1145,7 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>nd</strong></td><td><p>number of significant digits (i.e., number of
- genes) retained in chromosomal encoding (default is 6).</p></td>
+genes) retained in chromosomal encoding (default is 6).</p></td>
   
 </tr>
 
@@ -1161,9 +1161,9 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>pcross</strong></td><td><p>crossover probability; must be  &lt;= 1.0 (default
- is 0.85). If crossover takes place, either one
- or two splicing points are used, with equal
- probabilities</p></td>
+is 0.85). If crossover takes place, either one
+or two splicing points are used, with equal
+probabilities</p></td>
   
 </tr>
 
@@ -1209,9 +1209,9 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>pmut</strong></td><td><p>initial mutation rate; should be small (default
- is 0.005) (Note: the mutation rate is the probability
- that any one gene locus will mutate in
- any one generation.)</p></td>
+is 0.005) (Note: the mutation rate is the probability
+that any one gene locus will mutate in
+any one generation.)</p></td>
   
 </tr>
 
@@ -1227,12 +1227,12 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>imut</strong></td><td><p>mutation mode; 1/2/3/4/5 (default is 2).
-  1=one-point mutation, fixed rate.
-  2=one-point, adjustable rate based on fitness.
-  3=one-point, adjustable rate based on distance.
-  4=one-point+creep, fixed rate.
-  5=one-point+creep, adjustable rate based on fitness.
-  6=one-point+creep, adjustable rate based on distance.</p></td>
+ 1=one-point mutation, fixed rate.
+ 2=one-point, adjustable rate based on fitness.
+ 3=one-point, adjustable rate based on distance.
+ 4=one-point+creep, fixed rate.
+ 5=one-point+creep, adjustable rate based on fitness.
+ 6=one-point+creep, adjustable rate based on distance.</p></td>
   
 </tr>
 
@@ -1248,7 +1248,7 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>fdif</strong></td><td><p>relative fitness differential; range from 0
- (none) to 1 (maximum).  (default is 1.0)</p></td>
+(none) to 1 (maximum).  (default is 1.0)</p></td>
   
 </tr>
 
@@ -1264,8 +1264,8 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>irep</strong></td><td><p>reproduction plan; 1/2/3=Full generational
- replacement/Steady-state-replace-random/Steady-
- state-replace-worst (default is 3)</p></td>
+replacement/Steady-state-replace-random/Steady-
+state-replace-worst (default is 3)</p></td>
   
 </tr>
 
@@ -1281,7 +1281,7 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>ielite</strong></td><td><p>elitism flag; 0/1=off/on (default is 0)
- (Applies only to reproduction plans 1 and 2)</p></td>
+(Applies only to reproduction plans 1 and 2)</p></td>
   
 </tr>
 
@@ -1297,7 +1297,7 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>ivrb</strong></td><td><p>printed output 0/1/2=None/Minimal/Verbose
- (default is 0)</p></td>
+(default is 0)</p></td>
   
 </tr>
 
@@ -1328,9 +1328,9 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>convergence_window</strong></td><td><p>convergence window; must be &gt;= 0
- This is the number of consecutive solutions
- within the tolerance for convergence to
- be declared (default is 20)</p></td>
+This is the number of consecutive solutions
+within the tolerance for convergence to
+be declared (default is 20)</p></td>
   
 </tr>
 
@@ -1346,8 +1346,8 @@ private subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, x
   
   <td></td><td>::</td>
   <td><strong>initial_guess_frac</strong></td><td><p>fraction of the initial population
- to set equal to the initial guess.  Range from 0
- (none) to 1.0 (all). (default is 0.1 or 10%).</p></td>
+to set equal to the initial guess.  Range from 0
+(none) to 1.0 (all). (default is 0.1 or 10%).</p></td>
   
 </tr>
 
@@ -1555,7 +1555,7 @@ private subroutine <a href='../proc/func_wrapper.html'>func_wrapper</a>(me, x, f
 
 
 <p>Wrapper for the user's function that is used by the main pikaia routine
-  The x input to this function comes from pikaia, and will be between [0,1].</p>
+ The x input to this function comes from pikaia, and will be between [0,1].</p>
     
     <h4>Arguments</h4>
     
@@ -1820,8 +1820,8 @@ private subroutine <a href='../proc/stdrep.html'>stdrep</a>(me, ph, fits, oldph,
 
 
 <p>Steady-state reproduction: insert offspring pair into population
-  only if they are fit enough (replace-random if irep=2 or
-  replace-worst if irep=3).</p>
+only if they are fit enough (replace-random if irep=2 or
+replace-worst if irep=3).</p>
     
     <h4>Arguments</h4>
     
@@ -1999,7 +1999,7 @@ private subroutine <a href='../proc/genrep.html'>genrep</a>(me, ip, ph, newph)
 
 
 <p>Full generational replacement: accumulate offspring into new
-  population array</p>
+population array</p>
     
     <h4>Arguments</h4>
     
@@ -2339,7 +2339,7 @@ private subroutine <a href='../proc/encode.html'>encode</a>(me, ph, gn)
 
 
 <p>Encode phenotype parameters into integer genotype
-  ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
     
     <h4>Arguments</h4>
     
@@ -2530,7 +2530,7 @@ private subroutine <a href='../proc/decode.html'>decode</a>(me, gn, ph)
 
 
 <p>decode genotype into phenotype parameters
-  ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
     
     <h4>Arguments</h4>
     
@@ -2899,8 +2899,8 @@ private subroutine <a href='../proc/rnkpop.html'>rnkpop</a>(me, arrin, indx, ran
 
 
 <p>Ranks initial population.
-  Calls external sort routine to produce key index and rank order
-  of input array arrin (which is not altered).</p>
+Calls external sort routine to produce key index and rank order
+of input array arrin (which is not altered).</p>
     
     <h4>Arguments</h4>
     
@@ -3061,8 +3061,8 @@ private subroutine <a href='../proc/pikaia.html'>pikaia</a>(me, x, f, status)
   
   <td>dimension(:)</td><td>::</td>
   <td><strong>x</strong></td><td><p>Input - initial guess for solution vector.
- Output - the "fittest" (optimal) solution found,
- i.e., the solution which maximizes the fitness function.</p></td>
+Output - the "fittest" (optimal) solution found,
+i.e., the solution which maximizes the fitness function.</p></td>
   
 </tr>
 
@@ -3093,7 +3093,7 @@ private subroutine <a href='../proc/pikaia.html'>pikaia</a>(me, x, f, status)
   
   <td></td><td>::</td>
   <td><strong>status</strong></td><td><p>an indicator of the success or failure
- of the call to pikaia (0=success; non-zero=failure)</p></td>
+of the call to pikaia (0=success; non-zero=failure)</p></td>
   
 </tr>
 
@@ -3212,7 +3212,7 @@ private function <a href='../proc/urand.html'>urand</a>(me) result(r)
 
 
 <p>Return the next pseudo-random deviate from a sequence which is
-  uniformly distributed in the interval [0,1]</p>
+uniformly distributed in the interval [0,1]</p>
     
     <h4>Arguments</h4>
     
@@ -3272,71 +3272,71 @@ private function <a href='../proc/urand.html'>urand</a>(me) result(r)
     
     <section>
     <h3><span class="anchor" id="src"></span>Source Code</h3>
-    <div class="highlight"><pre><span></span>    <span class="k">type</span><span class="p">,</span><span class="k">public</span> <span class="kd">::</span> <span class="n">pikaia_class</span>
+    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">type</span><span class="p">,</span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pikaia_class</span><span class="w"></span>
 
-        <span class="c">!! Main class for using the Pikaia algorithm.</span>
-        <span class="c">!! INIT and SOLVE are the only public methods.</span>
+<span class="w">        </span><span class="c">!! Main class for using the Pikaia algorithm.</span>
+<span class="w">        </span><span class="c">!! INIT and SOLVE are the only public methods.</span>
 
-        <span class="k">private</span>
+<span class="w">        </span><span class="k">private</span>
 
-<span class="k">        </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c">!number of solution variables</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">xl</span>    <span class="c">!! lower bounds of `x`</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">xu</span>    <span class="c">!! upper bound of `x`</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">del</span>
+<span class="k">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c">!number of solution variables</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xl</span><span class="w">    </span><span class="c">!! lower bounds of `x`</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xu</span><span class="w">    </span><span class="c">!! upper bound of `x`</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">del</span><span class="w"></span>
 
-        <span class="c">!other solution inputs (with default values):</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">np</span>                 <span class="o">=</span> <span class="mi">100</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">ngen</span>               <span class="o">=</span> <span class="mi">500</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">nd</span>                 <span class="o">=</span> <span class="mi">5</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pcross</span>             <span class="o">=</span> <span class="mf">0.85_wp</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">imut</span>               <span class="o">=</span> <span class="mi">2</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pmuti</span>              <span class="o">=</span> <span class="mf">0.005_wp</span>  <span class="c">!! initial value of `pmut`</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pmutmn</span>             <span class="o">=</span> <span class="mf">0.0005_wp</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pmutmx</span>             <span class="o">=</span> <span class="mf">0.25_wp</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fdif</span>               <span class="o">=</span> <span class="mf">1.0_wp</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">irep</span>               <span class="o">=</span> <span class="mi">1</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">ielite</span>             <span class="o">=</span> <span class="mi">1</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">ivrb</span>               <span class="o">=</span> <span class="mi">0</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">convergence_tol</span>    <span class="o">=</span> <span class="mf">0.0001_wp</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">convergence_window</span> <span class="o">=</span> <span class="mi">20</span>
-        <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">iseed</span>              <span class="o">=</span> <span class="mi">999</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">initial_guess_frac</span> <span class="o">=</span> <span class="mf">0.1_wp</span>
+<span class="w">        </span><span class="c">!other solution inputs (with default values):</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">np</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">ngen</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">nd</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pcross</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mf">0.85_wp</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">imut</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pmuti</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mf">0.005_wp</span><span class="w">  </span><span class="c">!! initial value of `pmut`</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pmutmn</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0005_wp</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pmutmx</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25_wp</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">fdif</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">irep</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">ielite</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">ivrb</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">convergence_tol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001_wp</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">convergence_window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"></span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">iseed</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">999</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">initial_guess_frac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1_wp</span><span class="w"></span>
 
-        <span class="c">!used internally:</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pmut</span>   <span class="o">=</span> <span class="o">-</span><span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">bestft</span> <span class="o">=</span> <span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span>
-        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pmutpv</span> <span class="o">=</span> <span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span>
+<span class="w">        </span><span class="c">!used internally:</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pmut</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bestft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pmutpv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">huge</span><span class="p">(</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"></span>
 
-        <span class="k">type</span><span class="p">(</span><span class="n">mt19937</span><span class="p">)</span> <span class="kd">::</span> <span class="nb">rand</span> <span class="c">!! random number generator</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">mt19937</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="nb">rand</span><span class="w"> </span><span class="c">!! random number generator</span>
 
-        <span class="c">!user-supplied procedures:</span>
-        <span class="k">procedure</span><span class="p">(</span><span class="n">pikaia_func</span><span class="p">),</span><span class="k">pointer</span> <span class="kd">::</span> <span class="n">user_f</span> <span class="o">=&gt;</span> <span class="nb">null</span><span class="p">()</span>  <span class="c">!! fitness function</span>
-        <span class="k">procedure</span><span class="p">(</span><span class="n">iter_func</span><span class="p">),</span><span class="k">pointer</span>   <span class="kd">::</span> <span class="n">iter_f</span> <span class="o">=&gt;</span> <span class="nb">null</span><span class="p">()</span>  <span class="c">!! reporting function (best member of population)</span>
+<span class="w">        </span><span class="c">!user-supplied procedures:</span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">(</span><span class="n">pikaia_func</span><span class="p">),</span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">user_f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">null</span><span class="p">()</span><span class="w">  </span><span class="c">!! fitness function</span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">(</span><span class="n">iter_func</span><span class="p">),</span><span class="k">pointer</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">iter_f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">null</span><span class="p">()</span><span class="w">  </span><span class="c">!! reporting function (best member of population)</span>
 
-    <span class="k">contains</span>
+<span class="w">    </span><span class="k">contains</span><span class="w"></span>
 
-        <span class="c">!public routines:</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="p">,</span><span class="k">public</span> <span class="kd">::</span> <span class="n">init</span>   <span class="o">=&gt;</span> <span class="n">set_inputs</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="p">,</span><span class="k">public</span> <span class="kd">::</span> <span class="n">solve</span>  <span class="o">=&gt;</span> <span class="n">solve_with_pikaia</span>
+<span class="w">        </span><span class="c">!public routines:</span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="p">,</span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">init</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">set_inputs</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="p">,</span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">solve</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">solve_with_pikaia</span><span class="w"></span>
 
-        <span class="c">!private routines:</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">ff</span>  <span class="o">=&gt;</span> <span class="n">func_wrapper</span>  <span class="c">!! internal pikaia function (x:[0,1])</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">newpop</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">stdrep</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">genrep</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">adjmut</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">cross</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="k">encode</span>
-<span class="k">        procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">mutate</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="k">decode</span>
-<span class="k">        procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">select_parents</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">report</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">rnkpop</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">pikaia</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">rninit</span>
-        <span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span> <span class="kd">::</span> <span class="n">urand</span>
+<span class="w">        </span><span class="c">!private routines:</span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ff</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">func_wrapper</span><span class="w">  </span><span class="c">!! internal pikaia function (x:[0,1])</span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newpop</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">stdrep</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">genrep</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">adjmut</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cross</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="k">encode</span>
+<span class="k">        procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mutate</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="k">decode</span>
+<span class="k">        procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">select_parents</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">report</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rnkpop</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pikaia</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rninit</span><span class="w"></span>
+<span class="w">        </span><span class="k">procedure</span><span class="p">,</span><span class="k">non_overridable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">urand</span><span class="w"></span>
 
-    <span class="k">end type </span><span class="n">pikaia_class</span>
+<span class="w">    </span><span class="k">end type </span><span class="n">pikaia_class</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -3351,7 +3351,7 @@ private function <a href='../proc/urand.html'>urand</a>(me) result(r)
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">

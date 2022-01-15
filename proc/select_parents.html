@@ -372,42 +372,42 @@ private subroutine select_parents(me, jfit, imom, idad)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>    <span class="k">subroutine </span><span class="n">select_parents</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">jfit</span><span class="p">,</span><span class="n">imom</span><span class="p">,</span><span class="n">idad</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">select_parents</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">jfit</span><span class="p">,</span><span class="n">imom</span><span class="p">,</span><span class="n">idad</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">implicit none</span>
+<span class="w">    </span><span class="k">implicit none</span>
 
-<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>   <span class="kd">::</span> <span class="n">me</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">jfit</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>                 <span class="kd">::</span> <span class="n">imom</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>                 <span class="kd">::</span> <span class="n">idad</span>
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">jfit</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">imom</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">idad</span><span class="w"></span>
 
-    <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">np1</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">dice</span><span class="p">,</span><span class="n">rtfit</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">parents</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">np1</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dice</span><span class="p">,</span><span class="n">rtfit</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">parents</span><span class="w"></span>
 
-    <span class="c">!initialize:</span>
-    <span class="n">np1</span> <span class="o">=</span> <span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">+</span><span class="mi">1</span>
-    <span class="n">parents</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
+<span class="w">    </span><span class="c">!initialize:</span>
+<span class="w">    </span><span class="n">np1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="n">parents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">99</span><span class="w"></span>
 
-    <span class="c">!get two (unequal) parents:</span>
-    <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
-        <span class="n">main</span><span class="p">:</span> <span class="k">do</span>
-<span class="k">            </span><span class="n">dice</span> <span class="o">=</span> <span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">*</span><span class="n">np1</span>
-            <span class="n">rtfit</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
-            <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span>
-                <span class="n">rtfit</span> <span class="o">=</span> <span class="n">rtfit</span><span class="o">+</span><span class="n">np1</span><span class="o">+</span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span><span class="o">*</span><span class="p">(</span><span class="n">np1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">jfit</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">rtfit</span><span class="o">&gt;=</span><span class="n">dice</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">                    </span><span class="n">parents</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">parents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/=</span><span class="n">parents</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="k">exit </span><span class="n">main</span>
-                <span class="k">end if</span>
+<span class="w">    </span><span class="c">!get two (unequal) parents:</span>
+<span class="w">    </span><span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="w"></span>
+<span class="w">        </span><span class="n">main</span><span class="p">:</span><span class="w"> </span><span class="k">do</span>
+<span class="k">            </span><span class="n">dice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">*</span><span class="n">np1</span><span class="w"></span>
+<span class="w">            </span><span class="n">rtfit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="w"></span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="w"></span>
+<span class="w">                </span><span class="n">rtfit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rtfit</span><span class="o">+</span><span class="n">np1</span><span class="o">+</span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span><span class="o">*</span><span class="p">(</span><span class="n">np1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">jfit</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rtfit</span><span class="o">&gt;=</span><span class="n">dice</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    </span><span class="n">parents</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">parents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/=</span><span class="n">parents</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">exit </span><span class="n">main</span><span class="w"></span>
+<span class="w">                </span><span class="k">end if</span>
 <span class="k">            end do</span>
-<span class="k">        end do </span><span class="n">main</span>
-    <span class="k">end do</span>
+<span class="k">        end do </span><span class="n">main</span><span class="w"></span>
+<span class="w">    </span><span class="k">end do</span>
 
-<span class="k">    </span><span class="n">imom</span> <span class="o">=</span> <span class="n">parents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">idad</span> <span class="o">=</span> <span class="n">parents</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">    </span><span class="n">imom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">idad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parents</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">end subroutine </span><span class="n">select_parents</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">select_parents</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -423,7 +423,7 @@ private subroutine select_parents(me, jfit, imom, idad)
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">

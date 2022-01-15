@@ -220,8 +220,8 @@ private subroutine stdrep(me, ph, fits, oldph, fitns, ifit, jfit, nnew)
 
     
     <p>Steady-state reproduction: insert offspring pair into population
-  only if they are fit enough (replace-random if irep=2 or
-  replace-worst if irep=3).</p>
+only if they are fit enough (replace-random if irep=2 or
+replace-worst if irep=3).</p>
     
 
     <h3>Arguments</h3>
@@ -423,87 +423,87 @@ private subroutine stdrep(me, ph, fits, oldph, fitns, ifit, jfit, nnew)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>    <span class="k">subroutine </span><span class="n">stdrep</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">ph</span><span class="p">,</span><span class="n">fits</span><span class="p">,</span><span class="n">oldph</span><span class="p">,</span><span class="n">fitns</span><span class="p">,</span><span class="n">ifit</span><span class="p">,</span><span class="n">jfit</span><span class="p">,</span><span class="n">nnew</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">stdrep</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">ph</span><span class="p">,</span><span class="n">fits</span><span class="p">,</span><span class="n">oldph</span><span class="p">,</span><span class="n">fitns</span><span class="p">,</span><span class="n">ifit</span><span class="p">,</span><span class="n">jfit</span><span class="p">,</span><span class="n">nnew</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">implicit none</span>
+<span class="w">    </span><span class="k">implicit none</span>
 
-<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">me</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">ph</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>              <span class="kd">::</span> <span class="n">fits</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">oldph</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>       <span class="kd">::</span> <span class="n">fitns</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>        <span class="kd">::</span> <span class="n">ifit</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span>        <span class="kd">::</span> <span class="n">jfit</span>
-    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>                           <span class="kd">::</span> <span class="n">nnew</span>
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">             </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">         </span><span class="kd">::</span><span class="w"> </span><span class="n">ph</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">              </span><span class="kd">::</span><span class="w"> </span><span class="n">fits</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">oldph</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">fitns</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">ifit</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">jfit</span><span class="w"></span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                           </span><span class="kd">::</span><span class="w"> </span><span class="n">nnew</span><span class="w"></span>
 
-    <span class="kt">integer</span>  <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="n">if1</span>
-    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fit</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="n">if1</span><span class="w"></span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">fit</span><span class="w"></span>
 
-    <span class="n">nnew</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">main_loop</span> <span class="p">:</span> <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="w">    </span><span class="n">nnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">    </span><span class="n">main_loop</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="w"></span>
 
-        <span class="c">!1. get offspring fitness</span>
-        <span class="n">fit</span> <span class="o">=</span> <span class="n">fits</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="w">        </span><span class="c">!1. get offspring fitness</span>
+<span class="w">        </span><span class="n">fit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fits</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="w"></span>
 
-        <span class="c">!2. if fit enough, insert in population</span>
-        <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="c">!2. if fit enough, insert in population</span>
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">fit</span><span class="o">&gt;</span><span class="n">fitns</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> <span class="k">then</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fit</span><span class="o">&gt;</span><span class="n">fitns</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span><span class="w"> </span><span class="k">then</span><span class="w"></span>
 
-                <span class="c">!make sure the phenotype is not already in the population</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">                    if</span> <span class="p">(</span><span class="k">all</span><span class="p">(</span><span class="n">oldph</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">==</span><span class="n">ph</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">)))</span> <span class="k">cycle </span><span class="n">main_loop</span>
-                <span class="k">end if</span>
+<span class="w">                </span><span class="c">!make sure the phenotype is not already in the population</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    if</span><span class="w"> </span><span class="p">(</span><span class="k">all</span><span class="p">(</span><span class="n">oldph</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">==</span><span class="n">ph</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">)))</span><span class="w"> </span><span class="k">cycle </span><span class="n">main_loop</span><span class="w"></span>
+<span class="w">                </span><span class="k">end if</span><span class="w"></span>
 
-                <span class="c">!offspring is fit enough for insertion, and is unique</span>
+<span class="w">                </span><span class="c">!offspring is fit enough for insertion, and is unique</span>
 
-                <span class="c">!(i) insert phenotype at appropriate place in population</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span>
-                <span class="k">else if</span> <span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">==</span><span class="mi">0</span> <span class="p">.</span><span class="nb">or</span><span class="p">.</span> <span class="n">i</span><span class="o">==</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-                <span class="k">else</span>
-<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
-                <span class="k">end if</span>
-<span class="k">                </span><span class="n">if1</span> <span class="o">=</span> <span class="n">ifit</span><span class="p">(</span><span class="n">i1</span><span class="p">)</span>
-                <span class="n">fitns</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">fit</span>
-                <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">n</span>
-                    <span class="n">oldph</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">ph</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">end do</span>
+<span class="w">                </span><span class="c">!(i) insert phenotype at appropriate place in population</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">==</span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">i</span><span class="o">==</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span>
+<span class="k">                    </span><span class="n">i1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">urand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="k">                </span><span class="n">if1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifit</span><span class="p">(</span><span class="n">i1</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">fitns</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">fit</span><span class="w"></span>
+<span class="w">                </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="w"></span>
+<span class="w">                    </span><span class="n">oldph</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">ph</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="k">end do</span><span class="w"></span>
 
-                <span class="c">!(ii) shift and update ranking arrays</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">i1</span><span class="p">)</span> <span class="k">then</span>
+<span class="w">                </span><span class="c">!(ii) shift and update ranking arrays</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"></span>
 
-                    <span class="c">!shift up</span>
-                    <span class="n">jfit</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span>
-                    <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="n">i1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-                        <span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">=</span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span>
-                        <span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-                    <span class="k">end do</span>
-<span class="k">                    </span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">if1</span>
+<span class="w">                    </span><span class="c">!shift up</span>
+<span class="w">                    </span><span class="n">jfit</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span><span class="w"></span>
+<span class="w">                    </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="n">i1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                        </span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">=</span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                        </span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="k">end do</span>
+<span class="k">                    </span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">if1</span><span class="w"></span>
 
-                <span class="k">else</span>
+<span class="w">                </span><span class="k">else</span><span class="w"></span>
 
-                    <span class="c">!shift down</span>
-                    <span class="n">jfit</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
-                    <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="n">i1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span>
-                        <span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">=</span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
-                        <span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-                    <span class="k">end do</span>
-<span class="k">                    </span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">if1</span>
+<span class="w">                    </span><span class="c">!shift down</span>
+<span class="w">                    </span><span class="n">jfit</span><span class="p">(</span><span class="n">if1</span><span class="p">)</span><span class="o">=</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                    </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="n">i1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="w"></span>
+<span class="w">                        </span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">=</span><span class="n">jfit</span><span class="p">(</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                        </span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="n">ifit</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="k">end do</span>
+<span class="k">                    </span><span class="n">ifit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">if1</span><span class="w"></span>
 
-                <span class="k">end if</span>
+<span class="w">                </span><span class="k">end if</span>
 
-<span class="k">                </span><span class="n">nnew</span> <span class="o">=</span> <span class="n">nnew</span><span class="o">+</span><span class="mi">1</span>
-                <span class="k">cycle </span><span class="n">main_loop</span>
+<span class="k">                </span><span class="n">nnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nnew</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                </span><span class="k">cycle </span><span class="n">main_loop</span><span class="w"></span>
 
-            <span class="k">end if</span>
+<span class="w">            </span><span class="k">end if</span>
 
 <span class="k">        end do</span>
 
-<span class="k">    end do </span><span class="n">main_loop</span>
+<span class="k">    end do </span><span class="n">main_loop</span><span class="w"></span>
 
-    <span class="k">end subroutine </span><span class="n">stdrep</span>
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">stdrep</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -519,7 +519,7 @@ private subroutine stdrep(me, ph, fits, oldph, fitns, ifit, jfit, nnew)
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2021 
+        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
                                           </p>
         </div>
         <div class="col-xs-6 col-md-6">
