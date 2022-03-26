@@ -22,17 +22,18 @@ This is a refactoring of the PIKAIA unconstrained optimization code from the [Hi
 
 ### Compiling
 
-A [FoBiS](https://github.com/szaghi/FoBiS) configuration file (`pikaia.fobis`) is also provided that can also build the library and examples. Use the `mode` flag to indicate what to build. For example:
+The library can be built with the [Fortran Package Manager](https://github.com/fortran-lang/fpm) using the provided `fpm.toml` file like so:
 
-  * To build all the examples using gfortran: `FoBiS.py build -f pikaia.fobis -mode tests-gnu`
-  * To build all the examples using ifort: `FoBiS.py build -f pikaia.fobis -mode tests-intel`
-  * To build a static library using gfortran: `FoBiS.py build -f pikaia.fobis -mode static-gnu`
-  * To build a static library using ifort: `FoBiS.py build -f pikaia.fobis -mode static-intel`
+```bash
+fpm build --release
+```
 
-  The full set of modes are: `static-gnu`, `static-gnu-debug`, `static-intel`, `static-intel-debug`, `shared-gnu`, `shared-gnu-debug`, `shared-intel`, `shared-intel-debug`, `tests-gnu`, `tests-gnu-debug`, `tests-intel`, `tests-intel-debug`,
-  `static-gnu-openmp`, `static-gnu-debug-openmp`, `static-intel-openmp`, `static-intel-debug-openmp`, `shared-gnu-openmp`, `shared-gnu-debug-openmp`, `shared-intel-openmp`, `shared-intel-debug-openmp`, `tests-gnu-openmp`, `tests-gnu-debug-openmp`, `tests-intel-openmp`, `tests-intel-debug-openmp`
+To use Pikaia within your fpm project, add the following to your `fpm.toml` file:
 
-  To generate the documentation using [ford](https://github.com/Fortran-FOSS-Programmers/ford), run: ```FoBis.py rule --execute makedoc -f pikaia.fobis```
+```yml
+[dependencies]
+pikaia = { git="https://github.com/jacobwilliams/pikaia.git" }
+```
 
 ### Examples
 
