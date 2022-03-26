@@ -67,6 +67,7 @@ jobs:
       run: fpm test --profile debug --flag -coverage
 
     - name: Create coverage report
+      if: contains( matrix.open-mp, 'no')
       run: |
         mkdir -p ${{ env.COV_DIR }}
         lcov --capture --initial --base-directory . --directory build/gfortran_*/ --output-file ${{ env.COV_DIR }}/coverage.base
@@ -76,6 +77,7 @@ jobs:
         COV_DIR: build/coverage
 
     - name: Upload coverage report
+      if: contains( matrix.open-mp, 'no')
       uses: codecov/codecov-action@v2
       with:
         files: build/coverage/coverage.info
