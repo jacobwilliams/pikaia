@@ -5,8 +5,10 @@
 
 ### Status
 
-![CI Status](https://github.com/jacobwilliams/pikaia/actions/workflows/CI.yml/badge.svg) [![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg?style=plastic)](https://github.com/jacobwilliams/pikaia/releases/latest)
-[![codecov](https://codecov.io/gh/jacobwilliams/pikaia/branch/master/graph/badge.svg?token=43HK33CSMY)](https://codecov.io/gh/jacobwilliams/pikaia)
+[![GitHub release](https://img.shields.io/github/release/jacobwilliams/pikaia.svg)](https://github.com/jacobwilliams/pikaia/releases/latest)
+[![CI Status](https://github.com/jacobwilliams/pikaia/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/pikaia/actions)
+[![codecov](https://codecov.io/gh/jacobwilliams/pikaia/branch/master/graph/badge.svg)](https://codecov.io/gh/jacobwilliams/pikaia)
+[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/pikaia)](https://github.com/jacobwilliams/pikaia/commits/master)
 
 ### Overview
 
