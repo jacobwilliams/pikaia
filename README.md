@@ -38,6 +38,15 @@ To use Pikaia within your fpm project, add the following to your `fpm.toml` file
 pikaia = { git="https://github.com/jacobwilliams/pikaia.git" }
 ```
 
+Or to use a specific version:
+
+```yml
+[dependencies]
+pikaia = { git="https://github.com/jacobwilliams/pikaia.git", tag = "1.0.1" }
+```
+
+The [mersenne-twister-fortran](https://github.com/jacobwilliams/mersenne-twister-fortran) library is required to compiled Pikaia. FPM will automatically download this library.
+
 ### Examples
 
  * An example use of Pikaia can be found [here](http://degenerateconic.com/earth-mars-free-return/).
