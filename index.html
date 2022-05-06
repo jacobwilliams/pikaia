@@ -49,7 +49,7 @@
               aria-haspopup="true"
      aria-expanded="false">Contents <span class="caret"></span></a>
         <ul class="dropdown-menu">
-            <li><a href="./lists/files.html">Source Files</a></li>
+            <li><a href="./sourcefile/pikaia_module.f90.html">Source File</a></li>
             <li><a href="./lists/modules.html">Modules</a></li>
             <li><a href="./lists/procedures.html">Procedures</a></li>
             <li><a href="./lists/absint.html">Abstract Interfaces</a></li>
@@ -58,7 +58,7 @@
             </ul>
         
             </li>
-<li class="visible-xs hidden-sm visible-lg"><a href="./lists/files.html">Source Files</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="./sourcefile/pikaia_module.f90.html">Source File</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="./lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="./lists/procedures.html">Procedures</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="./lists/absint.html">Abstract Interfaces</a></li>
@@ -118,6 +118,12 @@
 <span class="na">pikaia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">{ git=&quot;https://github.com/jacobwilliams/pikaia.git&quot; }</span><span class="w"></span>
 </code></pre></div>
 
+<p>Or to use a specific version:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[dependencies]</span><span class="w"></span>
+<span class="na">pikaia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">{ git=&quot;https://github.com/jacobwilliams/pikaia.git&quot;, tag = &quot;1.0.1&quot; }</span><span class="w"></span>
+</code></pre></div>
+
+<p>The <a href="https://github.com/jacobwilliams/mersenne-twister-fortran">mersenne-twister-fortran</a> library is required to compiled Pikaia. FPM will automatically download this library.</p>
 <h3>Examples</h3>
 <ul>
 <li>An example use of Pikaia can be found <a href="http://degenerateconic.com/earth-mars-free-return/">here</a>.</li>
@@ -147,14 +153,12 @@
       <div class="row">
         <div class="col-xs-6 col-sm-3">
               <h3>Source Files</h3>
-              <ul>                    <li><a href='./sourcefile/mt19937-64.f90.html'>mt19937-64.f90</a></li>
-                    <li><a href='./sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
+              <ul>                    <li><a href='./sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
 </ul>
           </div>
 		  <div class="col-xs-6 col-sm-3">
               <h3>Modules</h3>
-              <ul>                    <li><a href='./module/mt19937_64.html'>mt19937_64</a></li>
-                    <li><a href='./module/pikaia_module.html'>pikaia_module</a></li>
+              <ul>                    <li><a href='./module/pikaia_module.html'>pikaia_module</a></li>
 </ul>
           </div>
 		  <div class="col-xs-6 col-sm-3">
@@ -164,17 +168,16 @@
                     <li><a href='./proc/decode.html'>decode</a></li>
                     <li><a href='./proc/encode.html'>encode</a></li>
                     <li><a href='./proc/func_wrapper.html'>func_wrapper</a></li>
-                    <li><a href='./proc/genrand64_int64.html'>genrand64_int64</a></li>
-                    <li><a href='./proc/genrand64_real1.html'>genrand64_real1</a></li>
-                    <li><a href='./proc/genrand64_real2.html'>genrand64_real2</a></li>
-                    <li><a href='./proc/genrand64_real3.html'>genrand64_real3</a></li>
                     <li><a href='./proc/genrep.html'>genrep</a></li>
+                    <li><a href='./proc/mutate.html'>mutate</a></li>
+                    <li><a href='./proc/newpop.html'>newpop</a></li>
+                    <li><a href='./proc/pikaia.html'>pikaia</a></li>
+                    <li><a href='./proc/report.html'>report</a></li>
 </ul>
           </div>
 		  <div class="col-xs-6 col-sm-3">
               <h3>Derived Types</h3>
-              <ul>                    <li><a href='./type/mt19937.html'>mt19937</a></li>
-                    <li><a href='./type/pikaia_class.html'>pikaia_class</a></li>
+              <ul>                    <li><a href='./type/pikaia_class.html'>pikaia_class</a></li>
 </ul>
           </div>
       </div>
