@@ -16,6 +16,6 @@ display: public
          none
 source: true
 graph: true
-exclude_dir: ./src/tests
+extra_mods: mt19937_64:https://jacobwilliams.github.io/mersenne-twister-fortran/
 
 {!README.md!}

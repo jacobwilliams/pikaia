@@ -11,6 +11,9 @@ auto-executables = false
 auto-examples = false
 auto-tests = true
 
+[dependencies]
+mersenne-twister-fortran = { git="https://github.com/jacobwilliams/mersenne-twister-fortran.git", tag = "1.0.1" }
+
 [library]
 source-dir = "src"
 
