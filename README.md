@@ -45,7 +45,7 @@ Or to use a specific version:
 pikaia = { git="https://github.com/jacobwilliams/pikaia.git", tag = "1.0.1" }
 ```
 
-The [mersenne-twister-fortran](https://github.com/jacobwilliams/mersenne-twister-fortran) library is required to compiled Pikaia. FPM will automatically download this library.
+The [mersenne-twister-fortran](https://github.com/jacobwilliams/mersenne-twister-fortran) library is required to compile Pikaia. FPM will automatically download this library.
 
 ### Examples
 
