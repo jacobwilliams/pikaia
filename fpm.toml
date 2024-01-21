@@ -1,6 +1,6 @@
 name = "pikaia"
 author = "Jacob Williams"
-copyright  = "Copyright (c) 2015-2022, Jacob Williams"
+copyright  = "Copyright (c) 2015-2024, Jacob Williams"
 license = "BSD-3"
 description = "Modern Fortran Edition of the Pikaia Genetic Algorithm"
 homepage = "https://github.com/jacobwilliams/pikaia"
