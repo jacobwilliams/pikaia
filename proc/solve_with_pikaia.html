@@ -1,181 +1,640 @@
+<!-- -*- mode: jinja2 -*- -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="Modern Fortran Edition of the Pikaia Genetic Algorithm">
+      <meta name="description" content="Modern Fortran Edition of the Pikaia Genetic Algorithm">
     <meta name="author" content="Jacob Williams" >
     <link rel="icon" href="../favicon.png">
 
     <title>solve_with_pikaia &ndash; Pikaia</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="../css/pygments.css" rel="stylesheet">
     <link href="../css/font-awesome.min.css" rel="stylesheet">
     <link href="../css/local.css" rel="stylesheet">
-    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../js/svg-pan-zoom.min.js"></script>
-
   </head>
 
   <body>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
           <a class="navbar-brand" href="../index.html">Pikaia </a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
-              <a href="#" class="dropdown-toggle"
-              data-toggle="dropdown" role="button"
-              aria-haspopup="true"
-     aria-expanded="false">Contents <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a href="../sourcefile/pikaia_module.f90.html">Source File</a></li>
-            <li><a href="../lists/modules.html">Modules</a></li>
-            <li><a href="../lists/procedures.html">Procedures</a></li>
-            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
-                   <li><a href="../lists/types.html">Derived Types</a></li>
-       
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="sourcefile/pikaia_module.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
             </ul>
-        
-            </li>
-<li class="visible-xs hidden-sm visible-lg"><a href="../sourcefile/pikaia_module.f90.html">Source File</a></li>
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
-                             <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
-          </ul>
-        <form action="../search.html" class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
         </div>
-<!--
-        <button type="submit" class="btn btn-default">Submit</button>
--->
-        </form>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <div class="container">
   <div class="row">
     <h1>solve_with_pikaia
       <small>Subroutine</small>
+      
     </h1>
-    <div class="row">
-  <div class="col-lg-12">
-<div class="well well-sm">
-  <ul class="list-inline" style="margin-bottom:0px;display:inline">
-     <li><i class="fa fa-pencil"></i> Jacob Williams</li>
-     <li><i class="fa fa-list-ol"></i>
-       <a data-toggle="tooltip"
-    data-placement="bottom" data-html="true"
-    title=" 2.1% of total for procedures.">15 statements</a>
-     </li> 
-    <li><i class="fa fa-code"></i><a href="../src/pikaia_module.f90"> Source File</a></li>
-  </ul>
-  <ol class="breadcrumb in-well text-right">
-     <li><a href='../sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
-     <li><a href='../module/pikaia_module.html'>pikaia_module</a></li>
-     <li class="active">solve_with_pikaia</li>
-  </ol>
-</div>
-</div>
-</div>
-<script>
-  $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+            <li class="list-inline-item" id="meta-author"><i class="fa fa-pencil"></i> Jacob Williams</li>
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip"
+                 data-bs-placement="bottom" data-html="true"
+                 title=" 2.1% of total for procedures.">15 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/pikaia_module.f90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
+                <li class="breadcrumb-item"><a href='../module/pikaia_module.html'>pikaia_module</a></li>
+            <li class="breadcrumb-item active" aria-current="page">solve_with_pikaia</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
 
   </div>
   
   <div class="row">
     <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
-    <div id="sidebar">
-  <h3>Contents</h3>
- 
-<div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
-  <div class="list-group">
-    <a class="list-group-item" href="../proc/solve_with_pikaia.html#src">solve_with_pikaia</a>
-  </div>
-</div>
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/solve_with_pikaia.html#src">solve_with_pikaia</a>
+      </div>
+    </div>
 
-</div>
+
+  </div>
 
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2>private subroutine solve_with_pikaia(me, x, f, status)</h2>
+    <h2>private  subroutine solve_with_pikaia(me, x, f, status)  
+</h2>
     
 
     <p>Main pikaia wrapper used by the class.</p>
 
+    <h3>Type Bound</h3>
+    <p><a href='../type/pikaia_class.html'>pikaia_class</a></p>
+
     <h3>Arguments</h3>
-      <table class="table table-striped varlist">
-<thead><tr><th>Type</th><th>Intent</th><th>Optional</th><th>Attributes</th><th></th><th>Name</th><th></th></thead>
-<tbody>
-<tr>
-  <td><span class="anchor" id="variable-me~6"></span>class(<a href='../type/pikaia_class.html'>pikaia_class</a>),</td>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~5"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
 <td>intent(inout)</td>
-  <td></td>  <td></td><td>::</td>
-  <td><strong>me</strong></td><td></td>
-</tr>
-<tr>
-  <td><span class="anchor" id="variable-x~4"></span>real(kind=wp),</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~4"></span>
+              real(kind=wp),
+            </td>
 <td>intent(inout),</td>
-  <td></td>  <td>dimension(:)</td><td>::</td>
-  <td><strong>x</strong></td><td></td>
-</tr>
-<tr>
-  <td><span class="anchor" id="variable-f~5"></span>real(kind=wp),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~5"></span>
+              real(kind=wp),
+            </td>
 <td>intent(out)</td>
-  <td></td>  <td></td><td>::</td>
-  <td><strong>f</strong></td><td></td>
-</tr>
-<tr>
-  <td><span class="anchor" id="variable-status~3"></span>integer,</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-status~3"></span>
+              integer,
+            </td>
 <td>intent(out)</td>
-  <td></td>  <td></td><td>::</td>
-  <td><strong>status</strong></td><td></td>
-</tr>
-</tbody>
-</table>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>status</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
 
     <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~solve_with_pikaia~~CallsGraph Pages: 1 -->
+<svg id="procsolve_with_pikaiaCallsGraph" width="641pt" height="292pt"
+ viewBox="0.00 0.00 641.00 292.11" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~solve_with_pikaia~~CallsGraph" class="graph" transform="scale(1.94 1.94) rotate(0) translate(4 562)">
+<title>proc~~solve_with_pikaia~~CallsGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-562 1238,-562 1238,4 -4,4"/>
+<!-- proc~solve_with_pikaia -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node1" class="node">
+<title>proc~solve_with_pikaia</title>
+<polygon fill="none" stroke="black" points="264,-288 0,-288 0,-264 264,-264 264,-288"/>
+<text text-anchor="middle" x="132" y="-273.6" font-family="Helvetica,sans-Serif" font-size="10.50">pikaia_module::pikaia_class%solve_with_pikaia</text>
+</g>
+<!-- proc~pikaia -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node2" class="node">
+<title>proc~pikaia</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node2"><a xlink:href="../proc/pikaia.html" xlink:title="pikaia_module::pikaia_class%pikaia">
+<polygon fill="#d9534f" stroke="#d9534f" points="504,-288 300,-288 300,-264 504,-264 504,-288"/>
+<text text-anchor="middle" x="402" y="-273.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%pikaia</text>
+</a>
+</g>
+</g>
+<!-- proc~solve_with_pikaia&#45;&gt;proc~pikaia -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge1" class="edge">
+<title>proc~solve_with_pikaia&#45;&gt;proc~pikaia</title>
+<path fill="none" stroke="#000000" d="M264.25,-276C272.74,-276 281.24,-276 289.62,-276"/>
+<polygon fill="#000000" stroke="#000000" points="289.77,-279.5 299.77,-276 289.77,-272.5 289.77,-279.5"/>
+</g>
+<!-- proc~adjmut -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node3" class="node">
+<title>proc~adjmut</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node3"><a xlink:href="../proc/adjmut.html" xlink:title="pikaia_module::pikaia_class%adjmut">
+<polygon fill="#d9534f" stroke="#d9534f" points="768.5,-558 559.5,-558 559.5,-534 768.5,-534 768.5,-558"/>
+<text text-anchor="middle" x="664" y="-543.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%adjmut</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~adjmut -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge2" class="edge">
+<title>proc~pikaia&#45;&gt;proc~adjmut</title>
+<path fill="none" stroke="#000000" d="M405.7,-288.1C415.51,-329.05 453.37,-463.35 540,-525 543.28,-527.34 546.74,-529.44 550.32,-531.34"/>
+<polygon fill="#000000" stroke="#000000" points="548.93,-534.56 559.47,-535.65 551.91,-528.22 548.93,-534.56"/>
+</g>
+<!-- proc~cross -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node4" class="node">
+<title>proc~cross</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node4"><a xlink:href="../proc/cross.html" xlink:title="pikaia_module::pikaia_class%cross">
+<polygon fill="#d9534f" stroke="#d9534f" points="763.5,-390 564.5,-390 564.5,-366 763.5,-366 763.5,-390"/>
+<text text-anchor="middle" x="664" y="-375.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%cross</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~cross -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge3" class="edge">
+<title>proc~pikaia&#45;&gt;proc~cross</title>
+<path fill="none" stroke="#000000" d="M418.89,-288.05C443.46,-306.05 492.79,-339.68 540,-357 546.64,-359.44 553.59,-361.59 560.66,-363.5"/>
+<polygon fill="#000000" stroke="#000000" points="559.8,-366.89 570.36,-365.95 561.52,-360.11 559.8,-366.89"/>
+</g>
+<!-- proc~decode -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node5" class="node">
+<title>proc~decode</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node5"><a xlink:href="../proc/decode.html" xlink:title="pikaia_module::pikaia_class%decode">
+<polygon fill="#d9534f" stroke="#d9534f" points="769.5,-474 558.5,-474 558.5,-450 769.5,-450 769.5,-474"/>
+<text text-anchor="middle" x="664" y="-459.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%decode</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~decode -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge4" class="edge">
+<title>proc~pikaia&#45;&gt;proc~decode</title>
+<path fill="none" stroke="#000000" d="M409.03,-288.04C425.34,-319.18 473.57,-402.66 540,-441 543.24,-442.87 546.6,-444.58 550.05,-446.15"/>
+<polygon fill="#000000" stroke="#000000" points="548.81,-449.42 559.39,-449.98 551.46,-442.95 548.81,-449.42"/>
+</g>
+<!-- proc~encode -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node6" class="node">
+<title>proc~encode</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node6"><a xlink:href="../proc/encode.html" xlink:title="pikaia_module::pikaia_class%encode">
+<polygon fill="#d9534f" stroke="#d9534f" points="769.5,-432 558.5,-432 558.5,-408 769.5,-408 769.5,-432"/>
+<text text-anchor="middle" x="664" y="-417.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%encode</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~encode -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge5" class="edge">
+<title>proc~pikaia&#45;&gt;proc~encode</title>
+<path fill="none" stroke="#000000" d="M412.44,-288.22C432.74,-313.53 483.31,-371.59 540,-399 544.34,-401.1 548.86,-402.99 553.49,-404.7"/>
+<polygon fill="#000000" stroke="#000000" points="552.53,-408.07 563.13,-407.95 554.77,-401.44 552.53,-408.07"/>
+</g>
+<!-- proc~func_wrapper -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node7" class="node">
+<title>proc~func_wrapper</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node7"><a xlink:href="../proc/func_wrapper.html" xlink:title="pikaia_module::pikaia_class%func_wrapper">
+<polygon fill="#d9534f" stroke="#d9534f" points="1068,-135 824,-135 824,-111 1068,-111 1068,-135"/>
+<text text-anchor="middle" x="946" y="-120.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%func_wrapper</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~func_wrapper -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge6" class="edge">
+<title>proc~pikaia&#45;&gt;proc~func_wrapper</title>
+<path fill="none" stroke="#000000" d="M411.59,-263.92C430.98,-237.76 481.09,-176.21 540,-151 587.69,-130.59 714.43,-124.4 813.55,-122.82"/>
+<polygon fill="#000000" stroke="#000000" points="813.72,-126.31 823.66,-122.67 813.61,-119.31 813.72,-126.31"/>
+</g>
+<!-- proc~genrep -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node8" class="node">
+<title>proc~genrep</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node8"><a xlink:href="../proc/genrep.html" xlink:title="pikaia_module::pikaia_class%genrep">
+<polygon fill="#d9534f" stroke="#d9534f" points="768.5,-348 559.5,-348 559.5,-324 768.5,-324 768.5,-348"/>
+<text text-anchor="middle" x="664" y="-333.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%genrep</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~genrep -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge7" class="edge">
+<title>proc~pikaia&#45;&gt;proc~genrep</title>
+<path fill="none" stroke="#000000" d="M449.82,-288.05C476.25,-294.74 509.91,-303.09 540,-310 557.43,-314 576.3,-318.11 593.9,-321.84"/>
+<polygon fill="#000000" stroke="#000000" points="593.59,-325.35 604.1,-323.99 595.03,-318.5 593.59,-325.35"/>
+</g>
+<!-- proc~mutate -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node9" class="node">
+<title>proc~mutate</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node9"><a xlink:href="../proc/mutate.html" xlink:title="pikaia_module::pikaia_class%mutate">
+<polygon fill="#d9534f" stroke="#d9534f" points="769,-268 559,-268 559,-244 769,-244 769,-268"/>
+<text text-anchor="middle" x="664" y="-253.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%mutate</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~mutate -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge8" class="edge">
+<title>proc~pikaia&#45;&gt;proc~mutate</title>
+<path fill="none" stroke="#000000" d="M504.27,-268.21C518.75,-267.1 533.73,-265.94 548.44,-264.81"/>
+<polygon fill="#000000" stroke="#000000" points="548.88,-268.29 558.58,-264.03 548.34,-261.31 548.88,-268.29"/>
+</g>
+<!-- proc~newpop -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node10" class="node">
+<title>proc~newpop</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node10"><a xlink:href="../proc/newpop.html" xlink:title="pikaia_module::pikaia_class%newpop">
+<polygon fill="#d9534f" stroke="#d9534f" points="771,-104 557,-104 557,-80 771,-80 771,-104"/>
+<text text-anchor="middle" x="664" y="-89.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%newpop</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~newpop -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge9" class="edge">
+<title>proc~pikaia&#45;&gt;proc~newpop</title>
+<path fill="none" stroke="#000000" d="M409.76,-263.74C427.08,-233.6 476.19,-155.59 540,-118 547.16,-113.78 554.92,-110.24 562.93,-107.27"/>
+<polygon fill="#000000" stroke="#000000" points="564.09,-110.57 572.43,-104.04 561.84,-103.95 564.09,-110.57"/>
+</g>
+<!-- proc~report -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node11" class="node">
+<title>proc~report</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node11"><a xlink:href="../proc/report.html" xlink:title="pikaia_module::pikaia_class%report">
+<polygon fill="#d9534f" stroke="#d9534f" points="766,-226 562,-226 562,-202 766,-202 766,-226"/>
+<text text-anchor="middle" x="664" y="-211.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%report</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~report -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge10" class="edge">
+<title>proc~pikaia&#45;&gt;proc~report</title>
+<path fill="none" stroke="#000000" d="M439.02,-263.91C466.46,-255.02 505.31,-243.12 540,-235 550.93,-232.44 562.48,-230.06 573.94,-227.88"/>
+<polygon fill="#000000" stroke="#000000" points="574.78,-231.29 583.97,-226.03 573.5,-224.41 574.78,-231.29"/>
+</g>
+<!-- proc~rninit -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node12" class="node">
+<title>proc~rninit</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node12"><a xlink:href="../proc/rninit.html" xlink:title="pikaia_module::pikaia_class%rninit">
+<polygon fill="#d9534f" stroke="#d9534f" points="763.5,-24 564.5,-24 564.5,0 763.5,0 763.5,-24"/>
+<text text-anchor="middle" x="664" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%rninit</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~rninit -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge11" class="edge">
+<title>proc~pikaia&#45;&gt;proc~rninit</title>
+<path fill="none" stroke="#000000" d="M406.19,-263.73C417.18,-223.99 457.46,-97.98 540,-38 545.21,-34.21 550.86,-30.95 556.77,-28.15"/>
+<polygon fill="#000000" stroke="#000000" points="558.43,-31.25 566.26,-24.11 555.69,-24.81 558.43,-31.25"/>
+</g>
+<!-- proc~rnkpop -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node13" class="node">
+<title>proc~rnkpop</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node13"><a xlink:href="../proc/rnkpop.html" xlink:title="pikaia_module::pikaia_class%rnkpop">
+<polygon fill="#d9534f" stroke="#d9534f" points="1050.5,-75 841.5,-75 841.5,-51 1050.5,-51 1050.5,-75"/>
+<text text-anchor="middle" x="946" y="-60.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%rnkpop</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~rnkpop -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge12" class="edge">
+<title>proc~pikaia&#45;&gt;proc~rnkpop</title>
+<path fill="none" stroke="#000000" d="M406.69,-263.77C418.68,-226.56 460.39,-114.56 540,-71 588.36,-44.54 729.39,-47.49 831.44,-53.75"/>
+<polygon fill="#000000" stroke="#000000" points="831.3,-57.25 841.5,-54.38 831.74,-50.26 831.3,-57.25"/>
+</g>
+<!-- proc~select_parents -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node14" class="node">
+<title>proc~select_parents</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node14"><a xlink:href="../proc/select_parents.html" xlink:title="pikaia_module::pikaia_class%select_parents">
+<polygon fill="#d9534f" stroke="#d9534f" points="788,-184 540,-184 540,-160 788,-160 788,-184"/>
+<text text-anchor="middle" x="664" y="-169.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%select_parents</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~select_parents -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge13" class="edge">
+<title>proc~pikaia&#45;&gt;proc~select_parents</title>
+<path fill="none" stroke="#000000" d="M418.43,-263.94C442.8,-245.55 492.32,-210.78 540,-193 546.41,-190.61 553.11,-188.49 559.93,-186.61"/>
+<polygon fill="#000000" stroke="#000000" points="561.18,-189.9 569.99,-184.02 559.43,-183.12 561.18,-189.9"/>
+</g>
+<!-- proc~stdrep -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node15" class="node">
+<title>proc~stdrep</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node15"><a xlink:href="../proc/stdrep.html" xlink:title="pikaia_module::pikaia_class%stdrep">
+<polygon fill="#d9534f" stroke="#d9534f" points="766.5,-516 561.5,-516 561.5,-492 766.5,-492 766.5,-516"/>
+<text text-anchor="middle" x="664" y="-501.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%stdrep</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~stdrep -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge14" class="edge">
+<title>proc~pikaia&#45;&gt;proc~stdrep</title>
+<path fill="none" stroke="#000000" d="M407.06,-288.08C419.94,-324.41 463.64,-433.23 540,-483 543.83,-485.5 547.86,-487.72 552.04,-489.71"/>
+<polygon fill="#000000" stroke="#000000" points="550.83,-492.99 561.4,-493.68 553.56,-486.55 550.83,-492.99"/>
+</g>
+<!-- proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node16" class="node">
+<title>proc~urand</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node16"><a xlink:href="../proc/urand.html" xlink:title="pikaia_module::pikaia_class%urand">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="1047.5,-308 844.5,-308 844.5,-284 1047.5,-284 1047.5,-308"/>
+<text text-anchor="middle" x="946" y="-293.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::pikaia_class%urand</text>
+</a>
+</g>
+</g>
+<!-- proc~pikaia&#45;&gt;proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge15" class="edge">
+<title>proc~pikaia&#45;&gt;proc~urand</title>
+<path fill="none" stroke="#000000" d="M504.31,-279.74C598.12,-283.2 737.32,-288.34 834.08,-291.91"/>
+<polygon fill="#000000" stroke="#000000" points="834.06,-295.41 844.19,-292.28 834.32,-288.41 834.06,-295.41"/>
+</g>
+<!-- proc~cross&#45;&gt;proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge16" class="edge">
+<title>proc~cross&#45;&gt;proc~urand</title>
+<path fill="none" stroke="#000000" d="M749.2,-365.95C762.28,-363.41 775.58,-360.44 788,-357 830.91,-345.13 878.31,-325.8 909.68,-312.09"/>
+<polygon fill="#000000" stroke="#000000" points="911.15,-315.27 918.88,-308.03 908.32,-308.86 911.15,-315.27"/>
+</g>
+<!-- proc~mutate&#45;&gt;proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge17" class="edge">
+<title>proc~mutate&#45;&gt;proc~urand</title>
+<path fill="none" stroke="#000000" d="M749.01,-268C780.98,-272.57 817.61,-277.8 850.49,-282.5"/>
+<polygon fill="#000000" stroke="#000000" points="850.17,-285.99 860.57,-283.94 851.16,-279.06 850.17,-285.99"/>
+</g>
+<!-- proc~newpop&#45;&gt;proc~func_wrapper -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge18" class="edge">
+<title>proc~newpop&#45;&gt;proc~func_wrapper</title>
+<path fill="none" stroke="#000000" d="M771.26,-103.76C789.27,-105.76 808.08,-107.84 826.38,-109.87"/>
+<polygon fill="#000000" stroke="#000000" points="826.17,-113.36 836.49,-110.99 826.94,-106.41 826.17,-113.36"/>
+</g>
+<!-- proc~newpop&#45;&gt;proc~rnkpop -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge19" class="edge">
+<title>proc~newpop&#45;&gt;proc~rnkpop</title>
+<path fill="none" stroke="#000000" d="M771.26,-80.99C790.84,-78.97 811.37,-76.84 831.17,-74.79"/>
+<polygon fill="#000000" stroke="#000000" points="831.55,-78.27 841.13,-73.76 830.83,-71.31 831.55,-78.27"/>
+</g>
+<!-- initialize -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node18" class="node">
+<title>initialize</title>
+<polygon fill="#777777" stroke="#777777" points="974.5,-24 917.5,-24 917.5,0 974.5,0 974.5,-24"/>
+<text text-anchor="middle" x="946" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">initialize</text>
+</g>
+<!-- proc~rninit&#45;&gt;initialize -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge20" class="edge">
+<title>proc~rninit&#45;&gt;initialize</title>
+<path fill="none" stroke="#000000" d="M763.72,-12C813.3,-12 870.47,-12 907.14,-12"/>
+<polygon fill="#000000" stroke="#000000" points="907.37,-15.5 917.37,-12 907.37,-8.5 907.37,-15.5"/>
+</g>
+<!-- proc~rqsort -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node19" class="node">
+<title>proc~rqsort</title>
+<g id="a_proc~~solve_with_pikaia~~CallsGraph_node19"><a xlink:href="../proc/rqsort.html" xlink:title="pikaia_module::rqsort">
+<polygon fill="#d9534f" stroke="#d9534f" points="1234,-75 1104,-75 1104,-51 1234,-51 1234,-75"/>
+<text text-anchor="middle" x="1169" y="-60.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pikaia_module::rqsort</text>
+</a>
+</g>
+</g>
+<!-- proc~rnkpop&#45;&gt;proc~rqsort -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge21" class="edge">
+<title>proc~rnkpop&#45;&gt;proc~rqsort</title>
+<path fill="none" stroke="#000000" d="M1050.71,-63C1065.18,-63 1079.82,-63 1093.61,-63"/>
+<polygon fill="#000000" stroke="#000000" points="1093.97,-66.5 1103.97,-63 1093.97,-59.5 1093.97,-66.5"/>
+</g>
+<!-- proc~select_parents&#45;&gt;proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge22" class="edge">
+<title>proc~select_parents&#45;&gt;proc~urand</title>
+<path fill="none" stroke="#000000" d="M759.45,-184.01C769.25,-186.47 778.93,-189.43 788,-193 840.74,-213.75 894.25,-253.81 923.16,-277.39"/>
+<polygon fill="#000000" stroke="#000000" points="921.04,-280.18 930.98,-283.86 925.51,-274.79 921.04,-280.18"/>
+</g>
+<!-- proc~stdrep&#45;&gt;proc~urand -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge23" class="edge">
+<title>proc~stdrep&#45;&gt;proc~urand</title>
+<path fill="none" stroke="#000000" d="M766.71,-492.62C774.14,-490 781.33,-486.83 788,-483 858.85,-442.37 911.98,-356.97 933.94,-317.21"/>
+<polygon fill="#000000" stroke="#000000" points="937.16,-318.6 938.84,-308.14 931.01,-315.27 937.16,-318.6"/>
+</g>
+<!-- genrand64_real1 -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_node17" class="node">
+<title>genrand64_real1</title>
+<polygon fill="#777777" stroke="#777777" points="1220.5,-308 1117.5,-308 1117.5,-284 1220.5,-284 1220.5,-308"/>
+<text text-anchor="middle" x="1169" y="-293.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">genrand64_real1</text>
+</g>
+<!-- proc~urand&#45;&gt;genrand64_real1 -->
+<g id="proc~~solve_with_pikaia~~CallsGraph_edge24" class="edge">
+<title>proc~urand&#45;&gt;genrand64_real1</title>
+<path fill="none" stroke="#000000" d="M1047.8,-296C1068.07,-296 1088.78,-296 1107.17,-296"/>
+<polygon fill="#000000" stroke="#000000" points="1107.42,-299.5 1117.42,-296 1107.42,-292.5 1107.42,-299.5"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocsolve_with_pikaiaCallsGraph = svgPanZoom('#procsolve_with_pikaiaCallsGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 27.51" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.16 1.16) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 741.5,-28 741.5,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="70,-24 0,-24 0,0 70,0 70,-24"/>
+<text text-anchor="middle" x="35" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="146,-24 88,-24 88,0 146,0 146,-24"/>
+<text text-anchor="middle" x="117" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="225.5,-24 164.5,-24 164.5,0 225.5,0 225.5,-24"/>
+<text text-anchor="middle" x="195" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="374,-24 244,-24 244,0 374,0 374,-24"/>
+<text text-anchor="middle" x="309" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="537.5,-24 392.5,-24 392.5,0 537.5,0 537.5,-24"/>
+<text text-anchor="middle" x="465" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="614,-24 556,-24 556,0 614,0 614,-24"/>
+<text text-anchor="middle" x="585" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="737.5,-24 632.5,-24 632.5,0 737.5,0 737.5,-24"/>
+<text text-anchor="middle" x="685" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
 
-    <section class="visible-xs visible-sm hidden-md">
-      <h3>Contents</h3>
- 
-<div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
-  <div class="list-group">
-    <a class="list-group-item" href="../proc/solve_with_pikaia.html#src">solve_with_pikaia</a>
-  </div>
-</div>
-
-    </section>
-    <br class="visible-xs visible-sm hidden-md">
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
 
 
     
@@ -183,39 +642,40 @@
 
     
     
+
 
 
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">solve_with_pikaia</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">status</span><span class="p">)</span><span class="w"></span>
+    <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">solve_with_pikaia</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">status</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">implicit none</span>
 
-<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w"></span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span><span class="w"></span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">status</span><span class="w"></span>
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">status</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">user_f</span><span class="p">))</span><span class="w"> </span><span class="k">then</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">user_f</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
 
 <span class="w">        </span><span class="c">!scale input initial guess to be [0,1]:</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">me</span><span class="p">%</span><span class="n">del</span>
 
 <span class="w">        </span><span class="c">!call the main routine, using the wrapper function:</span>
-<span class="w">        </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">pikaia</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">status</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">pikaia</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">status</span><span class="p">)</span>
 
 <span class="w">        </span><span class="c">!unscale output to be [xl,xu]:</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="o">*</span><span class="n">x</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="o">*</span><span class="n">x</span>
 
 <span class="w">    </span><span class="k">else</span>
 
-<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;Error: pikaia class not initialized.&#39;</span><span class="w"></span>
-<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;Error: pikaia class not initialized.&#39;</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
 
 <span class="w">    </span><span class="k">end if</span>
 
-<span class="k">    end subroutine </span><span class="n">solve_with_pikaia</span><span class="w"></span>
+<span class="k">    end subroutine </span><span class="n">solve_with_pikaia</span>
 </pre></div>
 
     </section>
@@ -224,50 +684,45 @@
     </div>
   </div>
 
-    <hr>    
+      <hr>
     </div> <!-- /container -->
     <footer>
       <div class="container">
-      <div class="row">
-        <div class="col-xs-6 col-md-6"><p>Pikaia was developed by Jacob Williams<br>&copy; 2022 
+        <div class="row justify-content-between">
+          <div class="col"><p>Pikaia was developed by Jacob Williams<br>&copy; 2024 
 </p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
         </div>
-        <div class="col-xs-6 col-md-6">
-          <p class="text-right">
-            Documentation generated by 
-            <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
-          </p>
-        </div>
-      </div>
-      <br>
-      </div> <!-- /container -->    
+        <br>
+      </div> <!-- /container -->
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
-<!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
--->
-    <script src="../js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
 
     <!-- MathJax JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
-        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
-      });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script src="../tipuesearch/tipuesearch_content.js"></script>
-    <script src="../tipuesearch/tipuesearch_set.js"></script>
-    <script src="../tipuesearch/tipuesearch.js"></script>
-    
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
   </body>
 </html>
