@@ -1,0 +1,14 @@
+                                                    Feb 14 1996
+
+A few minor errors have been reported in the User's Guide
+
+(1) Section 5.1, p. 35; equation (5.1b) should read
+
+    r^2=(x-0.5)^2+(y-0.5)^2
+
+(2) Section 5.1, p. 37; the third line from bottom of the listing
+    should read
+
+    twod=cos(rr*nn*pi)**2 *exp(-rr**2/sigma2)
+
+    Likewise in the listing given in Sectin A.3, p. 97
