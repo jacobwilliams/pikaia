@@ -10,7 +10,7 @@ implicit  none
 
 integer,parameter :: n = 17
 
-integer :: seed, i, status
+integer :: i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
 real(wp) :: sigma

@@ -10,7 +10,7 @@ implicit none
 
 integer,parameter :: n = 5
 
-integer ::  seed, i, status
+integer ::  i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
 integer :: ndata
@@ -75,12 +75,12 @@ pure function fatan(yy,xx)
    end function fatan
 
    subroutine fit2(me,x,f)
-      !=============================================================
-      !     Fitness function for ellipse fitting problem (Sect. 5.4)
-      !
-      !     Ellipse parameters are:
-      !     x(1)=x_0, x(2)=y_0, x(3)=a, x(4)=b, x(5)=theta_0
-      !=============================================================
+
+      !! Fitness function for ellipse fitting problem (Sect. 5.4)
+      !!
+      !! Ellipse parameters are:
+      !! x(1)=x_0, x(2)=y_0, x(3)=a, x(4)=b, x(5)=theta_0
+
       class(pikaia_class),intent(inout) :: me
       real(wp),dimension(:),intent(in)  :: x
       real(wp),intent(out)              :: f

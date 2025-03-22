@@ -7,8 +7,8 @@ PROGRAM xpk1a
 
    IMPLICIT NONE
 
-   INTEGER N , seed , i , status
-   PARAMETER (N=2)
+   INTEGER :: i , status
+   integer, PARAMETER :: N = 2
 
    REAL(wp) :: x(N) , f
    type(pikaia_class) :: solver

@@ -12,7 +12,7 @@ implicit none
 
 integer,parameter :: n = 2
 
-integer :: seed, i, status
+integer :: i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
 real(wp) :: sigma
@@ -56,11 +56,11 @@ subroutine finit()
    end subroutine finit
 
    subroutine fit3(me,x,f)
-      !=============================================================
-      !     Fitness function for circle fitting problem using
-      !     a robust estimator based on the Hough transform
-      !     (Sect. 5.5)
-      !=============================================================
+
+      !! Fitness function for circle fitting problem using
+      !! a robust estimator based on the Hough transform
+      !! (Sect. 5.5)
+
       class(pikaia_class),intent(inout) :: me
       real(wp),dimension(:),intent(in)  :: x
       real(wp),intent(out)              :: f
