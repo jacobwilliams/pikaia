@@ -27,6 +27,7 @@ call solver%init(n,xl,xu,fit2,status,&
                   ngen  = 200,&
                   np    = 50,&
                   iseed = 654321, &
+                  ivrb  = 1, &
                   irep  = 3 )
                   ! ctrl(9)=0.0   !? what was this ?
                   ! ctrl(10)=3    !? is this irep ?

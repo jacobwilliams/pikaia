@@ -24,7 +24,8 @@ real(wp),dimension(n),parameter :: xu = 1.0_wp
 
 ! initialize
 call solver%init(n,xl,xu,fit3,status,&
-                  iseed = 123456 )
+                 ivrb  = 1, &
+                 iseed = 123456 )
 ! Read in synthetic data
 call finit()
 

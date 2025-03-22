@@ -25,6 +25,7 @@ real(wp),dimension(n),parameter :: xu = 1.0_wp
 ! Set control variables (use defaults except for population size)
    call solver%init(n,xl,xu,fit1b,status,&
                     np    = 50,&
+                    ivrb  = 1, &
                     iseed = 13579)
    call finit()
 

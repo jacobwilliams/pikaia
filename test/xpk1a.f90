@@ -25,6 +25,7 @@ PROGRAM xpk1a
    call solver%init(n,xl,xu,fit1a,status,&
                     ngen  = 100,&
                     np    = 50,&
+                    ivrb  = 1, &
                     iseed = 123456)
    CALL finit()
 
