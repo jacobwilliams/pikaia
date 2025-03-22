@@ -148,7 +148,7 @@
         !Local
         real(wp) :: rr
 
-        call slowdown(f,1000000)
+        call slowdown(f,10000)
         if (f<0.0_wp) return
 
         if (x(1)>1.0_wp .or. x(2)>1.0_wp) then
