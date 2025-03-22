@@ -23,10 +23,10 @@ PROGRAM xpk1a
 ! Set control variables (evolve 50 individuals over 100
 ! generations, use defaults values for other input parameters)
    call solver%init(n,xl,xu,fit1a,status,&
-                    ngen  = 100,&
-                    np    = 50,&
-                    ivrb  = 1, &
-                    iseed = 123456)
+      ngen  = 100,&
+      np    = 50,&
+      ivrb  = 1, &
+      iseed = 123456)
    CALL finit()
 
 ! Now call pikaia
@@ -39,45 +39,45 @@ PROGRAM xpk1a
 
 contains
 
-SUBROUTINE finit()
+   SUBROUTINE finit()
 
-   !! Reads in synthetic dataset (see Figure 5.4)
+      !! Reads in synthetic dataset (see Figure 5.4)
 
-   use json_module
+      use json_module
 
-   type(json_file) :: json
+      type(json_file) :: json
 
-   Sigma = 5.0_wp
+      Sigma = 5.0_wp
 
-   call json%load(filename='test/syndat1.json')
-   call json%get('Ndata',  Ndata)
-   call json%get('t',      t)
-   call json%get('f',      f_data)
-   call json%destroy()
+      call json%load(filename='test/syndat1.json')
+      call json%get('Ndata',  Ndata)
+      call json%get('t',      t)
+      call json%get('f',      f_data)
+      call json%destroy()
 
-END SUBROUTINE finit
+   END SUBROUTINE finit
 
-subroutine fit1a(me,x,f)
+   subroutine fit1a(me,x,f)
 
-   !! Fitness function for linear least squares problem
-   !! (Sect. 5.2)
+      !! Fitness function for linear least squares problem
+      !! (Sect. 5.2)
 
-   class(pikaia_class),intent(inout) :: me
-   real(wp),dimension(:),intent(in)  :: x
-   real(wp),intent(out)              :: f
+      class(pikaia_class),intent(inout) :: me
+      real(wp),dimension(:),intent(in)  :: x
+      real(wp),intent(out)              :: f
 
       INTEGER :: i
       REAL(wp) :: a , b , sum
 
-   ! 1. rescale input variables:
+      ! 1. rescale input variables:
       a = X(1)*10.0_wp
       b = X(2)*100.0_wp
-   ! 2. compute chi**2
+      ! 2. compute chi**2
       sum = 0.0_wp
       DO i = 1 , Ndata
          sum = sum + ((a*T(i)+b-f_data(i))/Sigma)**2
       ENDDO
-   ! 3. define fitness
+      ! 3. define fitness
       f = 1.0_wp/sum
 
    END subroutine fit1a
