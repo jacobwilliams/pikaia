@@ -1,8 +1,7 @@
 PROGRAM xpk1a
-!================================================================
-!     Driver program for linear least-squares problem
-!     (Sect. 5.2)
-!================================================================
+   !! Driver program for linear least-squares problem
+   !! (Sect. 5.2)
+
    use pikaia_module, only: pikaia_class
    use,intrinsic :: iso_fortran_env, only: wp => real64
 
@@ -13,9 +12,9 @@ PROGRAM xpk1a
 
    REAL(wp) :: x(N) , f
    type(pikaia_class) :: solver
-   real :: f_data(200), t(200) , sigma ! single precision from file
+   real(wp) :: sigma
    integer :: ndata
-
+   real(wp),dimension(:),allocatable :: f_data, t !! from the data file
    real(wp),dimension(n),parameter :: xl = 0.0_wp
    real(wp),dimension(n),parameter :: xu = 1.0_wp
 
@@ -43,21 +42,17 @@ SUBROUTINE finit()
 
    !! Reads in synthetic dataset (see Figure 5.4)
 
-   real :: f0(200) , vdum(11)
-   integer :: i
-   integer :: iunit
+   use json_module
 
-   ! todo: convert these data files to JSON...
-   OPEN (newunit=iunit,FILE='test/syndat1.i3e',FORM='unformatted',STATUS='old',convert='big_endian')
+   type(json_file) :: json
 
-   READ (iunit) Ndata
-   READ (iunit) (vdum(i),i=1,11)
-   READ (iunit) (T(i),i=1,Ndata)
-   READ (iunit) (f0(i),i=1,Ndata)
-   READ (iunit) (f_data(i),i=1,Ndata)
-   Sigma = 5.0
+   Sigma = 5.0_wp
 
-   close(iunit)
+   call json%load(filename='test/syndat1.json')
+   call json%get('Ndata',  Ndata)
+   call json%get('t',      t)
+   call json%get('f',      f_data)
+   call json%destroy()
 
 END SUBROUTINE finit
 

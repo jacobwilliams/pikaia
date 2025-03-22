@@ -1,10 +1,10 @@
 
 program xpk3
-!============================================================
-!     Driver program for circle fitting problem using
-!     a robust estimator based on the Hough transform
-!     (Sect. 5.5)
-!============================================================
+
+   !! Driver program for circle fitting problem using
+   !! a robust estimator based on the Hough transform
+   !! (Sect. 5.5)
+
    use pikaia_module, only: pikaia_class
    use,intrinsic :: iso_fortran_env, only: wp => real64
 
@@ -15,8 +15,9 @@ integer,parameter :: n = 2
 integer :: seed, i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
-real :: xdat(200),ydat(200),sigma  ! single precision for file
+real(wp) :: sigma
 integer :: ndata
+real(wp),dimension(:),allocatable :: xdat, ydat !! from the data file
 
 real(wp),dimension(n),parameter :: xl = 0.0_wp
 real(wp),dimension(n),parameter :: xu = 1.0_wp
@@ -38,20 +39,19 @@ write(*,*) '      f: ',f
 contains
 
 subroutine finit()
-   !===============================================================
-   ! Reads in synthetic dataset
-   !===============================================================
+   !! Reads in synthetic dataset
+   use json_module
 
-   integer :: i, iunit
-
-   open(newunit=iunit,file='test/syndat3.i3e',form='unformatted',status='old',convert='big_endian')
-   read(iunit) ndata
-   read(iunit) (xdat(i),i=1,ndata)
-   read(iunit) (ydat(i),i=1,ndata)
-   close(iunit)
+   type(json_file) :: json
 
    ! Same error estimate in x and y for all data points
    sigma=0.05_wp
+
+   call json%load(filename='test/syndat3.json')
+   call json%get('Ndata',  Ndata)
+   call json%get('xdat',   xdat)
+   call json%get('ydat',   ydat)
+   call json%destroy()
 
    end subroutine finit
 

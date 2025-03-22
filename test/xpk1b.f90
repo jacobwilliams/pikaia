@@ -13,8 +13,9 @@ integer,parameter :: n = 17
 integer :: seed, i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
-real :: f_data(200), t(200) , sigma ! single precision from file
+real(wp) :: sigma
 integer :: ndata, m
+real(wp),dimension(:),allocatable :: f_data, t !! from the data file
 
 real(wp),dimension(n),parameter :: xl = 0.0_wp
 real(wp),dimension(n),parameter :: xu = 1.0_wp
@@ -41,23 +42,23 @@ subroutine finit()
 
    !! Reads in synthetic dataset (see Figure 5.4)
 
-real :: f0(200),vdum(11),delt
-integer :: i, iunit
+   use json_module
 
-open(newunit=iunit,file='test/syndat1.i3e',form='unformatted',status='OLD',convert='big_endian')
-read(iunit) ndata
-read(iunit) (vdum(i),i=1,11)
-read(iunit) (t(i),i=1,ndata)
-read(iunit) (f0(i),i=1,ndata)
-read(iunit) (f_data(i),i=1,ndata)
-close(iunit)
+   real(wp) :: delt
+   type(json_file) :: json
 
-! Use 5 Fourier modes for the fit
-m=5
+   call json%load(filename='test/syndat1.json')
+   call json%get('Ndata',  Ndata)
+   call json%get('t',      t)
+   call json%get('f',      f_data)
+   call json%destroy()
 
-! same error bar for all point
-sigma=5.
-delt=t(3)-t(1)
+   ! Use 5 Fourier modes for the fit
+   m=5
+
+   ! same error bar for all point
+   sigma=5.0_wp
+   delt=t(3)-t(1)
 
 end subroutine finit
 
@@ -73,7 +74,7 @@ subroutine fit1b(me,x,f)
    integer,parameter :: MMAX=10
    real(wp),parameter :: pi = acos(-1.0_wp)
 
-   INTEGER :: N , i , j
+   INTEGER :: i , j
    REAL(wp) :: amp(MMAX) , per(MMAX) , a , b , sum , sum2 , nyp
 
    !---------- 1. rescale input variables:

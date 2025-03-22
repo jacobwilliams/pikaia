@@ -1,8 +1,8 @@
 
 program xpk2
-!==================================================================
-!     Driver program for ellipse fitting problem (Sect. 5.4)
-!==================================================================
+
+   !! Driver program for ellipse fitting problem (Sect. 5.4)
+
    use pikaia_module, only: pikaia_class
    use,intrinsic :: iso_fortran_env, only: wp => real64
 
@@ -13,8 +13,8 @@ integer,parameter :: n = 5
 integer ::  seed, i, status
 real(wp) :: x(n), f
 type(pikaia_class) :: solver
-real :: xdat(200),ydat(200) ! single precision for file
 integer :: ndata
+real(wp),dimension(:),allocatable :: xdat, ydat !! from the data file
 
 real(wp),dimension(n),parameter :: xl = 0.0_wp
 real(wp),dimension(n),parameter :: xu = 1.0_wp
@@ -45,20 +45,22 @@ contains
 
 subroutine finit()
 
-   ! Reads in synthetic dataset (see Figure 5.9)
+   !! Reads in synthetic dataset (see Figure 5.9)
 
-   integer :: i, iunit
+   use json_module
 
-   open(newunit=iunit,file='test/syndat2.i3e',form='unformatted',status='old',convert='big_endian')
-   read(iunit) ndata
-   read(iunit) (xdat(i),i=1,ndata)
-   read(iunit) (ydat(i),i=1,ndata)
-   close(iunit)
+   type(json_file) :: json
+
+   call json%load(filename='test/syndat2.json')
+   call json%get('Ndata',  Ndata)
+   call json%get('xdat',   xdat)
+   call json%get('ydat',   ydat)
+   call json%destroy()
 
 end subroutine finit
 
 pure function fatan(yy,xx)
-   ! Returns arctangent in full circle
+   !! Returns arctangent in full circle
 
    real(wp),intent(in) :: yy,xx
    real(wp) :: fatan

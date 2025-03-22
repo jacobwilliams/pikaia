@@ -36,3 +36,4 @@ doc/
 
 # mac
 .DS_Store
+/pikaia_test.txt
