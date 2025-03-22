@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran Edition of the Pikaia Genetic Algorithm">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="./favicon.png">
+
+    <title> Pikaia </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="./css/pygments.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/local.css" rel="stylesheet">
+      <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="./index.html">Pikaia </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./sourcefile/pikaia_module.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="./search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <!-- Main component for a primary marketing message or call to action -->
+    <div class="p-5 mb-4 bg-light border rounded-3" id="jumbotron">
+      <p>Modern Fortran Edition of the Pikaia Genetic Algorithm</p>
+        <p> Find us on&hellip;</p>
+      <p>
+        <a class="btn btn-lg btn-primary" href="https://github.com/jacobwilliams/pikaia" role="button">GitHub</a>
+        
+        
+        
+        
+      </p>
+    </div>
+
+      <div class="row" id='text'>
+        <div class=col-md-8>
+          <h1>Pikaia</h1>
+          <h1><img alt="pikaia" src="media/logo.png"></h1>
+<p><strong>Pikaia</strong>: Modern Fortran Edition of the PIKAIA Genetic Algorithm</p>
+<h3>Status</h3>
+<p><a href="https://github.com/topics/fortran"><img alt="Language" src="https://img.shields.io/badge/-Fortran-734f96?logo=fortran&amp;logoColor=white"></a>
+<a href="https://github.com/jacobwilliams/pikaia/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/release/jacobwilliams/pikaia.svg"></a>
+<a href="https://github.com/jacobwilliams/pikaia/actions"><img alt="CI Status" src="https://github.com/jacobwilliams/pikaia/actions/workflows/CI.yml/badge.svg"></a>
+<a href="https://codecov.io/gh/jacobwilliams/pikaia"><img alt="codecov" src="https://codecov.io/gh/jacobwilliams/pikaia/branch/master/graph/badge.svg"></a>
+<a href="https://github.com/jacobwilliams/pikaia/commits/master"><img alt="last-commit" src="https://img.shields.io/github/last-commit/jacobwilliams/pikaia"></a></p>
+<h3>Overview</h3>
+<p>This is a refactoring of the PIKAIA unconstrained optimization code from the <a href="http://www.hao.ucar.edu/modeling/pikaia/pikaia.php">High Altitude Observatory</a>.  The original code is public domain and was written by Paul Charbonneau &amp; Barry Knapp.  The new code differs from the old code in the following respects:</p>
+<ul>
+<li>The original fixed-form source (FORTRAN 77) was converted to free-form source.</li>
+<li>The code is now object-oriented Fortran 2003/2008.  All user interaction is now through the   <code>pikaia_class</code>.</li>
+<li>All real variables are now double precision.</li>
+<li>The original random number generator was replaced with MT19937-64 (64-bit Mersenne Twister).</li>
+<li>There are various new options (e.g., a convergence window with a tolerance can be specified as a   stopping condition, and the user can specify a subroutine for reporting iterations).</li>
+<li>Mapping the variables to be between 0 and 1 now occurs internally, rather than requiring the user   to do it.</li>
+<li>Can now include an initial guess in the initial population.</li>
+<li>Some OpenMP support has been added.</li>
+</ul>
+<h3>Compiling</h3>
+<p>The library can be built with the <a href="https://github.com/fortran-lang/fpm">Fortran Package Manager</a> using the provided <code>fpm.toml</code> file like so:</p>
+<div class="codehilite"><pre><span></span><code>fpm<span class="w"> </span>build<span class="w"> </span>--release
+</code></pre></div>
+
+<p>To use Pikaia within your fpm project, add the following to your <code>fpm.toml</code> file:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[dependencies]</span>
+<span class="n">pikaia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="p">=</span><span class="s2">&quot;https://github.com/jacobwilliams/pikaia.git&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+
+<p>Or to use a specific version:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[dependencies]</span>
+<span class="n">pikaia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="p">=</span><span class="s2">&quot;https://github.com/jacobwilliams/pikaia.git&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.1&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+
+<p>The <a href="https://github.com/jacobwilliams/mersenne-twister-fortran">mersenne-twister-fortran</a> library is required to compile Pikaia. FPM will automatically download this library.</p>
+<h3>Examples</h3>
+<ul>
+<li>An example use of Pikaia can be found <a href="http://degenerateconic.com/earth-mars-free-return/">here</a>.</li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+<li>The API documentation for the current <code>master</code> branch can be found <a href="https://jacobwilliams.github.io/pikaia/">here</a>.  This is generated by processing the source files with <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>.  Note that the shell script will also generate these files automatically in the <code>doc</code> folder, assuming you have FORD installed.</li>
+<li>The original Pikaia documentation (for v1.2) can be found <a href="http://www.hao.ucar.edu/modeling/pikaia/relnotes.ps">here</a>.</li>
+</ul>
+<h3>See also</h3>
+<ul>
+<li>PIKAIA description page: http://www.hao.ucar.edu/modeling/pikaia/pikaia.php</li>
+<li>Original source code: http://download.hao.ucar.edu/archive/pikaia/</li>
+</ul>
+        </div>
+          <div class="col-md-4">
+            <div class="card card-body bg-light">
+              <h2 class="card-title">Developer Info</h2>
+              <h4 class="card-text">Jacob Williams</h4>
+              <p class="card-text"></p>
+                <div class="text-center"><div class="btn-group" role="group">
+                    
+                    <a class="btn btn-lg btn-primary" href="https://github.com/jacobwilliams"><i class="fa fa-github fa-lg"></i></a>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div></div>
+            </div>
+          </div>
+      </div>
+        <div class="row">
+          <hr>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Source Files</h3>
+              <ul><li><a href='sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/files.html"><em>All source files&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Modules</h3>
+              <ul><li><a href='module/pikaia_module.html'>pikaia_module</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/modules.html"><em>All modules&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Procedures</h3>
+              <ul><li><a href='proc/adjmut.html'>adjmut</a></li><li><a href='proc/cross.html'>cross</a></li><li><a href='proc/decode.html'>decode</a></li><li><a href='proc/encode.html'>encode</a></li><li><a href='proc/func_wrapper.html'>func_wrapper</a></li><li><a href='proc/genrep.html'>genrep</a></li><li><a href='proc/mutate.html'>mutate</a></li><li><a href='proc/newpop.html'>newpop</a></li><li><a href='proc/pikaia.html'>pikaia</a></li><li><a href='proc/report.html'>report</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/procedures.html"><em>All procedures&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Derived Types</h3>
+              <ul><li><a href='type/pikaia_class.html'>pikaia_class</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/types.html"><em>All derived types&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              Pikaia
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="./tipuesearch/tipuesearch_content.js"></script>
+          <script src="./tipuesearch/tipuesearch_set.js"></script>
+          <script src="./tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,833 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran Edition of the Pikaia Genetic Algorithm">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>set_inputs &ndash; Pikaia</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">Pikaia </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../sourcefile/pikaia_module.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>set_inputs
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+            <li class="list-inline-item" id="meta-author"><i class="fa fa-pencil"></i> Jacob Williams</li>
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="21.1% of total for procedures.">148 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/pikaia_module.f90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
+                <li class="breadcrumb-item"><a href='../module/pikaia_module.html'>pikaia_module</a></li>
+            <li class="breadcrumb-item active" aria-current="page">set_inputs</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/set_inputs.html#src">set_inputs</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private  subroutine set_inputs(me, n, xl, xu, f, status, iter_f, np, ngen, nd, pcross, pmutmn, pmutmx, pmut, imut, fdif, irep, ielite, ivrb, convergence_tol, convergence_window, initial_guess_frac, iseed)  
+</h2>
+    
+
+    <p>Constructor for the <a href="../type/pikaia_class.html">pikaia_class</a>.
+  The routine must be called before the solve routine can be used.</p>
+<p>The following inputs are required: n, f, xl, xu.
+  For the others, if they are not present, then
+  the default values are used</p>
+<div class="alert alert-info">
+<p class="alert-title h4">Note</p>
+<p>Based on setctl in the original code.</p>
+</div>
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/pikaia_class.html'>pikaia_class</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~3"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+                <p>pikaia class</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+                <p>the parameter space dimension, i.e., the number
+of adjustable parameters (size of the x vector).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xl~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>xl</strong></td>
+            <td>
+                <p>vector of lower bounds for x</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xu~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>xu</strong></td>
+            <td>
+                <p>vector of upper bounds for x</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~3"></span>
+              procedure(<a href='../interface/pikaia_func.html'>pikaia_func</a>)
+            </td>
+<td></td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+                <p>user-supplied scalar function of n variables,
+which must have the <a href="../interface/pikaia_func.html">pikaia_func</a> procedure interface.
+By convention, f should return higher values for more optimal
+parameter values (i.e., individuals which are more "fit").
+For example, in fitting a function through data points, f
+could return the inverse of chi**2.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-status"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>status</strong></td>
+            <td>
+                <p>status output flag (0 if there were no errors)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iter_f~2"></span>
+              procedure(<a href='../interface/iter_func.html'>iter_func</a>),
+            </td>
+<td></td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iter_f</strong></td>
+            <td>
+                <p>user-supplied subroutine that will report the
+best solution for each generation.
+It must have the <a href="../interface/iter_func.html">iter_func</a> procedure interface.  If not present,
+then it is not used.  (note: this is independent of ivrb).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-np~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>np</strong></td>
+            <td>
+                <p>number of individuals in a population (default is 100)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ngen~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ngen</strong></td>
+            <td>
+                <p>maximum number of iterations</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nd~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nd</strong></td>
+            <td>
+                <p>number of significant digits (i.e., number of
+genes) retained in chromosomal encoding (default is 6).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pcross~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pcross</strong></td>
+            <td>
+                <p>crossover probability; must be  &lt;= 1.0 (default
+is 0.85). If crossover takes place, either one
+or two splicing points are used, with equal
+probabilities</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmn~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmn</strong></td>
+            <td>
+                <p>minimum mutation rate; must be &gt;= 0.0 (default is 0.0005)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmx~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmx</strong></td>
+            <td>
+                <p>maximum mutation rate; must be &lt;= 1.0 (default is 0.25)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmut~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmut</strong></td>
+            <td>
+                <p>initial mutation rate; should be small (default
+is 0.005) (Note: the mutation rate is the probability
+that any one gene locus will mutate in
+any one generation.)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-imut~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>imut</strong></td>
+            <td>
+                <p>mutation mode; 1/2/3/4/5 (default is 2).
+ 1=one-point mutation, fixed rate.
+ 2=one-point, adjustable rate based on fitness.
+ 3=one-point, adjustable rate based on distance.
+ 4=one-point+creep, fixed rate.
+ 5=one-point+creep, adjustable rate based on fitness.
+ 6=one-point+creep, adjustable rate based on distance.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fdif~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fdif</strong></td>
+            <td>
+                <p>relative fitness differential; range from 0
+(none) to 1 (maximum).  (default is 1.0)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-irep~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>irep</strong></td>
+            <td>
+                <p>reproduction plan; 1/2/3=Full generational
+replacement/Steady-state-replace-random/Steady-
+state-replace-worst (default is 3)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ielite~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ielite</strong></td>
+            <td>
+                <p>elitism flag; 0/1=off/on (default is 0)
+(Applies only to reproduction plans 1 and 2)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ivrb~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ivrb</strong></td>
+            <td>
+                <p>printed output 0/1/2=None/Minimal/Verbose
+(default is 0)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_tol~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_tol</strong></td>
+            <td>
+                <p>convergence tolerance; must be &gt; 0.0 (default is 0.0001)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_window~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_window</strong></td>
+            <td>
+                <p>convergence window; must be &gt;= 0
+This is the number of consecutive solutions
+within the tolerance for convergence to
+be declared (default is 20)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-initial_guess_frac~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>initial_guess_frac</strong></td>
+            <td>
+                <p>fraction of the initial population
+to set equal to the initial guess.  Range from 0
+(none) to 1.0 (all). (default is 0.1 or 10%).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iseed~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iseed</strong></td>
+            <td>
+                <p>random seed value; must be &gt; 0 (default is 999)</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+
+
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">set_inputs</span><span class="p">(</span><span class="n">me</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">n</span><span class="p">,</span><span class="n">xl</span><span class="p">,</span><span class="n">xu</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">status</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">iter_f</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">np</span><span class="p">,</span><span class="n">ngen</span><span class="p">,</span><span class="n">nd</span><span class="p">,</span><span class="n">pcross</span><span class="p">,</span><span class="n">pmutmn</span><span class="p">,</span><span class="n">pmutmx</span><span class="p">,</span><span class="n">pmut</span><span class="p">,</span><span class="n">imut</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">fdif</span><span class="p">,</span><span class="n">irep</span><span class="p">,</span><span class="n">ielite</span><span class="p">,</span><span class="n">ivrb</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">convergence_tol</span><span class="p">,</span><span class="n">convergence_window</span><span class="p">,</span><span class="n">initial_guess_frac</span><span class="p">,&amp;</span>
+<span class="w">                            </span><span class="n">iseed</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">implicit none</span>
+
+<span class="k">    class</span><span class="p">(</span><span class="n">pikaia_class</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">    </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span><span class="w">        </span><span class="c">!! pikaia class</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">n</span><span class="w">         </span><span class="c">!! the parameter space dimension, i.e., the number</span>
+<span class="w">                                                    </span><span class="c">!! of adjustable parameters (size of the x vector).</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">xl</span><span class="w">        </span><span class="c">!! vector of lower bounds for x</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">xu</span><span class="w">        </span><span class="c">!! vector of upper bounds for x</span>
+<span class="w">    </span><span class="k">procedure</span><span class="p">(</span><span class="n">pikaia_func</span><span class="p">)</span><span class="w">             </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span><span class="w">         </span><span class="c">!! user-supplied scalar function of n variables,</span>
+<span class="w">                                                    </span><span class="c">!! which must have the [[pikaia_func]] procedure interface.</span>
+<span class="w">                                                    </span><span class="c">!! By convention, f should return higher values for more optimal</span>
+<span class="w">                                                    </span><span class="c">!! parameter values (i.e., individuals which are more &quot;fit&quot;).</span>
+<span class="w">                                                    </span><span class="c">!! For example, in fitting a function through data points, f</span>
+<span class="w">                                                    </span><span class="c">!! could return the inverse of chi**2.</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w">                </span><span class="kd">::</span><span class="w"> </span><span class="n">status</span><span class="w">    </span><span class="c">!! status output flag (0 if there were no errors)</span>
+<span class="w">    </span><span class="k">procedure</span><span class="p">(</span><span class="n">iter_func</span><span class="p">),</span><span class="k">optional</span><span class="w">      </span><span class="kd">::</span><span class="w"> </span><span class="n">iter_f</span><span class="w">    </span><span class="c">!! user-supplied subroutine that will report the</span>
+<span class="w">                                                    </span><span class="c">!! best solution for each generation.</span>
+<span class="w">                                                    </span><span class="c">!! It must have the [[iter_func]] procedure interface.  If not present,</span>
+<span class="w">                                                    </span><span class="c">!! then it is not used.  (note: this is independent of ivrb).</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">np</span><span class="w">        </span><span class="c">!! number of individuals in a population (default is 100)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">ngen</span><span class="w">      </span><span class="c">!! maximum number of iterations</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">nd</span><span class="w">        </span><span class="c">!! number of significant digits (i.e., number of</span>
+<span class="w">                                                    </span><span class="c">!! genes) retained in chromosomal encoding (default is 6).</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">pcross</span><span class="w">    </span><span class="c">!! crossover probability; must be  &lt;= 1.0 (default</span>
+<span class="w">                                                    </span><span class="c">!! is 0.85). If crossover takes place, either one</span>
+<span class="w">                                                    </span><span class="c">!! or two splicing points are used, with equal</span>
+<span class="w">                                                    </span><span class="c">!! probabilities</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">pmutmn</span><span class="w">    </span><span class="c">!! minimum mutation rate; must be &gt;= 0.0 (default is 0.0005)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">pmutmx</span><span class="w">    </span><span class="c">!! maximum mutation rate; must be &lt;= 1.0 (default is 0.25)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">pmut</span><span class="w">      </span><span class="c">!! initial mutation rate; should be small (default</span>
+<span class="w">                                                    </span><span class="c">!! is 0.005) (Note: the mutation rate is the probability</span>
+<span class="w">                                                    </span><span class="c">!! that any one gene locus will mutate in</span>
+<span class="w">                                                    </span><span class="c">!! any one generation.)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">imut</span><span class="w">      </span><span class="c">!! mutation mode; 1/2/3/4/5 (default is 2).</span>
+<span class="w">                                                    </span><span class="c">!!  1=one-point mutation, fixed rate.</span>
+<span class="w">                                                    </span><span class="c">!!  2=one-point, adjustable rate based on fitness.</span>
+<span class="w">                                                    </span><span class="c">!!  3=one-point, adjustable rate based on distance.</span>
+<span class="w">                                                    </span><span class="c">!!  4=one-point+creep, fixed rate.</span>
+<span class="w">                                                    </span><span class="c">!!  5=one-point+creep, adjustable rate based on fitness.</span>
+<span class="w">                                                    </span><span class="c">!!  6=one-point+creep, adjustable rate based on distance.</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">fdif</span><span class="w">      </span><span class="c">!! relative fitness differential; range from 0</span>
+<span class="w">                                                    </span><span class="c">!! (none) to 1 (maximum).  (default is 1.0)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">irep</span><span class="w">      </span><span class="c">!! reproduction plan; 1/2/3=Full generational</span>
+<span class="w">                                                    </span><span class="c">!! replacement/Steady-state-replace-random/Steady-</span>
+<span class="w">                                                    </span><span class="c">!! state-replace-worst (default is 3)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">ielite</span><span class="w">    </span><span class="c">!! elitism flag; 0/1=off/on (default is 0)</span>
+<span class="w">                                                    </span><span class="c">!! (Applies only to reproduction plans 1 and 2)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">ivrb</span><span class="w">      </span><span class="c">!! printed output 0/1/2=None/Minimal/Verbose</span>
+<span class="w">                                                    </span><span class="c">!! (default is 0)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">convergence_tol</span><span class="w">    </span><span class="c">!! convergence tolerance; must be &gt; 0.0 (default is 0.0001)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">convergence_window</span><span class="w"> </span><span class="c">!! convergence window; must be &gt;= 0</span>
+<span class="w">                                                             </span><span class="c">!! This is the number of consecutive solutions</span>
+<span class="w">                                                             </span><span class="c">!! within the tolerance for convergence to</span>
+<span class="w">                                                             </span><span class="c">!! be declared (default is 20)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">initial_guess_frac</span><span class="w"> </span><span class="c">!! fraction of the initial population</span>
+<span class="w">                                                             </span><span class="c">!! to set equal to the initial guess.  Range from 0</span>
+<span class="w">                                                             </span><span class="c">!! (none) to 1.0 (all). (default is 0.1 or 10%).</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">        </span><span class="kd">::</span><span class="w"> </span><span class="n">iseed</span><span class="w">              </span><span class="c">!! random seed value; must be &gt; 0 (default is 999)</span>
+
+<span class="w">    </span><span class="n">me</span><span class="p">%</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="p">))</span><span class="w"> </span><span class="k">deallocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="p">)</span>
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="w">    </span><span class="n">me</span><span class="p">%</span><span class="n">xl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xl</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xu</span><span class="p">))</span><span class="w"> </span><span class="k">deallocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xu</span><span class="p">)</span>
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">xu</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="w">    </span><span class="n">me</span><span class="p">%</span><span class="n">xu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xu</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="p">))</span><span class="w"> </span><span class="k">deallocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="p">)</span>
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="w">    </span><span class="n">me</span><span class="p">%</span><span class="n">del</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">xu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">xl</span>
+
+<span class="w">    </span><span class="n">me</span><span class="p">%</span><span class="n">user_f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">f</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">iter_f</span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">iter_f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">iter_f</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">np</span><span class="w">                 </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="n">np</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">ngen</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ngen</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">ngen</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nd</span><span class="w">                 </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">nd</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="n">nd</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pcross</span><span class="w">             </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pcross</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="n">pcross</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">imut</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">imut</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pmut</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pmuti</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">pmut</span><span class="w">  </span><span class="c">!initial value</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pmutmn</span><span class="w">             </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pmutmn</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="n">pmutmn</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pmutmx</span><span class="w">             </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pmutmx</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="n">pmutmx</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">fdif</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">fdif</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">irep</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">irep</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">ielite</span><span class="w">             </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="n">ielite</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">ivrb</span><span class="w">               </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ivrb</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">ivrb</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">convergence_tol</span><span class="w">    </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">convergence_tol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">convergence_tol</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">convergence_window</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">convergence_window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convergence_window</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">initial_guess_frac</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">initial_guess_frac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initial_guess_frac</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">iseed</span><span class="w">              </span><span class="p">))</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">iseed</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">iseed</span>
+
+<span class="w">    </span><span class="c">!check for errors:</span>
+
+<span class="w">    </span><span class="c">!initialize error flag:</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="c">!Print a header</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ivrb</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;------------------------------------------------------------&#39;</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;              PIKAIA Genetic Algorithm Report               &#39;</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;------------------------------------------------------------&#39;</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,I4)&#39;</span><span class="p">)</span><span class="w">    </span><span class="s1">&#39; Number of Generations evolving: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">ngen</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,I4)&#39;</span><span class="p">)</span><span class="w">    </span><span class="s1">&#39;     Individuals per generation: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">np</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,I4)&#39;</span><span class="p">)</span><span class="w">    </span><span class="s1">&#39;  Number of Chromosome segments: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">n</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,I4)&#39;</span><span class="p">)</span><span class="w">    </span><span class="s1">&#39;  Length of Chromosome segments: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">nd</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;          Crossover probability: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">pcross</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;          Initial mutation rate: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">pmuti</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;          Minimum mutation rate: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">pmutmn</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;          Maximum mutation rate: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">pmutmx</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;  Relative fitness differential: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;         Initial guess fraction: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">initial_guess_frac</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,E11.4)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;          Convergence tolerance: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">convergence_tol</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A,I4)&#39;</span><span class="p">)</span><span class="w">    </span><span class="s1">&#39;             Convergence window: &#39;</span><span class="p">,</span><span class="n">me</span><span class="p">%</span><span class="n">convergence_window</span>
+<span class="w">        </span><span class="k">select case</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform, Constant Rate&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform, Variable Rate (F)&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform, Variable Rate (D)&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform+Creep, Constant Rate&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform+Creep, Variable Rate (F)&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;                  Mutation Mode: Uniform+Creep, Variable Rate (D)&#39;</span>
+<span class="w">        </span><span class="k">end select</span>
+<span class="k">        select case</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;              Reproduction Plan: Full generational replacement&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;              Reproduction Plan: Steady-state-replace-random&#39;</span>
+<span class="w">        </span><span class="k">case</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="k">write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;              Reproduction Plan: Steady-state-replace-worst&#39;</span>
+<span class="w">        </span><span class="k">end select</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;------------------------------------------------------------&#39;</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="w">    </span><span class="c">!Check some control values</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">2</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">3</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">          </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">4</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">5</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">/=</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Mutation Mode.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span><span class="o">&gt;</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Relative fitness differential.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">/=</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">/=</span><span class="mi">2</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">/=</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Reproduction plan.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">pcross</span><span class="o">&gt;</span><span class="mf">1.0_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pcross</span><span class="o">&lt;</span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Crossover probability.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">/=</span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">/=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Elitism flag.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">convergence_tol</span><span class="o">&lt;=</span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Convergence tolerance.&#39;</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">101</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">convergence_window</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Convergence window.&#39;</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">102</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iseed</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for iseed.&#39;</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">nd</span><span class="o">&gt;</span><span class="mi">9</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">nd</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Chromosome length.&#39;</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">104</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">np</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: population size must be an even number.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">105</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">initial_guess_frac</span><span class="o">&lt;</span><span class="mf">0.0_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">initial_guess_frac</span><span class="o">&gt;</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39; ERROR: illegal value for Initial guess fraction.&#39;</span>
+<span class="w">       </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">106</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pmuti</span><span class="o">&gt;</span><span class="mf">0.5_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">        </span><span class="s1">&#39; WARNING: dangerously high value for Initial mutation rate; &#39;</span><span class="o">//</span><span class="p">&amp;</span>
+<span class="w">        </span><span class="s1">&#39;(Should enforce elitism with ielite=1.)&#39;</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">imut</span><span class="o">==</span><span class="mi">2</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">pmutmx</span><span class="o">&gt;</span><span class="mf">0.5_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ielite</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="s1">&#39; WARNING: dangerously high value for Maximum mutation rate; &#39;</span><span class="o">//</span><span class="p">&amp;</span>
+<span class="w">       </span><span class="s1">&#39;(Should enforce elitism with ielite=1.)&#39;</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">fdif</span><span class="o">&lt;</span><span class="mf">0.33_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">irep</span><span class="o">/=</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       write</span><span class="p">(</span><span class="n">output_unit</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="s1">&#39; WARNING: dangerously low value of Relative fitness differential.&#39;</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    end subroutine </span><span class="n">set_inputs</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              Pikaia
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>

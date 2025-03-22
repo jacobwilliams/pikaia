@@ -1,0 +1,3065 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran Edition of the Pikaia Genetic Algorithm">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>pikaia_module &ndash; Pikaia</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">Pikaia </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../sourcefile/pikaia_module.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>pikaia_module
+      <small>Module</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="100.0% of total for modules and submodules.">773 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/pikaia_module.f90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/pikaia_module.f90.html'>pikaia_module.f90</a></li>
+            <li class="breadcrumb-item active" aria-current="page">pikaia_module</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/pikaia_module.html#variable-wp">wp</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#absints-0"
+         aria-expanded="false" aria-controls="absints-0">
+         <h4 class="card-header bg-primary text-white">Abstract Interfaces</h4>
+      </a>
+      <div id="absints-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/pikaia_module.html#interface-pikaia_func">pikaia_func</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#interface-iter_func">iter_func</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#types-0"
+         aria-expanded="false" aria-controls="types-0">
+         <h4 class="card-header bg-primary text-white">Derived Types</h4>
+      </a>
+      <div id="types-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/pikaia_module.html#type-pikaia_class">pikaia_class</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#funcs-0"
+         aria-expanded="false" aria-controls="funcs-0">
+         <h4 class="card-header bg-primary text-white">Functions</h4>
+      </a>
+      <div id="funcs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-urand">urand</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-set_inputs">set_inputs</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-pikaia">pikaia</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-solve_with_pikaia">solve_with_pikaia</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-func_wrapper">func_wrapper</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-rqsort">rqsort</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-rninit">rninit</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-report">report</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-encode">encode</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-decode">decode</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-cross">cross</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-mutate">mutate</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-adjmut">adjmut</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-select_parents">select_parents</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-rnkpop">rnkpop</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-genrep">genrep</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-stdrep">stdrep</a>
+            <a class="list-group-item" href="../module/pikaia_module.html#proc-newpop">newpop</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      <p>PIKAIA is a general purpose unconstrained optimization
+  method based on a genetic algorithm.
+  This is an object-oriented version of the algorithm for Fortran 2003/2008.</p>
+<h1>See also</h1>
+<ul>
+<li><a href="http://www.hao.ucar.edu/modeling/pikaia/pikaia.php">Original description page</a></li>
+<li><a href="http://download.hao.ucar.edu/archive/pikaia/">Original sourcecode</a></li>
+</ul>
+<h1>License</h1>
+<div class="codehilite"><pre><span></span><code><span class="nt">Copyright</span><span class="w"> </span><span class="o">(</span><span class="nt">c</span><span class="o">)</span><span class="w"> </span><span class="nt">2015-2020</span><span class="o">,</span><span class="w"> </span><span class="nt">Jacob</span><span class="w"> </span><span class="nt">Williams</span>
+<span class="nt">http</span><span class="o">://</span><span class="nt">github</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">jacobwilliams</span><span class="o">/</span><span class="nt">pikaia</span>
+
+<span class="nt">All</span><span class="w"> </span><span class="nt">rights</span><span class="w"> </span><span class="nt">reserved</span><span class="o">.</span>
+
+<span class="nt">Redistribution</span><span class="w"> </span><span class="nt">and</span><span class="w"> </span><span class="nt">use</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">source</span><span class="w"> </span><span class="nt">and</span><span class="w"> </span><span class="nt">binary</span><span class="w"> </span><span class="nt">forms</span><span class="o">,</span><span class="w"> </span><span class="nt">with</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">without</span>
+<span class="nt">modification</span><span class="o">,</span><span class="w"> </span><span class="nt">are</span><span class="w"> </span><span class="nt">permitted</span><span class="w"> </span><span class="nt">provided</span><span class="w"> </span><span class="nt">that</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">following</span><span class="w"> </span><span class="nt">conditions</span><span class="w"> </span><span class="nt">are</span><span class="w"> </span><span class="nt">met</span><span class="o">:</span>
+<span class="o">*</span><span class="w"> </span><span class="nt">Redistributions</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">source</span><span class="w"> </span><span class="nt">code</span><span class="w"> </span><span class="nt">must</span><span class="w"> </span><span class="nt">retain</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">above</span><span class="w"> </span><span class="nt">copyright</span><span class="w"> </span><span class="nt">notice</span><span class="o">,</span><span class="w"> </span><span class="nt">this</span>
+<span class="w">  </span><span class="nt">list</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">conditions</span><span class="w"> </span><span class="nt">and</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">following</span><span class="w"> </span><span class="nt">disclaimer</span><span class="o">.</span>
+<span class="o">*</span><span class="w"> </span><span class="nt">Redistributions</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">binary</span><span class="w"> </span><span class="nt">form</span><span class="w"> </span><span class="nt">must</span><span class="w"> </span><span class="nt">reproduce</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">above</span><span class="w"> </span><span class="nt">copyright</span><span class="w"> </span><span class="nt">notice</span><span class="o">,</span>
+<span class="w">  </span><span class="nt">this</span><span class="w"> </span><span class="nt">list</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">conditions</span><span class="w"> </span><span class="nt">and</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">following</span><span class="w"> </span><span class="nt">disclaimer</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">documentation</span>
+<span class="w">  </span><span class="nt">and</span><span class="o">/</span><span class="nt">or</span><span class="w"> </span><span class="nt">other</span><span class="w"> </span><span class="nt">materials</span><span class="w"> </span><span class="nt">provided</span><span class="w"> </span><span class="nt">with</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">distribution</span><span class="o">.</span>
+<span class="o">*</span><span class="w"> </span><span class="nt">Neither</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">pikaia</span><span class="w"> </span><span class="nt">nor</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">names</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">its</span>
+<span class="w">  </span><span class="nt">contributors</span><span class="w"> </span><span class="nt">may</span><span class="w"> </span><span class="nt">be</span><span class="w"> </span><span class="nt">used</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">endorse</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">promote</span><span class="w"> </span><span class="nt">products</span><span class="w"> </span><span class="nt">derived</span><span class="w"> </span><span class="nt">from</span>
+<span class="w">  </span><span class="nt">this</span><span class="w"> </span><span class="nt">software</span><span class="w"> </span><span class="nt">without</span><span class="w"> </span><span class="nt">specific</span><span class="w"> </span><span class="nt">prior</span><span class="w"> </span><span class="nt">written</span><span class="w"> </span><span class="nt">permission</span><span class="o">.</span>
+
+<span class="nt">THIS</span><span class="w"> </span><span class="nt">SOFTWARE</span><span class="w"> </span><span class="nt">IS</span><span class="w"> </span><span class="nt">PROVIDED</span><span class="w"> </span><span class="nt">BY</span><span class="w"> </span><span class="nt">THE</span><span class="w"> </span><span class="nt">COPYRIGHT</span><span class="w"> </span><span class="nt">HOLDERS</span><span class="w"> </span><span class="nt">AND</span><span class="w"> </span><span class="nt">CONTRIBUTORS</span><span class="w"> </span><span class="s2">&quot;AS IS&quot;</span>
+<span class="nt">AND</span><span class="w"> </span><span class="nt">ANY</span><span class="w"> </span><span class="nt">EXPRESS</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">IMPLIED</span><span class="w"> </span><span class="nt">WARRANTIES</span><span class="o">,</span><span class="w"> </span><span class="nt">INCLUDING</span><span class="o">,</span><span class="w"> </span><span class="nt">BUT</span><span class="w"> </span><span class="nt">NOT</span><span class="w"> </span><span class="nt">LIMITED</span><span class="w"> </span><span class="nt">TO</span><span class="o">,</span><span class="w"> </span><span class="nt">THE</span>
+<span class="nt">IMPLIED</span><span class="w"> </span><span class="nt">WARRANTIES</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">MERCHANTABILITY</span><span class="w"> </span><span class="nt">AND</span><span class="w"> </span><span class="nt">FITNESS</span><span class="w"> </span><span class="nt">FOR</span><span class="w"> </span><span class="nt">A</span><span class="w"> </span><span class="nt">PARTICULAR</span><span class="w"> </span><span class="nt">PURPOSE</span><span class="w"> </span><span class="nt">ARE</span>
+<span class="nt">DISCLAIMED</span><span class="o">.</span><span class="w"> </span><span class="nt">IN</span><span class="w"> </span><span class="nt">NO</span><span class="w"> </span><span class="nt">EVENT</span><span class="w"> </span><span class="nt">SHALL</span><span class="w"> </span><span class="nt">THE</span><span class="w"> </span><span class="nt">COPYRIGHT</span><span class="w"> </span><span class="nt">HOLDER</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">CONTRIBUTORS</span><span class="w"> </span><span class="nt">BE</span><span class="w"> </span><span class="nt">LIABLE</span>
+<span class="nt">FOR</span><span class="w"> </span><span class="nt">ANY</span><span class="w"> </span><span class="nt">DIRECT</span><span class="o">,</span><span class="w"> </span><span class="nt">INDIRECT</span><span class="o">,</span><span class="w"> </span><span class="nt">INCIDENTAL</span><span class="o">,</span><span class="w"> </span><span class="nt">SPECIAL</span><span class="o">,</span><span class="w"> </span><span class="nt">EXEMPLARY</span><span class="o">,</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">CONSEQUENTIAL</span>
+<span class="nt">DAMAGES</span><span class="w"> </span><span class="o">(</span><span class="nt">INCLUDING</span><span class="o">,</span><span class="w"> </span><span class="nt">BUT</span><span class="w"> </span><span class="nt">NOT</span><span class="w"> </span><span class="nt">LIMITED</span><span class="w"> </span><span class="nt">TO</span><span class="o">,</span><span class="w"> </span><span class="nt">PROCUREMENT</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">SUBSTITUTE</span><span class="w"> </span><span class="nt">GOODS</span><span class="w"> </span><span class="nt">OR</span>
+<span class="nt">SERVICES</span><span class="o">;</span><span class="w"> </span><span class="nt">LOSS</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">USE</span><span class="o">,</span><span class="w"> </span><span class="nt">DATA</span><span class="o">,</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">PROFITS</span><span class="o">;</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">BUSINESS</span><span class="w"> </span><span class="nt">INTERRUPTION</span><span class="o">)</span><span class="w"> </span><span class="nt">HOWEVER</span>
+<span class="nt">CAUSED</span><span class="w"> </span><span class="nt">AND</span><span class="w"> </span><span class="nt">ON</span><span class="w"> </span><span class="nt">ANY</span><span class="w"> </span><span class="nt">THEORY</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">LIABILITY</span><span class="o">,</span><span class="w"> </span><span class="nt">WHETHER</span><span class="w"> </span><span class="nt">IN</span><span class="w"> </span><span class="nt">CONTRACT</span><span class="o">,</span><span class="w"> </span><span class="nt">STRICT</span><span class="w"> </span><span class="nt">LIABILITY</span><span class="o">,</span>
+<span class="nt">OR</span><span class="w"> </span><span class="nt">TORT</span><span class="w"> </span><span class="o">(</span><span class="nt">INCLUDING</span><span class="w"> </span><span class="nt">NEGLIGENCE</span><span class="w"> </span><span class="nt">OR</span><span class="w"> </span><span class="nt">OTHERWISE</span><span class="o">)</span><span class="w"> </span><span class="nt">ARISING</span><span class="w"> </span><span class="nt">IN</span><span class="w"> </span><span class="nt">ANY</span><span class="w"> </span><span class="nt">WAY</span><span class="w"> </span><span class="nt">OUT</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">THE</span><span class="w"> </span><span class="nt">USE</span>
+<span class="nt">OF</span><span class="w"> </span><span class="nt">THIS</span><span class="w"> </span><span class="nt">SOFTWARE</span><span class="o">,</span><span class="w"> </span><span class="nt">EVEN</span><span class="w"> </span><span class="nt">IF</span><span class="w"> </span><span class="nt">ADVISED</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">THE</span><span class="w"> </span><span class="nt">POSSIBILITY</span><span class="w"> </span><span class="nt">OF</span><span class="w"> </span><span class="nt">SUCH</span><span class="w"> </span><span class="nt">DAMAGE</span><span class="o">.</span>
+
+<span class="nt">------------------------------------------------------------------------------</span>
+
+<span class="nt">The</span><span class="w"> </span><span class="nt">original</span><span class="w"> </span><span class="nt">version</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">PIKAIA</span><span class="w"> </span><span class="nt">software</span><span class="w"> </span><span class="nt">is</span><span class="w"> </span><span class="nt">public</span><span class="w"> </span><span class="nt">domain</span><span class="w"> </span><span class="nt">software</span>
+<span class="nt">and</span><span class="w"> </span><span class="nt">is</span><span class="w"> </span><span class="nt">available</span><span class="w"> </span><span class="nt">electronically</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">High</span><span class="w"> </span><span class="nt">Altitude</span><span class="w"> </span><span class="nt">Observatory</span><span class="o">.</span>
+<span class="nt">http</span><span class="o">://</span><span class="nt">www</span><span class="p">.</span><span class="nc">hao</span><span class="p">.</span><span class="nc">ucar</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">modeling</span><span class="o">/</span><span class="nt">pikaia</span><span class="o">/</span><span class="nt">pikaia</span><span class="p">.</span><span class="nc">php</span>
+</code></pre></div>
+
+<h1>History</h1>
+<ul>
+<li>Jacob Williams : 3/8/2015 : Significant refactoring of original PIKAIA code.
+    Converted to free-form source, double precision real variables, added various
+    new features, and an object-oriented interface.</li>
+</ul>
+<br>          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='https://jacobwilliams.github.io/mersenne-twister-fortran/'>mt19937_64</a></li>
+                  <li class="list-inline-item"><a href='http://fortranwiki.org/fortran/show/iso_fortran_env'>iso_fortran_env</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: module~~pikaia_module~~UsesGraph Pages: 1 -->
+<svg id="modulepikaia_moduleUsesGraph" width="229pt" height="74pt"
+ viewBox="0.00 0.00 229.00 74.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~pikaia_module~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 70)">
+<title>module~~pikaia_module~~UsesGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-70 225,-70 225,4 -4,4"/>
+<!-- module~pikaia_module -->
+<g id="module~~pikaia_module~~UsesGraph_node1" class="node">
+<title>module~pikaia_module</title>
+<polygon fill="none" stroke="black" points="221,-45 130,-45 130,-21 221,-21 221,-45"/>
+<text text-anchor="middle" x="175.5" y="-30.6" font-family="Helvetica,sans-Serif" font-size="10.50">pikaia_module</text>
+</g>
+<!-- iso_fortran_env -->
+<g id="module~~pikaia_module~~UsesGraph_node2" class="node">
+<title>iso_fortran_env</title>
+<g id="a_module~~pikaia_module~~UsesGraph_node2"><a xlink:href="http://fortranwiki.org/fortran/show/iso_fortran_env" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="94,-66 0,-66 0,-42 94,-42 94,-66"/>
+<text text-anchor="middle" x="47" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+</g>
+<!-- module~pikaia_module&#45;&gt;iso_fortran_env -->
+<g id="module~~pikaia_module~~UsesGraph_edge1" class="edge">
+<title>module~pikaia_module&#45;&gt;iso_fortran_env</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M129.9,-40.4C121.62,-41.78 112.87,-43.23 104.29,-44.66"/>
+<polygon fill="#000000" stroke="#000000" points="103.63,-41.22 94.34,-46.31 104.77,-48.12 103.63,-41.22"/>
+</g>
+<!-- mt19937_64 -->
+<g id="module~~pikaia_module~~UsesGraph_node3" class="node">
+<title>mt19937_64</title>
+<g id="a_module~~pikaia_module~~UsesGraph_node3"><a xlink:href="https://jacobwilliams.github.io/mersenne-twister-fortran/" xlink:title="mt19937_64">
+<polygon fill="#337ab7" stroke="#337ab7" points="86.5,-24 7.5,-24 7.5,0 86.5,0 86.5,-24"/>
+<text text-anchor="middle" x="47" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">mt19937_64</text>
+</a>
+</g>
+</g>
+<!-- module~pikaia_module&#45;&gt;mt19937_64 -->
+<g id="module~~pikaia_module~~UsesGraph_edge2" class="edge">
+<title>module~pikaia_module&#45;&gt;mt19937_64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M129.9,-25.6C119.23,-23.82 107.78,-21.92 96.92,-20.12"/>
+<polygon fill="#000000" stroke="#000000" points="97.18,-16.62 86.74,-18.43 96.03,-23.52 97.18,-16.62"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="518pt" height="32pt"
+ viewBox="0.00 0.00 517.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 513.5,-28 513.5,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-24 0,-24 0,0 54,0 54,-24"/>
+<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="145.5,-24 72.5,-24 72.5,0 145.5,0 145.5,-24"/>
+<text text-anchor="middle" x="109" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="234,-24 164,-24 164,0 234,0 234,-24"/>
+<text text-anchor="middle" x="199" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="310,-24 252,-24 252,0 310,0 310,-24"/>
+<text text-anchor="middle" x="281" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="386,-24 328,-24 328,0 386,0 386,-24"/>
+<text text-anchor="middle" x="357" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="509.5,-24 404.5,-24 404.5,0 509.5,0 509.5,-24"/>
+<text text-anchor="middle" x="457" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+      
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wp"></span>
+              integer,
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>wp</strong></td>
+<td> =</td>
+                <td>real64</td>
+            <td>
+                <p>Default real kind [8 bytes].</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+        <section>
+          <h2>Abstract Interfaces</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-pikaia_func"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine pikaia_func(me, x, f)  
+
+    </h3>
+  <p>The interface for the function that pikaia will be maximizing.</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+                <p>pikaia class</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+                <p>optimization variable vector</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+                <p>fitness value</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-iter_func"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine iter_func(me, iter, x, f)  
+
+    </h3>
+  <p>The interface for the function that user can specify
+to report each iteration when pikaia is running.
+The best (fittest) population member is passed to
+this routine in each generation.</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~2"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+                <p>pikaia class</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iter"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iter</strong></td>
+            <td>
+                <p>iteration number</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+                <p>optimization variable vector</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+                <p>fitness value</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Derived Types</h2>
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-pikaia_class"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/pikaia_class.html'>pikaia_class</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      <p>Main class for using the Pikaia algorithm.
+INIT and SOLVE are the only public methods.</p>
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xl"></span>
+              real(kind=wp),
+            </td>
+              <td>private,</td>
+            <td>
+              dimension(:), allocatable
+            </td>
+            <td>::</td>
+            <td><strong>xl</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+<p>lower bounds of <code>x</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xu"></span>
+              real(kind=wp),
+            </td>
+              <td>private,</td>
+            <td>
+              dimension(:), allocatable
+            </td>
+            <td>::</td>
+            <td><strong>xu</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+<p>upper bound of <code>x</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-del"></span>
+              real(kind=wp),
+            </td>
+              <td>private,</td>
+            <td>
+              dimension(:), allocatable
+            </td>
+            <td>::</td>
+            <td><strong>del</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-np"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>np</strong></td>
+<td> =</td>
+                <td>100</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ngen"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ngen</strong></td>
+<td> =</td>
+                <td>500</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nd"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nd</strong></td>
+<td> =</td>
+                <td>5</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pcross"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pcross</strong></td>
+<td> =</td>
+                <td>0.85_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-imut"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>imut</strong></td>
+<td> =</td>
+                <td>2</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmuti"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmuti</strong></td>
+<td> =</td>
+                <td>0.005_wp</td>
+            <td>
+<p>initial value of <code>pmut</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmn"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmn</strong></td>
+<td> =</td>
+                <td>0.0005_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmx"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmx</strong></td>
+<td> =</td>
+                <td>0.25_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fdif"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fdif</strong></td>
+<td> =</td>
+                <td>1.0_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-irep"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>irep</strong></td>
+<td> =</td>
+                <td>1</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ielite"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ielite</strong></td>
+<td> =</td>
+                <td>1</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ivrb"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ivrb</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_tol"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_tol</strong></td>
+<td> =</td>
+                <td>0.0001_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_window"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_window</strong></td>
+<td> =</td>
+                <td>20</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iseed"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iseed</strong></td>
+<td> =</td>
+                <td>999</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-initial_guess_frac"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>initial_guess_frac</strong></td>
+<td> =</td>
+                <td>0.1_wp</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmut"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmut</strong></td>
+<td> =</td>
+                <td>-huge(1.0_wp)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bestft"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bestft</strong></td>
+<td> =</td>
+                <td>huge(1.0_wp)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutpv"></span>
+              real(kind=wp),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutpv</strong></td>
+<td> =</td>
+                <td>huge(1.0_wp)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rand"></span>
+              type(mt19937),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rand</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+<p>random number generator</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-user_f"></span>
+              procedure(<a href='../interface/pikaia_func.html'>pikaia_func</a>),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>user_f</strong></td>
+<td>=&gt; </td>
+                <td>null()</td>
+            <td>
+<p>fitness function</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iter_f"></span>
+              procedure(<a href='../interface/iter_func.html'>iter_func</a>),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>iter_f</strong></td>
+<td>=&gt; </td>
+                <td>null()</td>
+            <td>
+<p>reporting function (best member of population)</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+        <h4>Type-Bound Procedures</h4>
+        <table class="table table-striped varlist">
+          <tbody>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-init'>init</a></strong> => <a href='/home/runner/work/pikaia/pikaia/doc/proc/set_inputs.html'>set_inputs</a></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-solve'>solve</a></strong> => <a href='/home/runner/work/pikaia/pikaia/doc/proc/solve_with_pikaia.html'>solve_with_pikaia</a></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-ff'>ff</a></strong> => <a href='/home/runner/work/pikaia/pikaia/doc/proc/func_wrapper.html'>func_wrapper</a></td>
+                <td>../../<p>internal pikaia function (x:[0,1])</p></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-newpop'>newpop</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-stdrep'>stdrep</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-genrep'>genrep</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-adjmut'>adjmut</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-cross'>cross</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-encode'>encode</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-mutate'>mutate</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-decode'>decode</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-select_parents'>select_parents</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-report'>report</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-rnkpop'>rnkpop</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-pikaia'>pikaia</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-rninit'>rninit</a></strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public, non_overridable ::
+  <strong><a href='../type/pikaia_class.html#boundprocedure-urand'>urand</a></strong></td>
+                <td></td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Functions</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-urand"></span> <h3>private  function <a href='../proc/urand.html'>urand</a>(me) result(r)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Return the next pseudo-random deviate from a sequence which is
+uniformly distributed in the interval [0,1]</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~7"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=wp)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-set_inputs"></span> <h3>private  subroutine <a href='../proc/set_inputs.html'>set_inputs</a>(me, n, xl, xu, f, status, iter_f, np, ngen, nd, pcross, pmutmn, pmutmx, pmut, imut, fdif, irep, ielite, ivrb, convergence_tol, convergence_window, initial_guess_frac, iseed)  
+</h3></div>
+    <div class="card-body">
+              <dl class="dl-horizontal">
+        <dt>Author</dt><dd>Jacob Williams</dd>
+    </dl>
+
+  <p>Constructor for the <a href="../type/pikaia_class.html">pikaia_class</a>.
+  The routine must be called before the solve routine can be used.</p><a href="../proc/set_inputs.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~3"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+<p>pikaia class</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+<p>the parameter space dimension, i.e., the number
+of adjustable parameters (size of the x vector).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xl~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>xl</strong></td>
+            <td>
+<p>vector of lower bounds for x</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xu~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>xu</strong></td>
+            <td>
+<p>vector of upper bounds for x</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~3"></span>
+              procedure(<a href='../interface/pikaia_func.html'>pikaia_func</a>)
+            </td>
+<td></td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+<p>user-supplied scalar function of n variables,
+which must have the <a href="../interface/pikaia_func.html">pikaia_func</a> procedure interface.
+By convention, f should return higher values for more optimal
+parameter values (i.e., individuals which are more "fit").
+For example, in fitting a function through data points, f
+could return the inverse of chi**2.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-status"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>status</strong></td>
+            <td>
+<p>status output flag (0 if there were no errors)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iter_f~2"></span>
+              procedure(<a href='../interface/iter_func.html'>iter_func</a>),
+            </td>
+<td></td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iter_f</strong></td>
+            <td>
+<p>user-supplied subroutine that will report the
+best solution for each generation.
+It must have the <a href="../interface/iter_func.html">iter_func</a> procedure interface.  If not present,
+then it is not used.  (note: this is independent of ivrb).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-np~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>np</strong></td>
+            <td>
+<p>number of individuals in a population (default is 100)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ngen~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ngen</strong></td>
+            <td>
+<p>maximum number of iterations</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nd~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nd</strong></td>
+            <td>
+<p>number of significant digits (i.e., number of
+genes) retained in chromosomal encoding (default is 6).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pcross~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pcross</strong></td>
+            <td>
+<p>crossover probability; must be  &lt;= 1.0 (default
+is 0.85). If crossover takes place, either one
+or two splicing points are used, with equal
+probabilities</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmn~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmn</strong></td>
+            <td>
+<p>minimum mutation rate; must be &gt;= 0.0 (default is 0.0005)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmutmx~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmutmx</strong></td>
+            <td>
+<p>maximum mutation rate; must be &lt;= 1.0 (default is 0.25)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pmut~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pmut</strong></td>
+            <td>
+<p>initial mutation rate; should be small (default
+is 0.005) (Note: the mutation rate is the probability
+that any one gene locus will mutate in
+any one generation.)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-imut~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>imut</strong></td>
+            <td>
+<p>mutation mode; 1/2/3/4/5 (default is 2).
+ 1=one-point mutation, fixed rate.
+ 2=one-point, adjustable rate based on fitness.
+ 3=one-point, adjustable rate based on distance.
+ 4=one-point+creep, fixed rate.
+ 5=one-point+creep, adjustable rate based on fitness.
+ 6=one-point+creep, adjustable rate based on distance.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fdif~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fdif</strong></td>
+            <td>
+<p>relative fitness differential; range from 0
+(none) to 1 (maximum).  (default is 1.0)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-irep~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>irep</strong></td>
+            <td>
+<p>reproduction plan; 1/2/3=Full generational
+replacement/Steady-state-replace-random/Steady-
+state-replace-worst (default is 3)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ielite~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ielite</strong></td>
+            <td>
+<p>elitism flag; 0/1=off/on (default is 0)
+(Applies only to reproduction plans 1 and 2)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ivrb~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ivrb</strong></td>
+            <td>
+<p>printed output 0/1/2=None/Minimal/Verbose
+(default is 0)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_tol~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_tol</strong></td>
+            <td>
+<p>convergence tolerance; must be &gt; 0.0 (default is 0.0001)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-convergence_window~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>convergence_window</strong></td>
+            <td>
+<p>convergence window; must be &gt;= 0
+This is the number of consecutive solutions
+within the tolerance for convergence to
+be declared (default is 20)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-initial_guess_frac~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>initial_guess_frac</strong></td>
+            <td>
+<p>fraction of the initial population
+to set equal to the initial guess.  Range from 0
+(none) to 1.0 (all). (default is 0.1 or 10%).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iseed~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iseed</strong></td>
+            <td>
+<p>random seed value; must be &gt; 0 (default is 999)</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-pikaia"></span> <h3>private  subroutine <a href='../proc/pikaia.html'>pikaia</a>(me, x, f, status)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Optimization (maximization) of user-supplied "fitness" function
+  over n-dimensional parameter space x using a basic genetic
+  algorithm method.</p><a href="../proc/pikaia.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~4"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+<p>Input - initial guess for solution vector.
+Output - the "fittest" (optimal) solution found,
+i.e., the solution which maximizes the fitness function.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~4"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+<p>the (scalar) value of the fitness function at x</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-status~2"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>status</strong></td>
+            <td>
+<p>an indicator of the success or failure
+of the call to pikaia (0=success; non-zero=failure)</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-solve_with_pikaia"></span> <h3>private  subroutine <a href='../proc/solve_with_pikaia.html'>solve_with_pikaia</a>(me, x, f, status)  
+</h3></div>
+    <div class="card-body">
+              <dl class="dl-horizontal">
+        <dt>Author</dt><dd>Jacob Williams</dd>
+    </dl>
+
+  <p>Main pikaia wrapper used by the class.</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~5"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~4"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-status~3"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>status</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-func_wrapper"></span> <h3>private  subroutine <a href='../proc/func_wrapper.html'>func_wrapper</a>(me, x, f)  
+</h3></div>
+    <div class="card-body">
+              <dl class="dl-horizontal">
+        <dt>Author</dt><dd>Jacob Williams</dd>
+    </dl>
+
+  <p>Wrapper for the user's function that is used by the main pikaia routine
+The x input to this function comes from pikaia, and will be between [0,1].</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~6"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>x</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f~6"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rqsort"></span> <h3>private  subroutine <a href='../proc/rqsort.html'>rqsort</a>(n, a, p)  
+</h3></div>
+    <div class="card-body">
+              <dl class="dl-horizontal">
+        <dt>Author</dt><dd>B. G. Knapp</dd>
+        <dt>Date</dt><dd>86/12/23</dd>
+    </dl>
+
+  <p>Return integer array p which indexes array a in increasing order.
+  Array a is not disturbed.  The Quicksort algorithm is used.</p><a href="../proc/rqsort.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n~3"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>a</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-p"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(n)
+            </td>
+            <td>::</td>
+            <td><strong>p</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rninit"></span> <h3>private  subroutine <a href='../proc/rninit.html'>rninit</a>(me)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Initialize the random number generator with the input seed value.</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~8"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-report"></span> <h3>private  subroutine <a href='../proc/report.html'>report</a>(me, oldph, fitns, ifit, ig, nnew)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Write generation report to standard output</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~9"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-oldph~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>oldph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fitns~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>fitns</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ifit~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>ifit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ig~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ig</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nnew"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nnew</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-encode"></span> <h3>private  subroutine <a href='../proc/encode.html'>encode</a>(me, ph, gn)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Encode phenotype parameters into integer genotype
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~10"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ph~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n)
+            </td>
+            <td>::</td>
+            <td><strong>ph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gn"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%n*me%nd)
+            </td>
+            <td>::</td>
+            <td><strong>gn</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-decode"></span> <h3>private  subroutine <a href='../proc/decode.html'>decode</a>(me, gn, ph)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>decode genotype into phenotype parameters
+ph(k) are x,y coordinates [ 0 &lt; x,y &lt; 1 ]</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~11"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gn~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n*me%nd)
+            </td>
+            <td>::</td>
+            <td><strong>gn</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ph~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%n)
+            </td>
+            <td>::</td>
+            <td><strong>ph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-cross"></span> <h3>private  subroutine <a href='../proc/cross.html'>cross</a>(me, gn1, gn2)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>breeds two parent chromosomes into two offspring chromosomes.
+  breeding occurs through crossover. If the crossover probability
+  test yields true (crossover taking place), either one-point or
+  two-point crossover is used, with equal probabilities.</p><a href="../proc/cross.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~12"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gn1~2"></span>
+              integer,
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n*me%nd)
+            </td>
+            <td>::</td>
+            <td><strong>gn1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gn2~2"></span>
+              integer,
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n*me%nd)
+            </td>
+            <td>::</td>
+            <td><strong>gn2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-mutate"></span> <h3>private  subroutine <a href='../proc/mutate.html'>mutate</a>(me, gn)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Introduces random mutation in a genotype.
+  Mutations occur at rate pmut at all gene loci.</p><a href="../proc/mutate.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~13"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gn~3"></span>
+              integer,
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n*me%nd)
+            </td>
+            <td>::</td>
+            <td><strong>gn</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-adjmut"></span> <h3>private  subroutine <a href='../proc/adjmut.html'>adjmut</a>(me, oldph, fitns, ifit)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Dynamical adjustment of mutation rate:</p><a href="../proc/adjmut.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~14"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-oldph~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>oldph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fitns~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>fitns</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ifit~3"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>ifit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-select_parents"></span> <h3>private  subroutine <a href='../proc/select_parents.html'>select_parents</a>(me, jfit, imom, idad)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Selects two parents from the population, using roulette wheel
+  algorithm with the relative fitnesses of the phenotypes as
+  the "hit" probabilities.</p><a href="../proc/select_parents.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~15"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jfit~2"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>jfit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-imom"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>imom</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idad"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idad</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rnkpop"></span> <h3>private  subroutine <a href='../proc/rnkpop.html'>rnkpop</a>(me, arrin, indx, rank)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Ranks initial population.
+Calls external sort routine to produce key index and rank order
+of input array arrin (which is not altered).</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~16"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-arrin"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>arrin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-indx"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>indx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rank"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>rank</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-genrep"></span> <h3>private  subroutine <a href='../proc/genrep.html'>genrep</a>(me, ip, ph, newph)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Full generational replacement: accumulate offspring into new
+population array</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~17"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ip~4"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ip</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ph~4"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n,2)
+            </td>
+            <td>::</td>
+            <td><strong>ph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-newph~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>newph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-stdrep"></span> <h3>private  subroutine <a href='../proc/stdrep.html'>stdrep</a>(me, ph, fits, oldph, fitns, ifit, jfit, nnew)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Steady-state reproduction: insert offspring pair into population
+only if they are fit enough (replace-random if irep=2 or
+replace-worst if irep=3).</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~18"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ph~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(me%n,2)
+            </td>
+            <td>::</td>
+            <td><strong>ph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fits~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(2)
+            </td>
+            <td>::</td>
+            <td><strong>fits</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-oldph~4"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>oldph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fitns~4"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>fitns</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ifit~4"></span>
+              integer,
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>ifit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jfit~3"></span>
+              integer,
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>jfit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nnew~2"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nnew</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-newpop"></span> <h3>private  subroutine <a href='../proc/newpop.html'>newpop</a>(me, oldph, newph, ifit, jfit, fitns, nnew)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>Replaces old population by new; recomputes fitnesses &amp; ranks</p><a href="../proc/newpop.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~19"></span>
+              class(<a href='../type/pikaia_class.html'>pikaia_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-oldph~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>oldph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-newph~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout),</td>
+              <td></td>            <td>
+              dimension(me%n,me%np)
+            </td>
+            <td>::</td>
+            <td><strong>newph</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ifit~5"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>ifit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jfit~4"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>jfit</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fitns~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(out),</td>
+              <td></td>            <td>
+              dimension(me%np)
+            </td>
+            <td>::</td>
+            <td><strong>fitns</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nnew~3"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nnew</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              Pikaia
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
