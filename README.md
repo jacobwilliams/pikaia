@@ -34,14 +34,14 @@ fpm build --release
 
 To use Pikaia within your fpm project, add the following to your `fpm.toml` file:
 
-```yml
+```toml
 [dependencies]
 pikaia = { git="https://github.com/jacobwilliams/pikaia.git" }
 ```
 
 Or to use a specific version:
 
-```yml
+```toml
 [dependencies]
 pikaia = { git="https://github.com/jacobwilliams/pikaia.git", tag = "1.0.1" }
 ```
