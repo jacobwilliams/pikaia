@@ -14,6 +14,9 @@ auto-tests = true
 [dependencies]
 mersenne-twister-fortran = { git="https://github.com/jacobwilliams/mersenne-twister-fortran.git", tag = "1.0.1" }
 
+[dev-dependencies]
+json-fortran = { git="https://github.com/jacobwilliams/json-fortran.git"}
+
 [library]
 source-dir = "src"
 
